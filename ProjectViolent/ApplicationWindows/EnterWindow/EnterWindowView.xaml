@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectViolent"
+        xmlns:DC="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow"
         xmlns:auth="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.AuthUC"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="720">
+    <Window.DataContext>
+        <DC:EnterWindowViewModel></DC:EnterWindowViewModel>
+    </Window.DataContext>
     <Window.Resources>
-        <ResourceDictionary Source="/Resources/Styles/EnterWindowStyles.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="../../Resources/Styles/EnterWindowStyles.xaml"></ResourceDictionary>
     </Window.Resources>
     <Grid Style="{StaticResource MainGridStyle}">
         <Grid.RowDefinitions>
@@ -22,9 +26,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Style="{StaticResource MainSubstrate}">
-            <ContentControl>
-                <auth:AuthUCView></auth:AuthUCView>
-            </ContentControl>
+            <ContentControl Content="{StaticResource AuthUC}"/>
         </Border>
     </Grid>
 </Window>

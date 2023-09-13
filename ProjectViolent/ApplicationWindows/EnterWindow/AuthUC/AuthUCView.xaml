@@ -4,10 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.AuthUC"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:MN="clr-namespace:ProjectViolent"
              mc:Ignorable="d" 
              d:DesignHeight="680" d:DesignWidth="480">
     <UserControl.Resources>
-        <ResourceDictionary Source="/Resources/Styles/EnterWindowAuthUCStyles.xaml" ></ResourceDictionary>
+        <ResourceDictionary Source="../../../Resources/Styles/EnterWindowAuthUCStyles.xaml"></ResourceDictionary>
     </UserControl.Resources>
     <Grid Background="White" Margin="10">
         <Grid.RowDefinitions>
@@ -24,12 +26,21 @@
         </Grid.ColumnDefinitions>
         <TextBlock Style="{StaticResource MainTextBlock}">Авторизация</TextBlock>
         <GroupBox Style="{StaticResource LoginGroupBox}">
-            <TextBox Style="{StaticResource LoginTextBoxStyle}"></TextBox>
+            <TextBox Style="{StaticResource LoginTextBoxStyle}"
+                     Text="{Binding Login,
+                Mode=TwoWay}"></TextBox>
         </GroupBox>
         <GroupBox Style="{StaticResource PasswordGroupBox}">
-            <PasswordBox Style="{StaticResource PasswordBoxStyle}"></PasswordBox>
+            <PasswordBox Style="{StaticResource PasswordBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <MN:PasswordBoxBehavior
+                        PasswordHash="{Binding PasswordHash,
+                        Mode=OneWayToSource}"/>
+                </i:Interaction.Behaviors>
+            </PasswordBox>
         </GroupBox>
-        <Button Style="{DynamicResource LoginButtonStyle}">Войти</Button>
+        <Button Style="{DynamicResource LoginButtonStyle}"
+                Command="{Binding ButtonCommand}">Войти</Button>
         <ContentControl Style="{StaticResource HyperLinkContentControl}">
             <Hyperlink>Регистрация</Hyperlink>
         </ContentControl>
