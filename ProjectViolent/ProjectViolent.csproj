@@ -63,6 +63,7 @@
     <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml.cs">
       <DependentUpon>SetPersonalDataUCView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCView.xaml">
       <SubType>Designer</SubType>
