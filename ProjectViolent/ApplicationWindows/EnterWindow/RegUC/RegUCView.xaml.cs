@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectViolent.ApplicationWindows.EnterWindow.AuthUC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
     /// </summary>
     public partial class RegUCView : UserControl
     {
+        public static readonly DependencyProperty HyperLinkCommandDependencyProperty = DependencyProperty.Register("HyperLinkCommand", typeof(RelayCommand), typeof(RegUCView));
+
+        public RelayCommand HyperLinkCommand
+        {
+            get => (RelayCommand)GetValue(HyperLinkCommandDependencyProperty);
+            set => SetValue(HyperLinkCommandDependencyProperty, value);
+        }
+
         public RegUCView()
         {
             InitializeComponent();

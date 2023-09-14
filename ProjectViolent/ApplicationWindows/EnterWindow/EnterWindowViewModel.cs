@@ -1,4 +1,5 @@
 ﻿using ProjectViolent.ApplicationWindows.EnterWindow.AuthUC;
+using ProjectViolent.ApplicationWindows.EnterWindow.RegUC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,10 +11,18 @@ using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.EnterWindow
 {
+    public enum StateOfEnterWindow
+    {
+        AuthOpen,
+        RegOpen
+    }
     public class EnterWindowViewModel : INotifyPropertyChanged
     {
         private AuthUCViewModel _authUCViewModel;
+        private RegUCViewModel _regUCViewModel;
         private RelayCommand _authHyperLink;
+        private RelayCommand _regHyperLink;
+        private StateOfEnterWindow _currentStateOfEnterWindow;
 
         public AuthUCViewModel AuthUCViewModel
         {
@@ -25,17 +34,47 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
             }
         }
 
+        public RegUCViewModel RegUCViewModel
+        {
+            get => _regUCViewModel;
+            set
+            {
+                _regUCViewModel = value;
+                OnPropertyChanged(nameof(RegUCViewModel));
+            }
+        }
+
         public RelayCommand AuthHyperLink
         {
             get => _authHyperLink ?? (new RelayCommand(obj =>
             {
-                MessageBox.Show("");
+                CurrentStateOfEnterWindow = StateOfEnterWindow.RegOpen;
             }));
+        }
+
+        public RelayCommand RegHyperLink
+        {
+            get => _authHyperLink ?? (new RelayCommand(obj =>
+            {
+                CurrentStateOfEnterWindow = StateOfEnterWindow.AuthOpen;
+            }));
+        }
+
+        public StateOfEnterWindow CurrentStateOfEnterWindow
+        {
+            get => _currentStateOfEnterWindow;
+            set
+            {
+                _currentStateOfEnterWindow = value;
+                OnPropertyChanged(nameof(CurrentStateOfEnterWindow));
+            }
         }
 
         public EnterWindowViewModel()
         {
             AuthUCViewModel = new AuthUCViewModel();
+            RegUCViewModel = new RegUCViewModel();
+            CurrentStateOfEnterWindow = StateOfEnterWindow.AuthOpen;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

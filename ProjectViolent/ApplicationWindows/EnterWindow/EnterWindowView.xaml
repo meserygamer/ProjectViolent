@@ -26,7 +26,20 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Style="{StaticResource MainSubstrate}">
-            <ContentControl Content="{StaticResource AuthUC}"/>
+            <ContentControl>
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentStateOfEnterWindow}" Value="AuthOpen">
+                                <Setter Property="Content" Value="{StaticResource AuthUC}" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding CurrentStateOfEnterWindow}" Value="RegOpen">
+                                <Setter Property="Content" Value="{StaticResource RegUC}" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
         </Border>
     </Grid>
 </Window>

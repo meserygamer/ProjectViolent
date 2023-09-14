@@ -42,7 +42,7 @@
         <Button Style="{DynamicResource LoginButtonStyle}"
                 Command="{Binding ButtonCommand}">Войти</Button>
         <ContentControl Style="{StaticResource HyperLinkContentControl}">
-            <Hyperlink Command="{Binding ElementName=userControl, Path=HyperLinkCommand, Mode=OneWay}">Регистрация</Hyperlink>
+            <Hyperlink Command="{Binding ElementName=userControl, Path=HyperLinkCommand, Mode=OneWay}">У вас нет аккаунта?</Hyperlink>
         </ContentControl>
     </Grid>
 </UserControl>

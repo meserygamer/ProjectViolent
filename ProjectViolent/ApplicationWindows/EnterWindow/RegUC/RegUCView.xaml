@@ -1,4 +1,5 @@
 ﻿<UserControl x:Class="ProjectViolent.ApplicationWindows.EnterWindow.RegUC.RegUCView"
+             x:Name="userControlReg"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -53,7 +54,7 @@
             <Button Style="{DynamicResource LoginButtonStyle}"
             Command="{Binding ButtonCommand}">Зарегистрироваться</Button>
             <ContentControl Style="{StaticResource HyperLinkContentControl}">
-                <Hyperlink Command="{Binding ElementName=userControl, Path=HyperLinkCommand, Mode=OneWay}">У вас уже есть аккаунт?</Hyperlink>
+                <Hyperlink Command="{Binding ElementName=userControlReg, Path=HyperLinkCommand, Mode=OneWay}">У вас уже есть аккаунт?</Hyperlink>
             </ContentControl>
         </Grid>
     </Grid>
