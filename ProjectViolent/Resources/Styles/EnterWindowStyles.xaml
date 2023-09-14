@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:auth="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.AuthUC"
-                    xmlns:reg="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.RegUC">
+                    xmlns:reg="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.RegUC"
+                    xmlns:SPD="clr-namespace:ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC">
     <Style x:Key="MainGridStyle" TargetType="Grid">
         <Setter Property="Background">
             <Setter.Value>
@@ -17,4 +18,5 @@
     </Style>
     <auth:AuthUCView x:Key="AuthUC" DataContext="{Binding AuthUCViewModel}" HyperLinkCommand="{Binding ElementName=EnterWindow, Path=DataContext.AuthHyperLink}"></auth:AuthUCView>
     <reg:RegUCView x:Key="RegUC" DataContext="{Binding RegUCViewModel}" HyperLinkCommand="{Binding ElementName=EnterWindow, Path=DataContext.RegHyperLink}"></reg:RegUCView>
+    <SPD:SetPersonalDataUCView x:Key="SPDUC"></SPD:SetPersonalDataUCView>
 </ResourceDictionary>

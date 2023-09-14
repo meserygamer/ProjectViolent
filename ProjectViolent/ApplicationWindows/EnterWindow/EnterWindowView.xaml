@@ -26,8 +26,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Border Style="{StaticResource MainSubstrate}">
-            <ContentControl>
-                <ContentControl.Style>
+            <ContentControl Content="{StaticResource SPDUC}">
+                <!--<ContentControl.Style>
                     <Style TargetType="ContentControl">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding CurrentStateOfEnterWindow}" Value="AuthOpen">
@@ -38,7 +38,7 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ContentControl.Style>
+                </ContentControl.Style>-->
             </ContentControl>
         </Border>
     </Grid>
