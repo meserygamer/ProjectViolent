@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
 {
@@ -15,6 +16,7 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
         private string _patronymic;
         private DateTime _birthday;
         private int _idSelectedGender;
+        private RelayCommand _confirmData;
 
         public string Name
         {
@@ -64,6 +66,19 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
                 _idSelectedGender = value;
                 OnPropertyChanged("IdSelectedGender");
             }
+        }
+
+        public RelayCommand ConfirmData
+        {
+            get => _confirmData ?? (new RelayCommand(obj => 
+            {
+                MessageBox.Show("");
+            }));
+        }
+
+        public SetPersonalDataUCViewModel()
+        {
+            Birthday = DateTime.Now;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

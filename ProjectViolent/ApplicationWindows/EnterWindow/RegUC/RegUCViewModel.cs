@@ -16,6 +16,7 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
         private string _passwordHash;
         private string _confirmPasswordHash;
         private RelayCommand _buttonCommand;
+        private StateOfEnterWindow _enterWindowState;
 
         public string Login
         {
@@ -52,7 +53,18 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
             get => _buttonCommand ?? (new RelayCommand(obj =>
             {
                 MessageBox.Show("");
+                EnterWindowState = StateOfEnterWindow.SetPersonalDataOpen;
             }));
+        }
+
+        public StateOfEnterWindow EnterWindowState
+        {
+            get => _enterWindowState;
+            set
+            {
+                _enterWindowState = value;
+                OnPropertyChanged(nameof(EnterWindowState));
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

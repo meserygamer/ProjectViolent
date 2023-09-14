@@ -22,11 +22,18 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
     public partial class RegUCView : UserControl
     {
         public static readonly DependencyProperty HyperLinkCommandDependencyProperty = DependencyProperty.Register("HyperLinkCommand", typeof(RelayCommand), typeof(RegUCView));
+        public static readonly DependencyProperty EnterWindowStateDependencyProperty = DependencyProperty.Register("EnterWindowState", typeof(StateOfEnterWindow), typeof(RegUCView));
 
         public RelayCommand HyperLinkCommand
         {
             get => (RelayCommand)GetValue(HyperLinkCommandDependencyProperty);
             set => SetValue(HyperLinkCommandDependencyProperty, value);
+        }
+
+        public StateOfEnterWindow EnterWindowState
+        {
+            get => (StateOfEnterWindow)GetValue(EnterWindowStateDependencyProperty);
+            set => SetValue(EnterWindowStateDependencyProperty, value);
         }
 
         public RegUCView()

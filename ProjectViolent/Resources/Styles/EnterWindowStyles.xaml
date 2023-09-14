@@ -18,5 +18,5 @@
     </Style>
     <auth:AuthUCView x:Key="AuthUC" DataContext="{Binding AuthUCViewModel}" HyperLinkCommand="{Binding ElementName=EnterWindow, Path=DataContext.AuthHyperLink}"></auth:AuthUCView>
     <reg:RegUCView x:Key="RegUC" DataContext="{Binding RegUCViewModel}" HyperLinkCommand="{Binding ElementName=EnterWindow, Path=DataContext.RegHyperLink}"></reg:RegUCView>
-    <SPD:SetPersonalDataUCView x:Key="SPDUC"></SPD:SetPersonalDataUCView>
+    <SPD:SetPersonalDataUCView x:Key="SPDUC" DataContext="{Binding SetPersonalDataUCViewModel}"></SPD:SetPersonalDataUCView>
 </ResourceDictionary>

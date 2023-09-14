@@ -1,5 +1,6 @@
 ﻿using ProjectViolent.ApplicationWindows.EnterWindow.AuthUC;
 using ProjectViolent.ApplicationWindows.EnterWindow.RegUC;
+using ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,14 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
     public enum StateOfEnterWindow
     {
         AuthOpen,
-        RegOpen
+        RegOpen,
+        SetPersonalDataOpen
     }
     public class EnterWindowViewModel : INotifyPropertyChanged
     {
         private AuthUCViewModel _authUCViewModel;
         private RegUCViewModel _regUCViewModel;
+        private SetPersonalDataUCViewModel _setPersonalDataUCViewModel;
         private RelayCommand _authHyperLink;
         private RelayCommand _regHyperLink;
         private StateOfEnterWindow _currentStateOfEnterWindow;
@@ -41,6 +44,16 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
             {
                 _regUCViewModel = value;
                 OnPropertyChanged(nameof(RegUCViewModel));
+            }
+        }
+
+        public SetPersonalDataUCViewModel SetPersonalDataUCViewModel
+        {
+            get => _setPersonalDataUCViewModel;
+            set
+            {
+                _setPersonalDataUCViewModel = value;
+                OnPropertyChanged(nameof(SetPersonalDataUCViewModel));
             }
         }
 
@@ -74,7 +87,17 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
         {
             AuthUCViewModel = new AuthUCViewModel();
             RegUCViewModel = new RegUCViewModel();
+            SetPersonalDataUCViewModel = new SetPersonalDataUCViewModel();
+            RegUCViewModel.PropertyChanged += NextRegPage;
             CurrentStateOfEnterWindow = StateOfEnterWindow.AuthOpen;
+        }
+
+        private void NextRegPage(object obj, PropertyChangedEventArgs a)
+        {
+            if(a.PropertyName == "EnterWindowState")
+            {
+                CurrentStateOfEnterWindow = ((RegUCViewModel)obj).EnterWindowState;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
