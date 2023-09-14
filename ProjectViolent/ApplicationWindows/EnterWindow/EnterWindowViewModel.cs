@@ -6,12 +6,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.EnterWindow
 {
     public class EnterWindowViewModel : INotifyPropertyChanged
     {
         private AuthUCViewModel _authUCViewModel;
+        private RelayCommand _authHyperLink;
 
         public AuthUCViewModel AuthUCViewModel
         {
@@ -21,6 +23,14 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
                 _authUCViewModel = value;
                 OnPropertyChanged(nameof(AuthUCViewModel));
             }
+        }
+
+        public RelayCommand AuthHyperLink
+        {
+            get => _authHyperLink ?? (new RelayCommand(obj =>
+            {
+                MessageBox.Show("");
+            }));
         }
 
         public EnterWindowViewModel()

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ProjectViolent.ApplicationWindows.EnterWindow.AuthUC.AuthUCView"
+﻿<UserControl x:Name="userControl" x:Class="ProjectViolent.ApplicationWindows.EnterWindow.AuthUC.AuthUCView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -42,7 +42,7 @@
         <Button Style="{DynamicResource LoginButtonStyle}"
                 Command="{Binding ButtonCommand}">Войти</Button>
         <ContentControl Style="{StaticResource HyperLinkContentControl}">
-            <Hyperlink>Регистрация</Hyperlink>
+            <Hyperlink Command="{Binding ElementName=userControl, Path=HyperLinkCommand, Mode=OneWay}">Регистрация</Hyperlink>
         </ContentControl>
     </Grid>
 </UserControl>

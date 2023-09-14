@@ -14,5 +14,5 @@
         <Setter Property="Grid.Column" Value="1"></Setter>
         <Setter Property="CornerRadius" Value="10"></Setter>
     </Style>
-    <auth:AuthUCView x:Key="AuthUC" DataContext="{Binding AuthUCViewModel}"></auth:AuthUCView>
+    <auth:AuthUCView x:Key="AuthUC" DataContext="{Binding AuthUCViewModel}" HyperLinkCommand="{Binding ElementName=EnterWindow, Path=DataContext.AuthHyperLink}"></auth:AuthUCView>
 </ResourceDictionary>

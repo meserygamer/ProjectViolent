@@ -20,6 +20,13 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.AuthUC
     /// </summary>
     public partial class AuthUCView : UserControl
     {
+        public static readonly DependencyProperty HyperLinkCommandDependencyProperty = DependencyProperty.Register("HyperLinkCommand", typeof(RelayCommand), typeof(AuthUCView));
+
+        public RelayCommand HyperLinkCommand
+        {
+            get => (RelayCommand)GetValue(HyperLinkCommandDependencyProperty);
+            set => SetValue(HyperLinkCommandDependencyProperty, value);
+        }
         public AuthUCView()
         {
             InitializeComponent();

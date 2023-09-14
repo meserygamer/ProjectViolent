@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
     <Page Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCView.xaml">
       <SubType>Designer</SubType>
@@ -85,6 +86,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\EnterWindowAuthUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\EnterWindowRegUCStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
