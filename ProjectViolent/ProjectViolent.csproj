@@ -59,6 +59,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml.cs">
+      <DependentUpon>SetPersonalDataUCView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RelayCommand.cs" />
     <Page Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCView.xaml">
       <SubType>Designer</SubType>
@@ -85,11 +88,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\EnterWindowAuthUCStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\EnterWindowRegUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\EnterWindowSetPersonalDataUCStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
