@@ -9,6 +9,45 @@ using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
 {
+    public class UserData
+    {
+        private string _userName;
+        private string _userSurName;
+        private string _userPatronymic;
+        private DateTime _birthDay;
+        private int _idGender;
+
+        public string UserName
+        {
+            get => _userName;
+            set => _userName = value;
+        }
+
+        public string UserSurName
+        {
+            get => _userSurName;
+            set => _userSurName = value;
+        }
+
+        public string UserPatronymic
+        {
+            get => _userPatronymic;
+            set => _userPatronymic = value;
+        }
+
+        public DateTime BirthDay
+        {
+            get => _birthDay;
+            set => _birthDay = value;
+        }
+
+        public int IdGender
+        {
+            get => _idGender;
+            set => _idGender = value;
+        }
+    }
+
     public class SetPersonalDataUCViewModel : INotifyPropertyChanged
     {
         private string _name;
@@ -70,9 +109,31 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
 
         public RelayCommand ConfirmData
         {
-            get => _confirmData ?? (new RelayCommand(obj => 
+            get => _confirmData ?? (new RelayCommand(obj =>
             {
-                MessageBox.Show("");
+                if (SurName is null || SurName == "")
+                {
+                    MessageBox.Show("Заполните фамилию");
+                }
+                else if(Name is null || Name == "")
+                {
+                    MessageBox.Show("Заполните имя");
+                }
+                else if(IdSelectedGender == 0)
+                {
+                    MessageBox.Show("Выберите пол");
+                }
+                else
+                {
+                    Application.Current.Resources.Add("UserData", new UserData()
+                    {
+                        UserName = Name,
+                        UserSurName = SurName,
+                        UserPatronymic = Patronymic,
+                        BirthDay = Birthday,
+                        IdGender = IdSelectedGender
+                    });
+                }
             }));
         }
 

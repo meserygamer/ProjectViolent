@@ -38,7 +38,8 @@
                     <i:Interaction.Behaviors>
                         <MN:PasswordBoxBehavior
                     PasswordHash="{Binding PasswordHash,
-                    Mode=OneWayToSource}"/>
+                            Mode=OneWayToSource}"
+                    Password="{Binding Password, Mode=TwoWay}"/>
                     </i:Interaction.Behaviors>
                 </PasswordBox>
             </GroupBox>
@@ -54,7 +55,10 @@
             <Button Style="{DynamicResource LoginButtonStyle}"
             Command="{Binding ButtonCommand}">Зарегистрироваться</Button>
             <ContentControl Style="{StaticResource HyperLinkContentControl}">
-                <Hyperlink Command="{Binding ElementName=userControlReg, Path=HyperLinkCommand, Mode=OneWay}">У вас уже есть аккаунт?</Hyperlink>
+                <Hyperlink Command="{Binding ElementName=userControlReg,
+                    Path=HyperLinkCommand,
+                    Mode=OneWay}">У вас уже есть аккаунт?
+                </Hyperlink>
             </ContentControl>
         </Grid>
     </Grid>

@@ -59,7 +59,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCModel.cs" />
     <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCModel.cs" />
     <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml.cs">
       <DependentUpon>SetPersonalDataUCView.xaml</DependentUpon>
     </Compile>

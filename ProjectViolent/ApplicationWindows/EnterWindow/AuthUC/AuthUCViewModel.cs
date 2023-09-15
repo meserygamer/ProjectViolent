@@ -40,7 +40,15 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.AuthUC
         {
             get => _buttonCommand ?? (new RelayCommand(obj =>
             {
-                MessageBox.Show("");
+                if (Login is null || Login.Length == 0)
+                {
+                    MessageBox.Show("Заполните поле логина");
+                }
+                else if (PasswordHash is null || PasswordHash.Length == 0)
+                {
+                    MessageBox.Show("Заполните поле пароля");
+                }
+                else MessageBox.Show("Всё ок");
             }));
         }
 
