@@ -8,9 +8,16 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
 {
     public class RegUCModel
     {
-        public static bool IsLoginFree()
+        public static bool IsLoginFree(string login)
         {
-            return true;
+            using(Entities DB = new Entities())
+            {
+                if(DB.AuthorizationData.Find(login) == null)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
     }
 }

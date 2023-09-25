@@ -16,7 +16,8 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
     {
         AuthOpen,
         RegOpen,
-        SetPersonalDataOpen
+        SetPersonalDataOpen,
+        RegistrationIsOver
     }
     public class EnterWindowViewModel : INotifyPropertyChanged
     {
@@ -89,6 +90,7 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
             RegUCViewModel = new RegUCViewModel();
             SetPersonalDataUCViewModel = new SetPersonalDataUCViewModel();
             RegUCViewModel.PropertyChanged += NextRegPage;
+            SetPersonalDataUCViewModel.PropertyChanged += AccountRegistration;
             CurrentStateOfEnterWindow = StateOfEnterWindow.AuthOpen;
         }
 
@@ -97,6 +99,16 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow
             if(a.PropertyName == "EnterWindowState")
             {
                 CurrentStateOfEnterWindow = ((RegUCViewModel)obj).EnterWindowState;
+            }
+        }
+
+        private void AccountRegistration(object obj, PropertyChangedEventArgs a)
+        {
+            if (a.PropertyName == "EnterWindowState")
+            {
+                EnterWindowModel.RegistrationUser();
+                MessageBox.Show("Регистрация успешно завершена");
+                //CurrentStateOfEnterWindow = ((SetPersonalDataUCViewModel)obj).EnterWindowState;
             }
         }
 

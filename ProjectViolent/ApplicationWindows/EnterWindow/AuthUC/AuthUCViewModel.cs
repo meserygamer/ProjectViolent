@@ -48,7 +48,14 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.AuthUC
                 {
                     MessageBox.Show("Заполните поле пароля");
                 }
-                else MessageBox.Show("Всё ок");
+                else if(AuthUCModel.CheckUser(Login, PasswordHash))
+                {
+                    MessageBox.Show("Добро пожаловать!");
+                }
+                else
+                {
+                    MessageBox.Show("Неправильно введен пароль или логин");
+                }
             }));
         }
 

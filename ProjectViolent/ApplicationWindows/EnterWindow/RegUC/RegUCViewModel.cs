@@ -12,24 +12,6 @@ using ProjectViolent;
 
 namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
 {
-    public class RegData
-    {
-        private string _login;
-        private string _passwordHash;
-
-        public string Login
-        {
-            get => _login;
-            set => _login = value;
-        }
-
-        public string PasswordHash
-        {
-            get => _passwordHash;
-            set => _passwordHash = value;
-        }
-    }
-
     public class RegUCViewModel : INotifyPropertyChanged
     {
         private string _login;
@@ -98,12 +80,12 @@ namespace ProjectViolent.ApplicationWindows.EnterWindow.RegUC
                         " не менее 2 цифры и не менее 1 спец. символа." +
                         " Общая длина пароля не менее 8 символов)");
                 }
-                else if(RegUCModel.IsLoginFree())
+                else if(RegUCModel.IsLoginFree(Login))
                 {
-                    Application.Current.Resources.Add("RegData", new RegData() 
+                    Application.Current.Resources.Add("RegData", new AuthorizationData() 
                     { 
                         Login = Login,
-                        PasswordHash = PasswordHash
+                        SecurePasssword = PasswordHash
                     });
                     EnterWindowState = StateOfEnterWindow.SetPersonalDataOpen;
                 }

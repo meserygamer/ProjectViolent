@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище DataBase" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AuthorizationData">
           <Key>
             <PropertyRef Name="Login" />
@@ -37,7 +37,7 @@
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <Association Name="FK__Authoriza__UserI__6754599E">
           <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
@@ -75,7 +75,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище DataBaseContainer">
+        <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="AuthorizationData" EntityType="Self.AuthorizationData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
@@ -97,7 +97,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DataBase" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="AuthorizationData">
           <Key>
             <PropertyRef Name="Login" />
@@ -135,7 +135,7 @@
             <PropertyRef Name="RoleID" />
           </Key>
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UserData" Relationship="Self.FK__UserData__RoleID__6383C8BA" FromRole="UserRoles" ToRole="UserData" />
         </EntityType>
         <Association Name="FK__Authoriza__UserI__6754599E">
@@ -197,9 +197,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DataBaseContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AuthorizationData">
-            <EntityTypeMapping TypeName="DataBase.AuthorizationData">
+            <EntityTypeMapping TypeName="Model.AuthorizationData">
               <MappingFragment StoreEntitySet="AuthorizationData">
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
@@ -208,7 +208,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Genders">
-            <EntityTypeMapping TypeName="DataBase.Genders">
+            <EntityTypeMapping TypeName="Model.Genders">
               <MappingFragment StoreEntitySet="Genders">
                 <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
@@ -216,7 +216,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserData">
-            <EntityTypeMapping TypeName="DataBase.UserData">
+            <EntityTypeMapping TypeName="Model.UserData">
               <MappingFragment StoreEntitySet="UserData">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -229,7 +229,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="DataBase.UserRoles">
+            <EntityTypeMapping TypeName="Model.UserRoles">
               <MappingFragment StoreEntitySet="UserRoles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
