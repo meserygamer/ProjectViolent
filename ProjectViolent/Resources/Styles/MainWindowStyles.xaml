@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl">
+    <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView"></EISUC:EnterInSystemUCView>
+    <Style x:Key="MainContentControl"
+           TargetType="ContentControl">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding MainControlState}" Value="Login">
+                <Setter Property="Content" Value="{StaticResource EnterInSystemUserControlView}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

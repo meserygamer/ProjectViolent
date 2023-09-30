@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{80DC17E7-29E9-4259-9986-F74744937051}</ProjectGuid>
+    <ProjectGuid>{1F453102-DC41-422A-B967-48AD24170EE8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ProjectViolent</RootNamespace>
     <AssemblyName>ProjectViolent</AssemblyName>
@@ -44,6 +44,7 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -68,104 +69,64 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationWindows\AdminMenu\AdminMenuView.xaml.cs">
-      <DependentUpon>AdminMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationWindows\EnterWindow\EnterWindowModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCViewModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml.cs">
-      <DependentUpon>SetPersonalDataUCView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCViewModel.cs" />
-    <Compile Include="AuthorizationData.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Genders.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="UserData.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="UserRoles.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Page Include="ApplicationWindows\AdminMenu\AdminMenuView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ApplicationWindows\EnterWindow\EnterWindowView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCView.xaml.cs">
-      <DependentUpon>AuthUCView.xaml</DependentUpon>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCModel.cs" />
+    <Compile Include="AuthorizationData.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
-    <Compile Include="ApplicationWindows\EnterWindow\AuthUC\AuthUCViewModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\EnterWindowView.xaml.cs">
-      <DependentUpon>EnterWindowView.xaml</DependentUpon>
-      <SubType>Code</SubType>
+    <Compile Include="DataBase.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBase.Context.tt</DependentUpon>
     </Compile>
-    <Page Include="ApplicationWindows\EnterWindow\RegUC\RegUCView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ApplicationWindows\EnterWindow\SetPersonalDataUC\SetPersonalDataUCView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\AdminMenuUCStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\EnterWindowAuthUCStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\EnterWindowRegUCStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\EnterWindowSetPersonalDataUCStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\Styles\EnterWindowStyles.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="DataBase.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataBase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataBase.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Genders.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="UserData.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoles.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationWindows\EnterWindow\EnterWindowViewModel.cs" />
-    <Compile Include="ApplicationWindows\EnterWindow\RegUC\RegUCView.xaml.cs">
-      <DependentUpon>RegUCView.xaml</DependentUpon>
+    <Compile Include="ApplicationWindows\MainWindow\MainWindowView.xaml.cs">
+      <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\MainWindowViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCView.xaml.cs">
+      <DependentUpon>EnterInSystemUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCView.xaml.cs">
+      <DependentUpon>LoginUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCView.xaml.cs">
+      <DependentUpon>RegAuthDataUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCView.xaml.cs">
+      <DependentUpon>RegUserDataUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCViewModel.cs" />
     <Compile Include="PasswordBoxBehavior.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -184,12 +145,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="DataBase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataBase.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="DataBase.edmx.diagram">
+      <DependentUpon>DataBase.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -201,22 +162,69 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Pictures\EnterWindowBackground.jpg" />
+    <Content Include="DataBase.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>DataBase.Context.cs</LastGenOutput>
+      <DependentUpon>DataBase.edmx</DependentUpon>
+    </Content>
+    <Content Include="DataBase.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DataBase.edmx</DependentUpon>
+      <LastGenOutput>DataBase.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="ApplicationWindows\MainWindow\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\EnterInSystemUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\LoginUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\MainWindowStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\RegAuthDataUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\RegUserDataUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\EnterWindowBackground.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
+    <Folder Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControl\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl.UserControls.RegUserDataUC.RegUserDataUCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl.UserControls.RegUserDataUC"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:MN="clr-namespace:ProjectViolent"
+             MinHeight="680" MinWidth="480">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/RegUserDataUCStyles.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="White" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="12*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Style="{StaticResource MainTextBlock}">Установка личных данных</TextBlock>
+        <GroupBox Style="{StaticResource SurnameGroupBox}">
+            <TextBox Style="{StaticResource LoginTextBoxStyle}" 
+                     Text="{Binding SurName,Mode=TwoWay}"></TextBox>
+        </GroupBox>
+        <GroupBox Style="{StaticResource NameGroupBox}">
+            <TextBox Style="{StaticResource LoginTextBoxStyle}"
+                     Text="{Binding Name,Mode=TwoWay}"></TextBox>
+        </GroupBox>
+        <GroupBox Style="{StaticResource PatronymicGroupBox}">
+            <TextBox Style="{StaticResource LoginTextBoxStyle}"
+                     Text="{Binding Patronymic, Mode=TwoWay}"></TextBox>
+        </GroupBox>
+        <GroupBox Style="{StaticResource BirthDayGroupBox}">
+            <DatePicker Style="{DynamicResource DatePickerStyle1}"
+                        SelectedDate="{Binding Birthday}"/>
+        </GroupBox>
+        <GroupBox Style="{StaticResource GenderGroupBox}">
+            <ComboBox Style="{DynamicResource ComboBoxStyle1}"
+                      SelectedIndex="{Binding IdSelectedGender}">
+                <ComboBoxItem IsSelected="True" IsEnabled="False" >Выберите пол</ComboBoxItem>
+                <ComboBoxItem>Мужской</ComboBoxItem>
+                <ComboBoxItem>Женский</ComboBoxItem>
+            </ComboBox>
+        </GroupBox>
+        <Button Style="{DynamicResource ConfirmButtonStyle}"
+                Command="{Binding ConfirmData}">
+            Подтвердить</Button>
+    </Grid>
+</UserControl>
