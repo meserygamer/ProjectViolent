@@ -28,6 +28,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSyste
         private RelayCommand _regHyperLink;
         private StateOfEnterWindow _currentStateOfEnterWindow;
 
+        public event Action<int> LoginWasComplete;
+
         public LoginUCViewModel LoginUCViewModel
         {
             get => _loginUCViewModel;
@@ -98,8 +100,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSyste
         private void LoginInAccountWasComplete(int obj)
         {
             Application.Current.Resources.Add("UserID", obj);
-            MessageBox.Show($"Вы вошли в аккаунт ваш номер: {obj}");
-            //
+            LoginWasComplete(obj);
         }
 
         private void NextRegPage(object obj, PropertyChangedEventArgs a)

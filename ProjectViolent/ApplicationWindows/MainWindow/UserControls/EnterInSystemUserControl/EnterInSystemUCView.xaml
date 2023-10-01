@@ -6,9 +6,6 @@
              xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl"
              x:Name="EnterUC"
              mc:Ignorable="d" MinHeight="850" MinWidth="720">
-    <UserControl.DataContext>
-        <local:EnterInSystemUCViewModel></local:EnterInSystemUCViewModel>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <ResourceDictionary Source="/Resources/Styles/EnterInSystemUCStyles.xaml"></ResourceDictionary>
     </UserControl.Resources>

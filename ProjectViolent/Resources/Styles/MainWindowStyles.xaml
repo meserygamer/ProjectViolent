@@ -1,12 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl">
-    <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView"></EISUC:EnterInSystemUCView>
-    <Style x:Key="MainContentControl"
+                    xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl"
+                    xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC">
+    <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
+    <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew" DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
+        <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
             <DataTrigger Binding="{Binding MainControlState}" Value="Login">
                 <Setter Property="Content" Value="{StaticResource EnterInSystemUserControlView}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="AdminPanel">
+                <Setter Property="Content" Value="{StaticResource AdminPanelMainMenuUserControlVIew}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

@@ -73,9 +73,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\MainWindowModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCVIew.xaml.cs">
       <DependentUpon>AdminPanelMainMenuUCVIew.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCViewModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCView.xaml.cs">
       <DependentUpon>ShowInformationAboutAllUsersUCView.xaml</DependentUpon>
     </Compile>

@@ -111,7 +111,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="2.5*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Margin="10">
             <Grid.ColumnDefinitions>
@@ -120,7 +120,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.2*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Style="{DynamicResource ButtonStyle1}"
