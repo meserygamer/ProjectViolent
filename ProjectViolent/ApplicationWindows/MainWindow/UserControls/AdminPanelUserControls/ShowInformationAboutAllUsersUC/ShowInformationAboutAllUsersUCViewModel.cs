@@ -55,6 +55,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _sortType = SortType.Ascending;
                     OnPropertyChanged();
+                    _genderFilterType = GenderFilterType.All;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(AllGenderFilterTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(_sortType, _genderFilterType);
                 }
             }
@@ -69,6 +71,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _sortType = SortType.Descending;
                     OnPropertyChanged();
+                    _genderFilterType = GenderFilterType.All;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(AllGenderFilterTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(_sortType, _genderFilterType);
                 }
             }
@@ -83,6 +87,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _sortType = SortType.Default;
                     OnPropertyChanged();
+                    _genderFilterType = GenderFilterType.All;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(AllGenderFilterTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(null,_genderFilterType);
                 }
             }
@@ -99,6 +105,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _genderFilterType = GenderFilterType.Female;
                     OnPropertyChanged();
+                    _sortType = SortType.Default;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(DefaultSortTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(_sortType, GenderFilterType.Female);
                 }
             }
@@ -113,6 +121,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _genderFilterType = GenderFilterType.Male;
                     OnPropertyChanged();
+                    _sortType = SortType.Default;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(DefaultSortTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(_sortType, GenderFilterType.Male);
                 }
             }
@@ -127,6 +137,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     _genderFilterType = GenderFilterType.All;
                     OnPropertyChanged();
+                    _sortType = SortType.Default;//Урезание для отдельной работы фильтров, поиска и сортировки
+                    OnPropertyChanged(nameof(DefaultSortTypeIsChecked));//Урезание для отдельной работы фильтров, поиска и сортировки
                     Model.UpdateGrid(_sortType, null);
                 }
             }
@@ -176,8 +188,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             get => _searchCommand ?? (_searchCommand = new RelayCommand(a => 
             {
                 Model.UpdateGrid();
-                DefaultSortTypeIsChecked = true;
-                AllGenderFilterTypeIsChecked = true;
+                DefaultSortTypeIsChecked = true; //Урезание для отдельной работы фильтров, поиска и сортировки
+                AllGenderFilterTypeIsChecked = true; //Урезание для отдельной работы фильтров, поиска и сортировки
                 switch (_searchType)
                 {
                     case SearchType.SearchByID:
