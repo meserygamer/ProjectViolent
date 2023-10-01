@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC"
              mc:Ignorable="d" Background="White"
+             x:Name="ShowInfUC"
              d:DesignHeight="850" d:DesignWidth="720">
     <UserControl.Resources>
         <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
@@ -79,6 +80,9 @@
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Padding" Value="10 0 0 0"></Setter>
             <Setter Property="AllowDrop" Value="true"/>
             <Setter Property="Height" Value="60"/>
             <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
@@ -100,13 +104,16 @@
                                 <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
                                               HorizontalScrollBarVisibility="Hidden"
                                               VerticalScrollBarVisibility="Hidden"/>
-                                <Button Grid.Column="1" Style="{StaticResource ButtonStyle2}"></Button>
+                                <Button Grid.Column="1" 
+                                        Style="{StaticResource ButtonStyle2}"
+                                        Command="{Binding SearchCommand}"></Button>
                             </Grid>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+        <local:AuthorizationDataConverter x:Key="AuthDataConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -124,6 +131,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Button Style="{DynamicResource ButtonStyle1}"
+                    Command="{Binding ElementName=ShowInfUC, Path=MoveOnPreviousCommand}"
                     Grid.Column="0"
                     Grid.Row="0">
             </Button>
@@ -134,13 +142,17 @@
                 <RadioButton GroupName="SortGroup"
                  Content="По возрастанию"
                              FontSize="16"
-                             Margin="0 10 0 0"></RadioButton>
+                             Margin="0 10 0 0"
+                             IsChecked="{Binding AscendingSortTypeIsChecked, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="SortGroup"
                  Content="По убыванию"
-                             FontSize="16"></RadioButton>
+                             FontSize="16"
+                             IsChecked="{Binding DescendingSortTypeIsChecked, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="SortGroup"
                  Content="По умолчанию"
-                             FontSize="16"></RadioButton>
+                             IsChecked="{Binding DefaultSortTypeIsChecked, Mode=TwoWay}"
+                             FontSize="16"
+                             ></RadioButton>
             </StackPanel>
             <StackPanel Grid.Row="0"
                         Grid.Column="2">
@@ -149,12 +161,15 @@
                 <RadioButton GroupName="FiltrGroup"
                              Content="Мужчины"
                              FontSize="16"
-                             Margin="0 10 0 0"></RadioButton>
+                             Margin="0 10 0 0"
+                             IsChecked="{Binding MaleGenderFilterTypeIsChecked, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="FiltrGroup"
                  Content="Женщины"
-                             FontSize="16"></RadioButton>
+                             FontSize="16"
+                             IsChecked="{Binding FemaleGenderFilterTypeIsChecked, Mode=TwoWay}"></RadioButton>
                 <RadioButton GroupName="FiltrGroup"
                  Content="Все"
+                             IsChecked="{Binding AllGenderFilterTypeIsChecked, Mode=TwoWay}"
                              FontSize="16"></RadioButton>
             </StackPanel>
             <Grid Grid.Row="1"
@@ -164,17 +179,20 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Style="{DynamicResource TextBoxStyle1}"/>
+                <TextBox Style="{DynamicResource TextBoxStyle1}"
+                         Text="{Binding FindQuery, Mode=TwoWay}"/>
                 <StackPanel Grid.Column="1"
                             Margin="10 0 0 0">
-                    <RadioButton FontSize="16">
+                    <RadioButton FontSize="16"
+                                 IsChecked="{Binding SearchByIDSearchTypeIsChecked, Mode=TwoWay}">
                         <RadioButton.Content>
                             <TextBlock TextWrapping="WrapWithOverflow">
                                 Поиск по номеру пользователя
                             </TextBlock>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton FontSize="16">
+                    <RadioButton FontSize="16"
+                                 IsChecked="{Binding SearchByLoginSearchTypeIsChecked, Mode=TwoWay}">
                         <RadioButton.Content>
                             <TextBlock TextWrapping="WrapWithOverflow">
                                 Поиск по логину пользователя
@@ -182,9 +200,25 @@
                         </RadioButton.Content>
                     </RadioButton>
                 </StackPanel>
-                <Button Grid.Column="2" Style="{StaticResource ButtonStyle3}"></Button>
+                <Button Grid.Column="2" 
+                        Style="{StaticResource ButtonStyle3}"
+                        Command="{Binding ClearCommand}"></Button>
             </Grid>
         </Grid>
-        <DataGrid Grid.Row="1"></DataGrid>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Model.UserDatas}"
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="№ Пользователя" Binding="{Binding UserID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Логин" Binding="{Binding AuthorizationData, Converter={StaticResource AuthDataConverter}}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Genders.Gender}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthday}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Роль" Binding="{Binding UserRoles.Role}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

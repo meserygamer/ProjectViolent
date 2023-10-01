@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     /// </summary>
     public partial class ShowInformationAboutAllUsersUCView : UserControl
     {
+        public static readonly DependencyProperty MoveOnPreviousCommandDependencyProperty = DependencyProperty.Register("MoveOnPreviousCommand", typeof(RelayCommand), typeof(ShowInformationAboutAllUsersUCView));
+
+        public RelayCommand MoveOnPreviousCommand
+        {
+            get => (RelayCommand)GetValue(MoveOnPreviousCommandDependencyProperty);
+            set => SetValue(MoveOnPreviousCommandDependencyProperty, value);
+        }
+
         public ShowInformationAboutAllUsersUCView()
         {
             InitializeComponent();

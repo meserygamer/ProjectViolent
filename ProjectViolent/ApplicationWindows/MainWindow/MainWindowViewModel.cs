@@ -1,4 +1,5 @@
 ﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
     {
         Login,
         AdminPanel,
+        ShowAllUsers,
         UserPanel
     }
 
@@ -23,6 +25,9 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private MainControlStates _mainControlState;
         private EnterInSystemUCViewModel _enterInSystemUCDataContext;
         private AdminPanelMainMenuUCViewModel _adminPanelMainMenuUCDataContext;
+        private ShowInformationAboutAllUsersUCViewModel _showInformationAboutAllUsersUCDataContext;
+        private RelayCommand _showAllUserCommand;
+        private RelayCommand _moveOnAdminPanel;
 
         public MainControlStates MainControlState
         {
@@ -54,12 +59,40 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             }
         }
 
+        public ShowInformationAboutAllUsersUCViewModel ShowInformationAboutAllUsersUCDataContext
+        {
+            get => _showInformationAboutAllUsersUCDataContext;
+            set
+            {
+                _showInformationAboutAllUsersUCDataContext = value;
+                OnPropertyChanged(nameof(ShowInformationAboutAllUsersUCDataContext));
+            }
+        }
+
+        public RelayCommand ShowAllUserCommand
+        {
+            get => _showAllUserCommand ?? (_showAllUserCommand = new RelayCommand(a => 
+            {
+                ShowInformationAboutAllUsersUCDataContext = new ShowInformationAboutAllUsersUCViewModel();
+                MainControlState = MainControlStates.ShowAllUsers;
+            }));
+        }
+
+        public RelayCommand MoveOnAdminPanel
+        {
+            get => _moveOnAdminPanel ?? (_moveOnAdminPanel = new RelayCommand(a => 
+            {
+                MainControlState = MainControlStates.AdminPanel;
+            }));
+        }
+
         public MainWindowViewModel()
         {
             EnterInSystemUCDataContext = new EnterInSystemUCViewModel();
             AdminPanelMainMenuUCDataContext = new AdminPanelMainMenuUCViewModel();
             MainControlState = MainControlStates.Login;
             EnterInSystemUCDataContext.LoginWasComplete += EnterWasComplete;
+            EnterInSystemUCDataContext.LoginWasComplete += AdminPanelMainMenuUCDataContext.NameAndSurName;
         }
 
         public void EnterWasComplete(int UserID)

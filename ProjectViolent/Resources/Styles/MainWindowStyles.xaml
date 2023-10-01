@@ -1,9 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl"
-                    xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC">
+                    xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC"
+                    xmlns:SAIAU="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC">
     <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
-    <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew" DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
+    <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew"
+                                     ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
+                                     DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
+    <SAIAU:ShowInformationAboutAllUsersUCView x:Key="ShowInformationAboutAllUsersUserControlView"
+                                              MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
+                                              DataContext="{Binding ShowInformationAboutAllUsersUCDataContext}"
+                                              ></SAIAU:ShowInformationAboutAllUsersUCView>
         <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
@@ -12,6 +19,9 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="AdminPanel">
                 <Setter Property="Content" Value="{StaticResource AdminPanelMainMenuUserControlVIew}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="ShowAllUsers">
+                <Setter Property="Content" Value="{StaticResource ShowInformationAboutAllUsersUserControlView}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>
