@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectViolent.ApplicationWindows.EnterWindow.SetPersonalDataUC
+namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC
 {
     /// <summary>
-    /// Логика взаимодействия для SetPersonalDataUCView.xaml
+    /// Логика взаимодействия для AdminPanelMainMenuUCVIew.xaml
     /// </summary>
-    public partial class SetPersonalDataUCView : UserControl
+    public partial class AdminPanelMainMenuUCVIew : UserControl
     {
-        public SetPersonalDataUCView()
+        public AdminPanelMainMenuUCVIew()
         {
             InitializeComponent();
         }

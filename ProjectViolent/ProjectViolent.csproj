@@ -73,6 +73,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCVIew.xaml.cs">
+      <DependentUpon>AdminPanelMainMenuUCVIew.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCModel.cs" />
@@ -178,6 +181,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCVIew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,8 +230,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControl\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
