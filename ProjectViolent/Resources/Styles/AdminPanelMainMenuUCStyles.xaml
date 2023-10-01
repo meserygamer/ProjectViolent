@@ -1,0 +1,56 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC">
+    <local:DefineFIO x:Key="DefineFIOConverter"></local:DefineFIO>
+    <Style x:Key="MainLabel" TargetType="TextBlock">
+        <Setter Property="Text" Value="Меню администратора"></Setter>
+        <Setter Property="TextAlignment" Value="Left"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="10 0 0 0"></Setter>
+        <Setter Property="FontWeight" Value="SemiBold"></Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+    <Style x:Key="UserStackPanel" TargetType="StackPanel">
+        <Setter Property="Grid.Row" Value="0"/>
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="Orientation" Value="Horizontal"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Right"></Setter>
+    </Style>
+    <Style x:Key="UserInfoStackPanel" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0 0 10 0"/>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    </Style>
+    <Style x:Key="UserName" TargetType="TextBlock">
+        <Setter Property="Text">
+            <Setter.Value>
+                <MultiBinding Converter="{StaticResource DefineFIOConverter}">
+                    <Binding Path="SurName"></Binding>
+                    <Binding Path="Name"></Binding>
+                </MultiBinding>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="FontSize" Value="24"></Setter>
+    </Style>
+    <Style x:Key="UserRole" TargetType="TextBlock">
+        <Setter Property="Text" Value="Администратор"/>
+        <Setter Property="FontSize" Value="16"></Setter>
+        <Setter Property="Foreground" Value="Gray"></Setter>
+    </Style>
+    <Style x:Key="UserImage" TargetType="Image">
+        <Setter Property="Height" Value="60"/>
+        <Setter Property="Width" Value="60"/>
+        <Setter Property="Source" Value="/Resources/Images/LoginIcon.png"></Setter>
+    </Style>
+    <Style x:Key="MenuScrollViewer" TargetType="ScrollViewer">
+        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Grid.Column" Value="0"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+        <Setter Property="Margin" Value="10 10 0 0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Hidden"></Setter>
+    </Style>
+    <Style x:Key="ShowAllUserCommand" TargetType="Hyperlink">
+        <Setter Property="Command" Value="{Binding ElementName=UC,
+                Path=ShowAllUsersCommand, Mode=OneWay}"/>
+    </Style>
+</ResourceDictionary>

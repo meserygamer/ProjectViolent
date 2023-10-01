@@ -8,112 +8,7 @@
              x:Name="ShowInfUC"
              d:DesignHeight="850" d:DesignWidth="720">
     <UserControl.Resources>
-        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#0000"/>
-            <Setter Property="BorderBrush" Value="#0000"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Height" Value="50"></Setter>
-            <Setter Property="Width" Value="50"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="VerticalAlignment" Value="Top"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <Image Source="/Resources/Images/BackButton.png"></Image>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#0000"/>
-            <Setter Property="BorderBrush" Value="#0000"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Height" Value="40"></Setter>
-            <Setter Property="Width" Value="40"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <Image Source="/Resources/Images/SearchIcon.png"></Image>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ButtonStyle3" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#0000"/>
-            <Setter Property="BorderBrush" Value="#0000"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Height" Value="40"></Setter>
-            <Setter Property="Width" Value="40"></Setter>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <Image Source="/Resources/Images/CancelButton.png"></Image>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="TextBoxStyle1" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="BorderBrush" Value="Black"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="20"></Setter>
-            <Setter Property="Padding" Value="10 0 0 0"></Setter>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="Height" Value="60"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                SnapsToDevicePixels="True"
-                                CornerRadius="10">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition Width="50"/>
-                                </Grid.ColumnDefinitions>
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
-                                              HorizontalScrollBarVisibility="Hidden"
-                                              VerticalScrollBarVisibility="Hidden"/>
-                                <Button Grid.Column="1" 
-                                        Style="{StaticResource ButtonStyle2}"
-                                        Command="{Binding SearchCommand}"></Button>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <local:AuthorizationDataConverter x:Key="AuthDataConverter"/>
+        <ResourceDictionary Source="/Resources/Styles/ShowInformationAboutAllUsersUCStyles.xaml"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -130,85 +25,34 @@
                 <RowDefinition Height="1.2*"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Button Style="{DynamicResource ButtonStyle1}"
-                    Command="{Binding ElementName=ShowInfUC, Path=MoveOnPreviousCommand}"
-                    Grid.Column="0"
-                    Grid.Row="0">
-            </Button>
-            <StackPanel Grid.Row="0"
-                        Grid.Column="1">
-                <TextBlock Text="Сортировка фамилий"
-                           FontSize="18"></TextBlock>
-                <RadioButton GroupName="SortGroup"
-                 Content="По возрастанию"
-                             FontSize="16"
-                             Margin="0 10 0 0"
-                             IsChecked="{Binding AscendingSortTypeIsChecked, Mode=TwoWay}"></RadioButton>
-                <RadioButton GroupName="SortGroup"
-                 Content="По убыванию"
-                             FontSize="16"
-                             IsChecked="{Binding DescendingSortTypeIsChecked, Mode=TwoWay}"></RadioButton>
-                <RadioButton GroupName="SortGroup"
-                 Content="По умолчанию"
-                             IsChecked="{Binding DefaultSortTypeIsChecked, Mode=TwoWay}"
-                             FontSize="16"
-                             ></RadioButton>
+            <Button Style="{DynamicResource ButtonStyle1}"/>
+            <StackPanel Style="{StaticResource ChoseSort}">
+                <TextBlock Style="{StaticResource ChoseSortTextBlock}"/>
+                <RadioButton Style="{StaticResource ChoseSortRad1}"/>
+                <RadioButton Style="{StaticResource ChoseSortRad2}"/>
+                <RadioButton Style="{StaticResource ChoseSortRad3}"/>
             </StackPanel>
-            <StackPanel Grid.Row="0"
-                        Grid.Column="2">
-                <TextBlock Text="Фильтрация по полу"
-                           FontSize="18"></TextBlock>
-                <RadioButton GroupName="FiltrGroup"
-                             Content="Мужчины"
-                             FontSize="16"
-                             Margin="0 10 0 0"
-                             IsChecked="{Binding MaleGenderFilterTypeIsChecked, Mode=TwoWay}"></RadioButton>
-                <RadioButton GroupName="FiltrGroup"
-                 Content="Женщины"
-                             FontSize="16"
-                             IsChecked="{Binding FemaleGenderFilterTypeIsChecked, Mode=TwoWay}"></RadioButton>
-                <RadioButton GroupName="FiltrGroup"
-                 Content="Все"
-                             IsChecked="{Binding AllGenderFilterTypeIsChecked, Mode=TwoWay}"
-                             FontSize="16"></RadioButton>
+            <StackPanel Style="{StaticResource ChoseFiltr}">
+                <TextBlock Style="{StaticResource ChoseFiltrTextBlock}"/>
+                <RadioButton Style="{StaticResource ChoseFiltrRad1}"/>
+                <RadioButton Style="{StaticResource ChoseFiltrRad2}"/>
+                <RadioButton Style="{StaticResource ChoseFiltrRad3}"/>
             </StackPanel>
-            <Grid Grid.Row="1"
-                  Grid.ColumnSpan="4">
+            <Grid Style="{StaticResource QuaryGrid}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2.8*"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Style="{DynamicResource TextBoxStyle1}"
-                         Text="{Binding FindQuery, Mode=TwoWay}"/>
-                <StackPanel Grid.Column="1"
-                            Margin="10 0 0 0">
-                    <RadioButton FontSize="16"
-                                 IsChecked="{Binding SearchByIDSearchTypeIsChecked, Mode=TwoWay}">
-                        <RadioButton.Content>
-                            <TextBlock TextWrapping="WrapWithOverflow">
-                                Поиск по номеру пользователя
-                            </TextBlock>
-                        </RadioButton.Content>
-                    </RadioButton>
-                    <RadioButton FontSize="16"
-                                 IsChecked="{Binding SearchByLoginSearchTypeIsChecked, Mode=TwoWay}">
-                        <RadioButton.Content>
-                            <TextBlock TextWrapping="WrapWithOverflow">
-                                Поиск по логину пользователя
-                            </TextBlock>
-                        </RadioButton.Content>
-                    </RadioButton>
+                <TextBox Style="{DynamicResource TextBoxStyle1}"/>
+                <StackPanel Style="{StaticResource ChoseSearchType}">
+                    <RadioButton Style="{StaticResource ChoseSearchTypeRB1}"/>
+                    <RadioButton Style="{StaticResource ChoseSearchTypeRB2}"/>
                 </StackPanel>
-                <Button Grid.Column="2" 
-                        Style="{StaticResource ButtonStyle3}"
-                        Command="{Binding ClearCommand}"></Button>
+                <Button Style="{StaticResource ButtonStyle3}"/>
             </Grid>
         </Grid>
-        <DataGrid Grid.Row="1"
-                  AutoGenerateColumns="False"
-                  ItemsSource="{Binding Model.UserDatas}"
-                  IsReadOnly="True">
+        <DataGrid Style="{StaticResource MainDataGrid}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="№ Пользователя" Binding="{Binding UserID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}"></DataGridTextColumn>
