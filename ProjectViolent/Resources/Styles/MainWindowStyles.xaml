@@ -2,26 +2,35 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl"
                     xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC"
-                    xmlns:SAIAU="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC">
+                    xmlns:SAIAU="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC"
+                    xmlns:SMTDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC">
     <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
     <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew"
                                      ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
+                                     ShowMainDataBaseTableCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowMainTableCommand}"
                                      DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
     <SAIAU:ShowInformationAboutAllUsersUCView x:Key="ShowInformationAboutAllUsersUserControlView"
                                               MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
                                               DataContext="{Binding ShowInformationAboutAllUsersUCDataContext}"
                                               ></SAIAU:ShowInformationAboutAllUsersUCView>
-        <Style x:Key="MainContentControl"
+    <SMTDB:ShowMainTableDataBaseUCView x:Key="ShowMainTableDataBaseUCView"
+                                       MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
+                                       DataContext="{Binding ShowMainTableDataBaseUCDataContext}"
+                                       ></SMTDB:ShowMainTableDataBaseUCView>
+    <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
             <DataTrigger Binding="{Binding MainControlState}" Value="Login">
-                <Setter Property="Content" Value="{StaticResource EnterInSystemUserControlView}" />
+                <Setter Property="Content" Value="{StaticResource EnterInSystemUserControlView}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="AdminPanel">
-                <Setter Property="Content" Value="{StaticResource AdminPanelMainMenuUserControlVIew}" />
+                <Setter Property="Content" Value="{StaticResource AdminPanelMainMenuUserControlVIew}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="ShowAllUsers">
-                <Setter Property="Content" Value="{StaticResource ShowInformationAboutAllUsersUserControlView}" />
+                <Setter Property="Content" Value="{StaticResource ShowInformationAboutAllUsersUserControlView}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="ShowMainTable">
+                <Setter Property="Content" Value="{StaticResource ShowMainTableDataBaseUCView}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

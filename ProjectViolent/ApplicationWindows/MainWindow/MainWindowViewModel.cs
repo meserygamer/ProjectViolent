@@ -1,5 +1,6 @@
 ﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         Login,
         AdminPanel,
         ShowAllUsers,
+        ShowMainTable,
         UserPanel
     }
 
@@ -26,7 +28,9 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private EnterInSystemUCViewModel _enterInSystemUCDataContext;
         private AdminPanelMainMenuUCViewModel _adminPanelMainMenuUCDataContext;
         private ShowInformationAboutAllUsersUCViewModel _showInformationAboutAllUsersUCDataContext;
+        private ShowMainTableDataBaseUCViewModel _showMainTableDataBaseUCDataContext;
         private RelayCommand _showAllUserCommand;
+        private RelayCommand _showMainTableCommand;
         private RelayCommand _moveOnAdminPanel;
 
         public MainControlStates MainControlState
@@ -69,12 +73,31 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             }
         }
 
+        public ShowMainTableDataBaseUCViewModel ShowMainTableDataBaseUCDataContext
+        {
+            get => _showMainTableDataBaseUCDataContext;
+            set
+            {
+                _showMainTableDataBaseUCDataContext = value;
+                OnPropertyChanged(nameof(ShowMainTableDataBaseUCDataContext));
+            }
+        }
+
         public RelayCommand ShowAllUserCommand
         {
             get => _showAllUserCommand ?? (_showAllUserCommand = new RelayCommand(a => 
             {
                 ShowInformationAboutAllUsersUCDataContext = new ShowInformationAboutAllUsersUCViewModel();
                 MainControlState = MainControlStates.ShowAllUsers;
+            }));
+        }
+
+        public RelayCommand ShowMainTableCommand
+        {
+            get => _showMainTableCommand ?? (_showMainTableCommand = new RelayCommand(a => 
+            {
+                ShowMainTableDataBaseUCDataContext = new ShowMainTableDataBaseUCViewModel();
+                MainControlState = MainControlStates.ShowMainTable;
             }));
         }
 

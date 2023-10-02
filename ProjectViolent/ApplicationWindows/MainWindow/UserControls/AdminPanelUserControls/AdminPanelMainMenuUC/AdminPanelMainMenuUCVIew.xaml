@@ -28,9 +28,18 @@
             <Image Style="{StaticResource UserImage}"></Image>
         </StackPanel>
         <ScrollViewer Style="{StaticResource MenuScrollViewer}">
-            <Hyperlink Style="{StaticResource ShowAllUserCommand}">
-                Посмотреть информацию обо всех пользователях
-            </Hyperlink>
+            <StackPanel>
+                <TextBlock>
+                    <Hyperlink Style="{StaticResource ShowAllUserCommand}">
+                        Посмотреть информацию обо всех пользователях
+                    </Hyperlink>
+                </TextBlock>
+                <TextBlock>
+                    <Hyperlink Style="{StaticResource ShowMainDataBaseTableCommand}">
+                        Посмотреть главную таблицу базы данных
+                    </Hyperlink>
+                </TextBlock>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </UserControl>

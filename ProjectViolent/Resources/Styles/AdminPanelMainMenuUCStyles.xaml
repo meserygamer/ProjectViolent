@@ -53,4 +53,8 @@
         <Setter Property="Command" Value="{Binding ElementName=UC,
                 Path=ShowAllUsersCommand, Mode=OneWay}"/>
     </Style>
+    <Style x:Key="ShowMainDataBaseTableCommand" TargetType="Hyperlink">
+        <Setter Property="Command" Value="{Binding ElementName=UC,
+                Path=ShowMainDataBaseTableCommand, Mode=OneWay}"/>
+    </Style>
 </ResourceDictionary>

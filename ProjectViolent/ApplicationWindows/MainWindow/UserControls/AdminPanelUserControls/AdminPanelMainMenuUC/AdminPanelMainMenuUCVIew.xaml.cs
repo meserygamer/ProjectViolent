@@ -22,11 +22,18 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public partial class AdminPanelMainMenuUCVIew : UserControl
     {
         public static readonly DependencyProperty ShowAllUsersCommandDependencyProperty = DependencyProperty.Register("ShowAllUsersCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowMainDataBaseTableCommandDependencyProperty = DependencyProperty.Register("ShowMainDataBaseTableCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
 
         public RelayCommand ShowAllUsersCommand
         {
             get => (RelayCommand)GetValue(ShowAllUsersCommandDependencyProperty);
             set => SetValue(ShowAllUsersCommandDependencyProperty, value);
+        }
+
+        public RelayCommand ShowMainDataBaseTableCommand
+        {
+            get => (RelayCommand)GetValue(ShowMainDataBaseTableCommandDependencyProperty);
+            set => SetValue(ShowMainDataBaseTableCommandDependencyProperty, value);
         }
 
         public AdminPanelMainMenuUCVIew()

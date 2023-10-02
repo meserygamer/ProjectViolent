@@ -84,6 +84,10 @@
       <DependentUpon>ShowInformationAboutAllUsersUCView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCView.xaml.cs">
+      <DependentUpon>ShowMainTableDataBaseUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCViewModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCModel.cs" />
@@ -207,6 +211,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\EnterInSystemUCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,6 +256,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Styles\ShowInformationAboutAllUsersUCStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles\ShowMainTableDataBaseUCStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
