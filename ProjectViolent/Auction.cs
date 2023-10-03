@@ -12,31 +12,22 @@ namespace ProjectViolent
     using System;
     using System.Collections.Generic;
     
-    public partial class UserData
+    public partial class Auction
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserData()
+        public Auction()
         {
-            this.AuthorizationData = new HashSet<AuthorizationData>();
             this.BettingHistory = new HashSet<BettingHistory>();
-            this.Items = new HashSet<Items>();
         }
     
-        public int UserID { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Patronymic { get; set; }
-        public System.DateTime Birthday { get; set; }
-        public int GenderID { get; set; }
-        public int RoleID { get; set; }
+        public int ID_Auction { get; set; }
+        public int ID_Item { get; set; }
+        public System.DateTime Date_Start { get; set; }
+        public System.DateTime Date_End { get; set; }
+        public Nullable<decimal> StartPrice { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AuthorizationData> AuthorizationData { get; set; }
-        public virtual Genders Genders { get; set; }
-        public virtual UserRoles UserRoles { get; set; }
+        public virtual Items Items { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BettingHistory> BettingHistory { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Items> Items { get; set; }
     }
 }

@@ -4,7 +4,17 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Auction">
+          <Key>
+            <PropertyRef Name="ID_Auction" />
+          </Key>
+          <Property Name="ID_Auction" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Item" Type="int" Nullable="false" />
+          <Property Name="Date_Start" Type="datetime" Nullable="false" />
+          <Property Name="Date_End" Type="datetime" Nullable="false" />
+          <Property Name="StartPrice" Type="money" />
+        </EntityType>
         <EntityType Name="AuthorizationData">
           <Key>
             <PropertyRef Name="Login" />
@@ -13,12 +23,31 @@
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="SecurePasssword" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="BettingHistory">
+          <Key>
+            <PropertyRef Name="ID_Bid" />
+          </Key>
+          <Property Name="ID_Bid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ID_Auction" Type="int" Nullable="false" />
+          <Property Name="BidAmount" Type="money" Nullable="false" />
+        </EntityType>
         <EntityType Name="Genders">
           <Key>
             <PropertyRef Name="GenderID" />
           </Key>
           <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Gender" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID_Item" />
+          </Key>
+          <Property Name="ID_Item" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Image" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserData">
           <Key>
@@ -39,6 +68,18 @@
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
+        <Association Name="FK__Auction__ID_Item__75A278F5">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Auction" Type="Self.Auction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID_Item" />
+            </Principal>
+            <Dependent Role="Auction">
+              <PropertyRef Name="ID_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Authoriza__UserI__6754599E">
           <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
           <End Role="AuthorizationData" Type="Self.AuthorizationData" Multiplicity="*" />
@@ -47,6 +88,42 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="AuthorizationData">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BettingHi__ID_Au__797309D9">
+          <End Role="Auction" Type="Self.Auction" Multiplicity="1" />
+          <End Role="BettingHistory" Type="Self.BettingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auction">
+              <PropertyRef Name="ID_Auction" />
+            </Principal>
+            <Dependent Role="BettingHistory">
+              <PropertyRef Name="ID_Auction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BettingHi__UserI__787EE5A0">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="BettingHistory" Type="Self.BettingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BettingHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__UserID__72C60C4A">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Items">
               <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
@@ -76,13 +153,32 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorizationData" EntityType="Self.AuthorizationData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BettingHistory" EntityType="Self.BettingHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Auction__ID_Item__75A278F5" Association="Self.FK__Auction__ID_Item__75A278F5">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Auction" EntitySet="Auction" />
+          </AssociationSet>
           <AssociationSet Name="FK__Authoriza__UserI__6754599E" Association="Self.FK__Authoriza__UserI__6754599E">
             <End Role="UserData" EntitySet="UserData" />
             <End Role="AuthorizationData" EntitySet="AuthorizationData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BettingHi__ID_Au__797309D9" Association="Self.FK__BettingHi__ID_Au__797309D9">
+            <End Role="Auction" EntitySet="Auction" />
+            <End Role="BettingHistory" EntitySet="BettingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BettingHi__UserI__787EE5A0" Association="Self.FK__BettingHi__UserI__787EE5A0">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="BettingHistory" EntitySet="BettingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__UserID__72C60C4A" Association="Self.FK__Items__UserID__72C60C4A">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Items" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FK__UserData__Gender__628FA481" Association="Self.FK__UserData__Gender__628FA481">
             <End Role="Genders" EntitySet="Genders" />
@@ -93,8 +189,7 @@
             <End Role="UserData" EntitySet="UserData" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -129,6 +224,8 @@
           <NavigationProperty Name="AuthorizationData" Relationship="Self.FK__Authoriza__UserI__6754599E" FromRole="UserData" ToRole="AuthorizationData" />
           <NavigationProperty Name="Genders" Relationship="Self.FK__UserData__Gender__628FA481" FromRole="UserData" ToRole="Genders" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserData__RoleID__6383C8BA" FromRole="UserData" ToRole="UserRoles" />
+          <NavigationProperty Name="BettingHistory" Relationship="Model.FK__BettingHi__UserI__787EE5A0" FromRole="UserData" ToRole="BettingHistory" />
+          <NavigationProperty Name="Items" Relationship="Model.FK__Items__UserID__72C60C4A" FromRole="UserData" ToRole="Items" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -191,7 +288,109 @@
             <End Role="UserRoles" EntitySet="UserRoles" />
             <End Role="UserData" EntitySet="UserData" />
           </AssociationSet>
+          <EntitySet Name="Auction" EntityType="Model.Auction" />
+          <EntitySet Name="BettingHistory" EntityType="Model.BettingHistory" />
+          <EntitySet Name="Items" EntityType="Model.Items" />
+          <AssociationSet Name="FK__Auction__ID_Item__75A278F5" Association="Model.FK__Auction__ID_Item__75A278F5">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Auction" EntitySet="Auction" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BettingHi__ID_Au__797309D9" Association="Model.FK__BettingHi__ID_Au__797309D9">
+            <End Role="Auction" EntitySet="Auction" />
+            <End Role="BettingHistory" EntitySet="BettingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BettingHi__UserI__787EE5A0" Association="Model.FK__BettingHi__UserI__787EE5A0">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="BettingHistory" EntitySet="BettingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Items__UserID__72C60C4A" Association="Model.FK__Items__UserID__72C60C4A">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Auction">
+          <Key>
+            <PropertyRef Name="ID_Auction" />
+          </Key>
+          <Property Name="ID_Auction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Item" Type="Int32" Nullable="false" />
+          <Property Name="Date_Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Date_End" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Items" Relationship="Model.FK__Auction__ID_Item__75A278F5" FromRole="Auction" ToRole="Items" />
+          <NavigationProperty Name="BettingHistory" Relationship="Model.FK__BettingHi__ID_Au__797309D9" FromRole="Auction" ToRole="BettingHistory" />
+        </EntityType>
+        <EntityType Name="BettingHistory">
+          <Key>
+            <PropertyRef Name="ID_Bid" />
+          </Key>
+          <Property Name="ID_Bid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ID_Auction" Type="Int32" Nullable="false" />
+          <Property Name="BidAmount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Auction" Relationship="Model.FK__BettingHi__ID_Au__797309D9" FromRole="BettingHistory" ToRole="Auction" />
+          <NavigationProperty Name="UserData" Relationship="Model.FK__BettingHi__UserI__787EE5A0" FromRole="BettingHistory" ToRole="UserData" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID_Item" />
+          </Key>
+          <Property Name="ID_Item" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ItemName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Auction" Relationship="Model.FK__Auction__ID_Item__75A278F5" FromRole="Items" ToRole="Auction" />
+          <NavigationProperty Name="UserData" Relationship="Model.FK__Items__UserID__72C60C4A" FromRole="Items" ToRole="UserData" />
+        </EntityType>
+        <Association Name="FK__Auction__ID_Item__75A278F5">
+          <End Type="Model.Items" Role="Items" Multiplicity="1" />
+          <End Type="Model.Auction" Role="Auction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID_Item" />
+            </Principal>
+            <Dependent Role="Auction">
+              <PropertyRef Name="ID_Item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BettingHi__ID_Au__797309D9">
+          <End Type="Model.Auction" Role="Auction" Multiplicity="1" />
+          <End Type="Model.BettingHistory" Role="BettingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auction">
+              <PropertyRef Name="ID_Auction" />
+            </Principal>
+            <Dependent Role="BettingHistory">
+              <PropertyRef Name="ID_Auction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BettingHi__UserI__787EE5A0">
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="Model.BettingHistory" Role="BettingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BettingHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Items__UserID__72C60C4A">
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="Model.Items" Role="Items" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Items">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -233,6 +432,38 @@
               <MappingFragment StoreEntitySet="UserRoles">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Auction">
+            <EntityTypeMapping TypeName="Model.Auction">
+              <MappingFragment StoreEntitySet="Auction">
+                <ScalarProperty Name="StartPrice" ColumnName="StartPrice" />
+                <ScalarProperty Name="Date_End" ColumnName="Date_End" />
+                <ScalarProperty Name="Date_Start" ColumnName="Date_Start" />
+                <ScalarProperty Name="ID_Item" ColumnName="ID_Item" />
+                <ScalarProperty Name="ID_Auction" ColumnName="ID_Auction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BettingHistory">
+            <EntityTypeMapping TypeName="Model.BettingHistory">
+              <MappingFragment StoreEntitySet="BettingHistory">
+                <ScalarProperty Name="BidAmount" ColumnName="BidAmount" />
+                <ScalarProperty Name="ID_Auction" ColumnName="ID_Auction" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID_Bid" ColumnName="ID_Bid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="Model.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID_Item" ColumnName="ID_Item" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

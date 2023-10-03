@@ -92,7 +92,13 @@
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCModel.cs" />
+    <Compile Include="Auction.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
     <Compile Include="AuthorizationData.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BettingHistory.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="DataBase.Context.cs">
@@ -111,6 +117,9 @@
       <DependentUpon>DataBase.edmx</DependentUpon>
     </Compile>
     <Compile Include="Genders.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Items.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="RelayCommand.cs" />

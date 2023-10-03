@@ -29,5 +29,8 @@ namespace ProjectViolent
         public virtual DbSet<Genders> Genders { get; set; }
         public virtual DbSet<UserData> UserData { get; set; }
         public virtual DbSet<UserRoles> UserRoles { get; set; }
+        public virtual DbSet<Auction> Auction { get; set; }
+        public virtual DbSet<BettingHistory> BettingHistory { get; set; }
+        public virtual DbSet<Items> Items { get; set; }
     }
 }

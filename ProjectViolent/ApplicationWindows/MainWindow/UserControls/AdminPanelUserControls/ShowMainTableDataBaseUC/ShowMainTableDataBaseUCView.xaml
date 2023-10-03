@@ -27,13 +27,7 @@
                     <Border BorderThickness="1"
                             BorderBrush="Black">
                         <StackPanel>
-                            <Image></Image>
-                            <TextBlock Text="Аукцион №"></TextBlock>
-                            <TextBlock Text="Дата начала - "></TextBlock>
-                            <TextBlock Text="Дата конца - "></TextBlock>
-                            <TextBlock Text="Стартовая цена "></TextBlock>
-                            <TextBlock Text="Название предмета "></TextBlock>
-                            <TextBlock Text="Описание "></TextBlock>
+                            <TextBlock Text="{Binding StringFormat=Аукцион №{0}, Path=}"></TextBlock>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
