@@ -84,6 +84,7 @@
       <DependentUpon>ShowInformationAboutAllUsersUCView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCView.xaml.cs">
       <DependentUpon>ShowMainTableDataBaseUCView.xaml</DependentUpon>
     </Compile>
@@ -116,6 +117,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataBase.edmx</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseAuctionPatrialClass.cs" />
+    <Compile Include="DataBaseItemsPatrialClass.cs" />
     <Compile Include="Genders.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>

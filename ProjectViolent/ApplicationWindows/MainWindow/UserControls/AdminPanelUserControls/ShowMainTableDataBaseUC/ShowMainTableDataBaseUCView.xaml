@@ -17,21 +17,79 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="0.15*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button Style="{StaticResource ButtonStyle1}"></Button>
-        <ListView Grid.Row="1" Grid.ColumnSpan="3" BorderThickness="0">
+        <ListView Grid.Row="1"
+                  Grid.ColumnSpan="3"
+                  BorderThickness="0"
+                  ItemsSource="{Binding Model.AuctionsList}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="1"
-                            BorderBrush="Black">
-                        <StackPanel>
-                            <TextBlock Text="{Binding StringFormat=Аукцион №{0}, Path=}"></TextBlock>
+                            BorderBrush="Black"
+                            Width="665">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding StringFormat=Аукцион №{0}, Path=ID_Auction}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="145"/>
+                                    <ColumnDefinition Width="260"/>
+                                    <ColumnDefinition Width="200"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0"
+                                            Orientation="Vertical" 
+                                            Margin="10">
+                                    <Image Margin="0 0 0 10" 
+                                           Source="{Binding Items.BitImage}"
+                                           Width="125"
+                                           Height="125"></Image>
+                                    <TextBlock Text="Время проведения:"
+                                               Margin="0 0 0 10"/>
+                                    <TextBlock Text="{Binding StringFormat=с {0}, Path=Date_Start}"
+                                               Margin="0 0 0 10"/>
+                                    <TextBlock Text="{Binding StringFormat=до {0}, Path=Date_End}"
+                                               Margin="0 0 0 10"/>
+                                    <TextBlock Text="{Binding StringFormat=Стартовая цена: {0} р.,Path=StartPrice,TargetNullValue=0}"
+                                               TextWrapping="WrapWithOverflow"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1"
+                                            Orientation="Vertical"
+                                            Margin="0 0 10 0">
+                                    <TextBlock Text="{Binding Items.ItemName}"
+                                               TextWrapping="WrapWithOverflow"
+                                               Margin="0 0 0 10"></TextBlock>
+                                    <TextBlock Text="{Binding Items.Description}"
+                                               TextWrapping="WrapWithOverflow"></TextBlock>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2"
+                                            Orientation="Vertical">
+                                    <TextBlock Text="История ставок:" 
+                                               Margin="0 0 0 10"></TextBlock>
+                                    <ListView ItemsSource="{Binding BettingHistory}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="0 0 0 10">
+                                                    <TextBlock Text="{Binding UserData, Converter={StaticResource IdentifyUserConverter}}"></TextBlock>
+                                                    <TextBlock Text="{Binding BidAmount}"></TextBlock>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </StackPanel>
+                            </Grid>
+                            <TextBlock Text="Статус:"/>
+                            <TextBlock Text="{Binding StringFormat=Статус: {0},Path=AuctionStatus}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
         </ListView>
     </Grid>
 </UserControl>
