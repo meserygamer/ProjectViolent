@@ -50,4 +50,21 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             throw new NotImplementedException();
         }
     }
+
+    public class DateConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is DateTime dt)
+            {
+                return dt.ToString("g", CultureInfo.GetCultureInfo("ru-RU"));
+            }
+            else return value.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

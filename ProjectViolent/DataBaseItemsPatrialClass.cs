@@ -13,11 +13,15 @@ namespace ProjectViolent
         {
             get
             {
-                BitmapImage bitmapImage = new BitmapImage();
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = new System.IO.MemoryStream( Image, 0,Image.Length);
-                bitmapImage.EndInit();
-                return bitmapImage;
+                if(Image != null)
+                {
+                    BitmapImage bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = new System.IO.MemoryStream(Image, 0, Image.Length);
+                    bitmapImage.EndInit();
+                    return bitmapImage;
+                }
+                else return null;
             }
         }
     }
