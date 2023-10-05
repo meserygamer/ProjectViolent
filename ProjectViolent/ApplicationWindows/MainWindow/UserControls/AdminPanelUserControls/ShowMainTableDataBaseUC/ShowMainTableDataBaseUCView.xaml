@@ -59,6 +59,16 @@
             </Style>
             <BitmapImage UriSource="\Resources\Images\EmptyImage.jpg" x:Key="EmpImg"></BitmapImage>
             <local:DateConverter x:Key="DateConv"></local:DateConverter>
+            <Style TargetType="TextBlock" x:Key="SumOfBet">
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                <Setter Property="Text" Value="{Binding StringFormat=Сумма поставленная на лот: {0} р.,Path=SumOfBiddings}"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding BettingHistory.Count}"
+                                 Value="0">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="10 10 0 10">
@@ -68,7 +78,7 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.15*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button Style="{StaticResource ButtonStyle1}"></Button>
@@ -139,12 +149,12 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
+                                    <TextBlock Style="{StaticResource SumOfBet}">
+                                    </TextBlock>
                                 </StackPanel>
                             </Grid>
-                            <Border Margin="0 5 0 5">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{Binding ColorOfAuctionStatus}"></SolidColorBrush>
-                                </Border.Background>
+                            <Border Margin="0 5 0 5"
+                                    Background="{Binding ColorOfAuctionStatus}">
                                 <TextBlock Text="{Binding StringFormat=Статус: {0},Path=AuctionStatus}"
                                            HorizontalAlignment="Center"/>
                             </Border>
