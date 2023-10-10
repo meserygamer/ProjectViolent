@@ -80,6 +80,9 @@
       <DependentUpon>AddNewItemUCView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\AddNewItemUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\UserControls\DateTimePicker\DateTimePickerView.xaml.cs">
+      <DependentUpon>DateTimePickerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCVIew.xaml.cs">
       <DependentUpon>AdminPanelMainMenuUCVIew.xaml</DependentUpon>
@@ -225,6 +228,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\AddNewItemUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\UserControls\DateTimePicker\DateTimePickerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

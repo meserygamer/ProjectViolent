@@ -8,6 +8,16 @@
              d:DesignHeight="850" d:DesignWidth="720"
              Background="White">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="18*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Создание аукциона" 
+                   Grid.Row="0"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Bold"/>
         
     </Grid>
 </UserControl>
