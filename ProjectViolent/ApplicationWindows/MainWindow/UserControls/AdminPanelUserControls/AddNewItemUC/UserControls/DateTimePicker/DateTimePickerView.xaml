@@ -126,15 +126,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <local:MinutesConverter x:Key="MinConv"/>
+        <local:HourConverter x:Key="HourConv"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <DatePicker Style="{DynamicResource DatePickerStyle1}"/>
+        <DatePicker Style="{DynamicResource DatePickerStyle1}"
+                    SelectedDate="{Binding SelectedDate, Mode=TwoWay}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Border CornerRadius="2" Height="25" BorderThickness="1" BorderBrush="Gray">
+            <Border CornerRadius="2"
+                    Height="25"
+                    BorderThickness="1"
+                    BorderBrush="Gray">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
@@ -145,7 +160,7 @@
                         <RowDefinition Height="1"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="24"
+                    <TextBlock Text="{Binding SelectedDate, Converter={StaticResource HourConv}}"
                                Grid.Column="0"
                                Grid.Row="0"
                                Grid.RowSpan="3"
@@ -153,7 +168,8 @@
                                VerticalAlignment="Center"/>
                     <Button Grid.Column="1"
                             BorderThickness="0"
-                            Margin="0 1 1 0">
+                            Margin="0 1 1 0"
+                            Command="{Binding AddHour}">
                         ^
                     </Button>
                     <Rectangle Grid.Column="1"
@@ -163,7 +179,67 @@
                     <Button Grid.Column="1"
                             Grid.Row="2"
                             BorderThickness="0"
-                            Margin="0 0 1 1" RenderTransformOrigin="0.5,0.5">
+                            Margin="0 0 1 1"
+                            RenderTransformOrigin="0.5,0.5"
+                            Command="{Binding putAwayHour}">
+                        <Button.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="180"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Button.RenderTransform>
+                        ^
+                    </Button>
+                </Grid>
+            </Border>
+            <StackPanel Orientation="Vertical"
+                        Margin="5 12 5 12">
+                <Rectangle Width="3"
+                           Height="3"
+                           Fill="Black"
+                           Margin="0 0 0 5"/>
+                <Rectangle Width="3"
+                           Height="3"
+                           Fill="Black"/>
+            </StackPanel>
+            <Border CornerRadius="2"
+                    Height="25"
+                    BorderThickness="1"
+                    BorderBrush="Gray">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="15"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="{Binding SelectedDate, Converter={StaticResource MinConv}}"
+                               Grid.Column="0"
+                               Grid.Row="0"
+                               Grid.RowSpan="3"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                    <Button Grid.Column="1"
+                BorderThickness="0"
+                Margin="0 1 1 0"
+                            Command="{Binding AddMinute}">
+                        ^
+                    </Button>
+                    <Rectangle Grid.Column="1"
+                Grid.Row="1"
+                Fill="Black"
+                   Margin="0 0 1 0"/>
+                    <Button Grid.Column="1"
+                            Grid.Row="2"
+                            BorderThickness="0"
+                            Margin="0 0 1 1"
+                            RenderTransformOrigin="0.5,0.5"
+                            Command="{Binding putAwayMinute}">
                         <Button.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
