@@ -12,63 +12,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Styles/ShowMainTableDataBaseUCStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="ListBox.Static.Background" Color="#FFFFFFFF"/>
-            <SolidColorBrush x:Key="ListBox.Static.Border" Color="#FFABADB3"/>
-            <SolidColorBrush x:Key="ListBox.Disabled.Background" Color="#FFFFFFFF"/>
-            <SolidColorBrush x:Key="ListBox.Disabled.Border" Color="#FFD9D9D9"/>
-            <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
-                <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
-                <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
-                <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-                <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
-                <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
-                <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ListView}">
-                            <Border x:Name="Bd"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    SnapsToDevicePixels="true">
-                                <ScrollViewer Focusable="false"
-                                              Padding="0">
-                                    <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                </ScrollViewer>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Background" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Background}"/>
-                                    <Setter Property="BorderBrush" TargetName="Bd" Value="{StaticResource ListBox.Disabled.Border}"/>
-                                </Trigger>
-                                <MultiTrigger>
-                                    <MultiTrigger.Conditions>
-                                        <Condition Property="IsGrouping" Value="true"/>
-                                        <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-                                </MultiTrigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <BitmapImage UriSource="\Resources\Images\EmptyImage.jpg" x:Key="EmpImg"></BitmapImage>
-            <local:DateConverter x:Key="DateConv"></local:DateConverter>
-            <Style TargetType="TextBlock" x:Key="SumOfBet">
-                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
-                <Setter Property="Text" Value="{Binding StringFormat=Сумма поставленная на лот: {0} р.,Path=SumOfBiddings}"/>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding BettingHistory.Count}"
-                                 Value="0">
-                        <Setter Property="Visibility" Value="Hidden"/>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="10 10 0 10">
@@ -82,86 +25,8 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Button Style="{StaticResource ButtonStyle1}"></Button>
-        <ListView Style="{DynamicResource ListViewStyle1}" Grid.Row="1"
-                  Grid.ColumnSpan="3"
-                  BorderThickness="0"
-                  ItemsSource="{Binding Model.AuctionsList}"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness="1"
-                            Width="665"
-                            CornerRadius="5">
-                        <Border.BorderBrush>
-                            <LinearGradientBrush>
-                                <GradientStop Color="#03bfff" Offset="0" />
-                                <GradientStop Color="#fb03b1" Offset="1" />
-                            </LinearGradientBrush>
-                        </Border.BorderBrush>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding StringFormat=Аукцион №{0}, Path=ID_Auction}"
-                                       HorizontalAlignment="Center"
-                                       Margin="0 5 0 10"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="145"/>
-                                    <ColumnDefinition Width="260"/>
-                                    <ColumnDefinition Width="200"/>
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="0"
-                                            Orientation="Vertical" 
-                                            Margin="10 0 10 0">
-                                    <Image Margin="0 0 0 10" 
-                                           Source="{Binding Items.BitImage, TargetNullValue={StaticResource EmpImg}}"
-                                           Width="125"
-                                           Height="125" VerticalAlignment="Top"></Image>
-                                    <TextBlock Text="Время проведения:"
-                                               Margin="0 0 0 10"/>
-                                    <TextBlock Text="{Binding StringFormat=с {0}, Path=Date_Start, Converter={StaticResource DateConv}}"
-                                               Margin="0 0 0 10"/>
-                                    <TextBlock Text="{Binding StringFormat=до {0}, Path=Date_End, Converter={StaticResource DateConv}}"
-                                               Margin="0 0 0 10"/>
-                                    <TextBlock Text="{Binding StringFormat=Стартовая цена: {0} р.,Path=StartPrice,TargetNullValue=0}"
-                                               TextWrapping="WrapWithOverflow"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Grid.Column="1"
-                                            Orientation="Vertical"
-                                            Margin="0 0 10 0">
-                                    <TextBlock Text="{Binding Items.ItemName}"
-                                               TextWrapping="WrapWithOverflow"
-                                               Margin="0 0 0 10"></TextBlock>
-                                    <TextBlock Text="{Binding Items.Description}"
-                                               TextWrapping="WrapWithOverflow"></TextBlock>
-                                </StackPanel>
-                                <StackPanel Grid.Column="2"
-                                            Orientation="Vertical">
-                                    <TextBlock Text="История ставок:" 
-                                               Margin="0 0 0 10"></TextBlock>
-                                    <ListView ItemsSource="{Binding BettingHistory}"
-                                              BorderThickness="0"
-                                              Padding="-5">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Margin="0 0 0 10">
-                                                    <TextBlock Text="{Binding UserData, Converter={StaticResource IdentifyUserConverter}}"></TextBlock>
-                                                    <TextBlock Text="{Binding BidAmount}"></TextBlock>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
-                                    <TextBlock Style="{StaticResource SumOfBet}">
-                                    </TextBlock>
-                                </StackPanel>
-                            </Grid>
-                            <Border Margin="0 5 0 5"
-                                    Background="{Binding ColorOfAuctionStatus}">
-                                <TextBlock Text="{Binding StringFormat=Статус: {0},Path=AuctionStatus}"
-                                           HorizontalAlignment="Center"/>
-                            </Border>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
+        <ListView Style="{DynamicResource ListViewStyle1}"
+                  d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel IsHitTestVisible="False" 
