@@ -52,7 +52,6 @@
         <Setter Property="ItemsSource" Value="{Binding Model.AuctionsList}"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
         <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="Both"/>
@@ -162,6 +161,14 @@
                         </StackPanel>
                     </Border>
                 </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsHitTestVisible="False" 
+                               HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
     </Style>

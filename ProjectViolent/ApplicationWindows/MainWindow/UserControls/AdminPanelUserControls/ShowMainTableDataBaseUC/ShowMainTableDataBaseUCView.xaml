@@ -27,12 +27,6 @@
         <Button Style="{StaticResource ButtonStyle1}"></Button>
         <ListView Style="{DynamicResource ListViewStyle1}"
                   d:ItemsSource="{d:SampleData ItemCount=5}">
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel IsHitTestVisible="False" 
-                               HorizontalAlignment="Center"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
         </ListView>
     </Grid>
 </UserControl>
