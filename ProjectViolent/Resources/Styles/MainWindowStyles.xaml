@@ -3,11 +3,13 @@
                     xmlns:EISUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl"
                     xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC"
                     xmlns:SAIAU="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC"
-                    xmlns:SMTDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC">
+                    xmlns:SMTDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC"
+                    xmlns:ANIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC">
     <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
     <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew"
                                      ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
                                      ShowMainDataBaseTableCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowMainTableCommand}"
+                                     AddNewItemCommand="{Binding ElementName=MainWindow, Path=DataContext.ShowAddNewItemCommand}"
                                      DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
     <SAIAU:ShowInformationAboutAllUsersUCView x:Key="ShowInformationAboutAllUsersUserControlView"
                                               MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
@@ -17,6 +19,8 @@
                                        MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
                                        DataContext="{Binding ShowMainTableDataBaseUCDataContext}"
                                        ></SMTDB:ShowMainTableDataBaseUCView>
+    <ANIUC:AddNewItemUCView x:Key="AddNewItemUCView"
+                            DataContext="{Binding AddNewItemUCDataContext}"></ANIUC:AddNewItemUCView>
     <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
@@ -31,6 +35,9 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="ShowMainTable">
                 <Setter Property="Content" Value="{StaticResource ShowMainTableDataBaseUCView}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="AddNewItem">
+                <Setter Property="Content" Value="{StaticResource AddNewItemUCView}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

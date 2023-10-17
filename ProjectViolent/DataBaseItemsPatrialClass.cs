@@ -24,5 +24,10 @@ namespace ProjectViolent
                 else return null;
             }
         }
+
+        public override string ToString()
+        {
+            return ItemName + " (" + ID_Item + ")";
+        }
     }
 }

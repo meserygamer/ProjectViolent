@@ -11,7 +11,7 @@ using System.Windows.Data;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC.UserControls.DateTimePicker
 {
-    internal class DateTimePickerViewModel : INotifyPropertyChanged
+    public class DateTimePickerViewModel : INotifyPropertyChanged
     {
         DateTime _dateTimeOnClock;
         RelayCommand _addHour;

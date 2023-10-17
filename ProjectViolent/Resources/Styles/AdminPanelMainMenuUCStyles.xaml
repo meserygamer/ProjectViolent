@@ -57,4 +57,8 @@
         <Setter Property="Command" Value="{Binding ElementName=UC,
                 Path=ShowMainDataBaseTableCommand, Mode=OneWay}"/>
     </Style>
+    <Style x:Key="AddNewItemCommand" TargetType="Hyperlink">
+        <Setter Property="Command" Value="{Binding ElementName=UC,
+                Path=AddNewItemCommand, Mode=OneWay}"/>
+    </Style>
 </ResourceDictionary>

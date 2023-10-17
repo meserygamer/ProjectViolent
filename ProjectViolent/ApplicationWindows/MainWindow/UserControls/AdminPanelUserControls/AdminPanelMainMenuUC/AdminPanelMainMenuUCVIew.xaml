@@ -39,6 +39,11 @@
                         Посмотреть главную таблицу базы данных
                     </Hyperlink>
                 </TextBlock>
+                <TextBlock>
+                    <Hyperlink Style="{StaticResource AddNewItemCommand}">
+                        Добавление нового аукциона
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>

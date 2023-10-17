@@ -1,4 +1,5 @@
-﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
+﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl;
@@ -19,6 +20,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         AdminPanel,
         ShowAllUsers,
         ShowMainTable,
+        AddNewItem,
         UserPanel
     }
 
@@ -29,9 +31,11 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private AdminPanelMainMenuUCViewModel _adminPanelMainMenuUCDataContext;
         private ShowInformationAboutAllUsersUCViewModel _showInformationAboutAllUsersUCDataContext;
         private ShowMainTableDataBaseUCViewModel _showMainTableDataBaseUCDataContext;
+        private AddNewItemUCViewModel _addNewItemUCDataContext;
         private RelayCommand _showAllUserCommand;
         private RelayCommand _showMainTableCommand;
         private RelayCommand _moveOnAdminPanel;
+        private RelayCommand _showAddNewItemCommand;
 
         public MainControlStates MainControlState
         {
@@ -83,6 +87,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             }
         }
 
+        public AddNewItemUCViewModel AddNewItemUCDataContext
+        {
+            get => _addNewItemUCDataContext;
+            set
+            {
+                _addNewItemUCDataContext = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand ShowAllUserCommand
         {
             get => _showAllUserCommand ?? (_showAllUserCommand = new RelayCommand(a => 
@@ -106,6 +120,15 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             get => _moveOnAdminPanel ?? (_moveOnAdminPanel = new RelayCommand(a => 
             {
                 MainControlState = MainControlStates.AdminPanel;
+            }));
+        }
+
+        public RelayCommand ShowAddNewItemCommand
+        {
+            get => _showAddNewItemCommand ?? (_showAddNewItemCommand = new RelayCommand(a =>
+            {
+                AddNewItemUCDataContext = new AddNewItemUCViewModel();
+                MainControlState = MainControlStates.AddNewItem;
             }));
         }
 
