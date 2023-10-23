@@ -14,8 +14,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 {
     public class AddNewItemUCViewModel : INotifyPropertyChanged
     {
-        private DateTimePickerViewModel _sinceDateTimePickerVM;
-        private DateTimePickerViewModel _untilDateTimePickerVM;
         private decimal _startPrice;
         private ObservableCollection<Items> _availableItems;
         private Items _choseItem;
@@ -23,26 +21,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private RelayCommand _addNewItemCommand;
 
         private AddNewItemUCModel _model;
-
-        public DateTimePickerViewModel SinceDateTimePickerVM
-        {
-            get => _sinceDateTimePickerVM;
-            set
-            {
-                _sinceDateTimePickerVM = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public DateTimePickerViewModel UntilDateTimePickerVM
-        {
-            get => _untilDateTimePickerVM;
-            set
-            {
-                _untilDateTimePickerVM = value;
-                OnPropertyChanged();
-            }
-        }
 
         public decimal StartPrice
         {
@@ -99,10 +77,10 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             {
                 _model.AddNewAuctionInDataBase(new Auction() 
                 {
-                    ID_Item = _choseItem.ID_Item,
-                    Date_Start = _sinceDateTimePickerVM.SelectedDate,
-                    Date_End = _untilDateTimePickerVM.SelectedDate,
-                    StartPrice = _startPrice,
+                    //ID_Item = _choseItem.ID_Item,
+                    //Date_Start = _sinceDateTimePickerVM.SelectedDate,
+                    //Date_End = _untilDateTimePickerVM.SelectedDate,
+                    //StartPrice = _startPrice,
                 });
             }));
         }

@@ -7,6 +7,7 @@
              xmlns:DateTimePicker="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC.UserControls.DateTimePicker"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="720"
+             Name="AddNewAuc"
              Background="White">
     <UserControl.Resources>
         <Style x:Key="FocusVisual">
@@ -204,14 +205,12 @@
             <GroupBox Grid.Row="1"
                       Header="Начало аукциона"
                       FontSize="20">
-                <DateTimePicker:DateTimePickerView Height="70"
-                                                   DataContext="{Binding SinceDateTimePickerVM}"/>
+                <DateTimePicker:DateTimePickerView Height="70"/>
             </GroupBox>
             <GroupBox Grid.Row="2"
                       Header="Окончание аукциона"
                       FontSize="20">
-                <DateTimePicker:DateTimePickerView Height="70"
-                                                   DataContext="{Binding UntilDateTimePickerVM}"/>
+                <DateTimePicker:DateTimePickerView Height="70"/>
             </GroupBox>
             <GroupBox Grid.Row="3"
                       Header="Стартовая стоимость"

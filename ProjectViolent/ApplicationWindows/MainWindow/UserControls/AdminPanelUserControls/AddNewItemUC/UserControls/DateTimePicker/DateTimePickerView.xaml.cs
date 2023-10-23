@@ -20,9 +20,34 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     /// </summary>
     public partial class DateTimePickerView : UserControl
     {
+        public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register("SelectedDateTime", typeof(DateTime), typeof(DateTimePickerView));
+
+        public DateTime SelectedDateTime
+        {
+            get { return (DateTime)GetValue(SelectedDateTimeProperty); }
+            set { SetValue(SelectedDateTimeProperty, value); }
+        }
+
         public DateTimePickerView()
         {
             InitializeComponent();
+            SelectedDateTime = DateTime.Now;
+        }
+    }
+
+    public class proxy : Freezable
+    {
+        public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register("SelectedDateTime", typeof(DateTime), typeof(proxy));
+
+        public DateTime SelectedDateTime
+        {
+            get { return (DateTime)GetValue(SelectedDateTimeProperty); }
+            set { SetValue(SelectedDateTimeProperty, value); }
+        }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return new proxy();
         }
     }
 }

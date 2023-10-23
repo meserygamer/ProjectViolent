@@ -1,74 +1,92 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC.UserControls.DateTimePicker
 {
-    public class DateTimePickerViewModel : INotifyPropertyChanged
+    public class DateTimePickerViewModel : DependencyObject, INotifyPropertyChanged
     {
-        DateTime _dateTimeOnClock;
-        RelayCommand _addHour;
-        RelayCommand _putAwayHour;
-        RelayCommand _addMinute;
-        RelayCommand _putAwayMinute;
+        public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register("SelectedDateTime", typeof(DateTime), typeof(DateTimePickerViewModel));
 
-        public DateTime DateTimeOnClock
+        public DateTime SelectedDateTime
         {
-            get => _dateTimeOnClock;
+            get { return (DateTime)GetValue(SelectedDateTimeProperty); }
+            set { SetValue(SelectedDateTimeProperty, value); }
+        }
+
+        public ObservableCollection<string> HoursList
+        {
+            get => (new ObservableCollection<string>(_hours.ToList().ConvertAll<string>(a => a.ToString()))).TransformationForEach(a => (a.Length == 1) ? "0" + a : a);
+        }
+        public ObservableCollection<string> MinutsList
+        {
+            get => (new ObservableCollection<string>(_minuts.ToList().ConvertAll<string>(a => a.ToString()))).TransformationForEach(a => (a.Length == 1) ? "0" + a : a);
+        }
+
+        public int SelectedHours
+        {
+            get => _selectedHours;
             set
             {
-                _dateTimeOnClock = value;
-                OnPropertyChanged(nameof(DateTimeOnClock));
+                _selectedHours = value;
+                OnPropertyChanged();
+            }
+        }
+        public int SelectedMinuts
+        {
+            get => _selectedMinuts;
+            set
+            {
+                _selectedMinuts = value;
+                OnPropertyChanged();
             }
         }
 
-        public DateTime SelectedDate
+        private ObservableCollection<int> _hours;
+        private ObservableCollection<int> _minuts;
+
+        private int _selectedHours;
+        private int _selectedMinuts;
+
+        public DateTimePickerViewModel()
         {
-            get=> _dateTimeOnClock;
-            set
+            _firstInitializeHoursCollection();
+            _firstInitializeMinutsCollection();
+            SelectedHours = 0;
+            SelectedMinuts = 0;
+            SelectedDateTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Метод первичной инициализации списка часов
+        /// </summary>
+        private void _firstInitializeHoursCollection()
+        {
+            _hours = new ObservableCollection<int>();
+            for(int i = 0; i < 24; i++)
             {
-                _dateTimeOnClock = new DateTime(value.Year, value.Month, value.Day, _dateTimeOnClock.Hour, _dateTimeOnClock.Minute, 0);
-                OnPropertyChanged(nameof(SelectedDate));
+                _hours.Add(i);
             }
+            OnPropertyChanged("HoursList");
         }
 
-        public RelayCommand AddHour
+        /// <summary>
+        /// Метод первичной инициализации списка минут
+        /// </summary>
+        private void _firstInitializeMinutsCollection()
         {
-            get => _addHour ?? (_addHour = new RelayCommand(a => 
+            _minuts = new ObservableCollection<int>();
+            for (int i = 0; i < 60; i++)
             {
-                _dateTimeOnClock.AddHours(1);
-            }));
-        }
-
-        public RelayCommand AddMinute
-        {
-            get => _addHour ?? (_addHour = new RelayCommand(a =>
-            {
-                _dateTimeOnClock.AddMinutes(1);
-            }));
-        }
-
-        public RelayCommand putAwayHour
-        {
-            get => _addHour ?? (_addHour = new RelayCommand(a =>
-            {
-                _dateTimeOnClock.AddHours(-1);
-            }));
-        }
-
-        public RelayCommand putAwayMinute
-        {
-            get => _addHour ?? (_addHour = new RelayCommand(a =>
-            {
-                _dateTimeOnClock.AddMinutes(-1);
-            }));
+                _minuts.Add(i);
+            }
+            OnPropertyChanged("MinutsList");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -79,57 +97,15 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         }
     }
 
-    class HourConverter : IValueConverter
+    public static class ObservableCollectionExtension
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static ObservableCollection<T> TransformationForEach<T>(this ObservableCollection<T> Collection, Func<T,T> Action)
         {
-            if(value is DateTime date)
+            for(int i = 0; i < Collection.Count; i++)
             {
-                if (date.Hour.ToString().Length < 2)
-                {
-                    return "0" + date.Hour.ToString();
-                }
-                else
-                {
-                    return date.Hour.ToString();
-                }
+                Collection[i] = Action(Collection[i]);
             }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class MinutesConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is DateTime date)
-            {
-                if(date.Minute.ToString().Length < 2)
-                {
-                    return "0" + date.Minute.ToString();
-                }
-                else
-                {
-                    return date.Minute.ToString();
-                }
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
+            return Collection;
         }
     }
 }
