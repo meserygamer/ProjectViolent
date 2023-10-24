@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC.AddNewAuctionItemUCView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC"
+             xmlns:ImageSelector="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC.ImageSelectorUC"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="720"
+             d:Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" 
+                           MinHeight="50" MaxHeight="70"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="9*" MinHeight="390"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Создание нового предмета"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Grid.ColumnSpan="3"/>
+        <ImageSelector:ImageSelectorUCView Grid.Column="0" Grid.Row="2"
+                   Margin="20 0 0 0"/>
+        <Grid Grid.Row="2" Grid.Column="2"
+              Margin="0 0 20 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height ="20"/>
+                <RowDefinition Height ="6*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Название"
+                      FontSize="16"
+                      Grid.Row="0">
+                <TextBox BorderThickness="0"/>
+            </GroupBox>
+            <GroupBox Header="Описание"
+                      Grid.Row="2"
+                      FontSize="16">
+                <TextBox BorderThickness="0"/>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</UserControl>

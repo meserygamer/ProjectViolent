@@ -75,6 +75,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\MainWindowModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\AddNewAuctionItemUCView.xaml.cs">
+      <DependentUpon>AddNewAuctionItemUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\AddNewAuctionItemUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\ImageSelectorUC\ImageSelectorUCView.xaml.cs">
+      <DependentUpon>ImageSelectorUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\ImageSelectorUC\ImageSelectorUCViewModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\AddNewItemUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewItemUC\AddNewItemUCView.xaml.cs">
       <DependentUpon>AddNewItemUCView.xaml</DependentUpon>
@@ -225,6 +233,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ApplicationWindows\MainWindow\MainWindowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\AddNewAuctionItemUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AddNewAuctionItemUC\ImageSelectorUC\ImageSelectorUCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

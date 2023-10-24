@@ -1,4 +1,5 @@
-﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC;
+﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC;
@@ -21,6 +22,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         ShowAllUsers,
         ShowMainTable,
         AddNewItem,
+        AddNewAuctionItem,
         UserPanel
     }
 
@@ -32,10 +34,12 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private ShowInformationAboutAllUsersUCViewModel _showInformationAboutAllUsersUCDataContext;
         private ShowMainTableDataBaseUCViewModel _showMainTableDataBaseUCDataContext;
         private AddNewItemUCViewModel _addNewItemUCDataContext;
+        private AddNewAuctionItemUCViewModel _addNewAuctionItemUCDataContext;
         private RelayCommand _showAllUserCommand;
         private RelayCommand _showMainTableCommand;
         private RelayCommand _moveOnAdminPanel;
         private RelayCommand _showAddNewItemCommand;
+        private RelayCommand _showAddNewAuctionItemCommand;
 
         public MainControlStates MainControlState
         {
@@ -97,6 +101,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             }
         }
 
+        public AddNewAuctionItemUCViewModel AddNewAuctionItemUCDataContext
+        {
+            get => _addNewAuctionItemUCDataContext;
+            set
+            {
+                _addNewAuctionItemUCDataContext = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand ShowAllUserCommand
         {
             get => _showAllUserCommand ?? (_showAllUserCommand = new RelayCommand(a => 
@@ -129,6 +143,15 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             {
                 AddNewItemUCDataContext = new AddNewItemUCViewModel();
                 MainControlState = MainControlStates.AddNewItem;
+            }));
+        }
+
+        public RelayCommand ShowAddNewAuctionItemCommand
+        {
+            get => _showAddNewAuctionItemCommand ?? (_showAddNewAuctionItemCommand = new RelayCommand(a =>
+            {
+                AddNewAuctionItemUCDataContext = new AddNewAuctionItemUCViewModel();
+                MainControlState = MainControlStates.AddNewAuctionItem;
             }));
         }
 

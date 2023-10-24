@@ -44,6 +44,11 @@
                         Добавление нового аукциона
                     </Hyperlink>
                 </TextBlock>
+                <TextBlock>
+                    <Hyperlink Style="{StaticResource AddNewAuctionItemCommand}">
+                        Добавление нового предмета
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>

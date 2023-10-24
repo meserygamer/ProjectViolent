@@ -4,12 +4,14 @@
                     xmlns:APMMUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC"
                     xmlns:SAIAU="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC"
                     xmlns:SMTDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC"
-                    xmlns:ANIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC">
+                    xmlns:ANIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC"
+                    xmlns:ANAIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC">
     <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
     <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew"
                                      ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
                                      ShowMainDataBaseTableCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowMainTableCommand}"
                                      AddNewItemCommand="{Binding ElementName=MainWindow, Path=DataContext.ShowAddNewItemCommand}"
+                                     AddNewAuctionItemCommand="{Binding ElementName=MainWindow, Path=DataContext.ShowAddNewAuctionItemCommand}"
                                      DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
     <SAIAU:ShowInformationAboutAllUsersUCView x:Key="ShowInformationAboutAllUsersUserControlView"
                                               MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
@@ -21,6 +23,8 @@
                                        ></SMTDB:ShowMainTableDataBaseUCView>
     <ANIUC:AddNewItemUCView x:Key="AddNewItemUCView"
                             DataContext="{Binding AddNewItemUCDataContext}"></ANIUC:AddNewItemUCView>
+    <ANAIUC:AddNewAuctionItemUCView x:Key="AddNewAuctionItemUCView"
+                                    DataContext="{Binding AddNewAuctionItemUCDataContext}"/>
     <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
@@ -38,6 +42,9 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="AddNewItem">
                 <Setter Property="Content" Value="{StaticResource AddNewItemUCView}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="AddNewAuctionItem">
+                <Setter Property="Content" Value="{StaticResource AddNewAuctionItemUCView}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

@@ -61,4 +61,8 @@
         <Setter Property="Command" Value="{Binding ElementName=UC,
                 Path=AddNewItemCommand, Mode=OneWay}"/>
     </Style>
+    <Style x:Key="AddNewAuctionItemCommand" TargetType="Hyperlink">
+        <Setter Property="Command" Value="{Binding ElementName=UC,
+            Path=AddNewAuctionItemCommand, Mode=OneWay}"/>
+    </Style>
 </ResourceDictionary>
