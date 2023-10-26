@@ -89,7 +89,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         {
             _model = new AddNewItemUCModel();
             AvailableItems = new ObservableCollection<Items>(_model.AllItems);
-            StartPrice = 5000;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

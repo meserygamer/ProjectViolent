@@ -5,9 +5,70 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC"
              xmlns:ImageSelector="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC.ImageSelectorUC"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             Name="CreateNewItem"
              d:DesignHeight="850" d:DesignWidth="720"
              d:Background="White">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter 
+                                x:Name="contentPresenter"
+                                Focusable="False"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                Margin="{TemplateBinding Padding}"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonGrad">
+            <GradientStop Color="#03bfff" Offset="0" />
+            <GradientStop Color="#fb03b1" Offset="1" />
+        </LinearGradientBrush>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#0000"/>
+            <Setter Property="BorderBrush" Value="#0000"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Image Source="/Resources/Images/BackButton.png"></Image>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:AddNewAuctionItemUCViewModel/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" 
@@ -16,36 +77,95 @@
             <RowDefinition Height="9*" MinHeight="390"/>
             <RowDefinition Height="9*"/>
         </Grid.RowDefinitions>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
+        
         <TextBlock Text="Создание нового предмета"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="24"
                    FontWeight="Bold"
                    Grid.ColumnSpan="3"/>
-        <ImageSelector:ImageSelectorUCView Grid.Column="0" Grid.Row="2"
-                   Margin="20 0 0 0"/>
+
+        <Button
+            HorizontalAlignment="Left"
+            Style="{StaticResource ButtonStyle2}"
+            VerticalAlignment="Center"
+            Margin="15 0 0 0"
+            Grid.ColumnSpan="3"
+            Command="{Binding ElementName=CreateNewItem, Path=BackOnPreviousPage}"/>
+        
+        <ImageSelector:ImageSelectorUCView 
+            Grid.Column="0"
+            Grid.Row="2"
+            Margin="20 0 0 0"
+            SelectedImage="{Binding ElementName=CreateNewItem
+            ,Path=DataContext.ImageByteForm
+            ,Mode=OneWayToSource}"/>
+        
         <Grid Grid.Row="2" Grid.Column="2"
               Margin="0 0 20 0">
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height ="20"/>
                 <RowDefinition Height ="6*"/>
             </Grid.RowDefinitions>
+            
             <GroupBox Header="Название"
                       FontSize="16"
                       Grid.Row="0">
-                <TextBox BorderThickness="0"/>
+                
+                <TextBox BorderThickness="0"
+                         Padding="5 0 0 0"
+                         Text="{Binding ItemName, Mode=TwoWay}"/>
+                
             </GroupBox>
+            
             <GroupBox Header="Описание"
                       Grid.Row="2"
                       FontSize="16">
-                <TextBox BorderThickness="0"/>
+                
+                <TextBox BorderThickness="0"
+                         TextWrapping="Wrap"
+                         Padding="5 0 0 0"
+                         Text="{Binding ItemDescription, Mode=TwoWay}"/>
+                
             </GroupBox>
+            
         </Grid>
+        
+        <Grid Grid.Row="3"
+              Grid.ColumnSpan="3">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2.5*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <Button Style="{DynamicResource ButtonStyle1}"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="0 0 0 25"
+                    Background="#0000"
+                    BorderBrush="{StaticResource ButtonGrad}"
+                    Foreground="{StaticResource ButtonGrad}"
+                    FontSize="18"
+                    Command="{Binding AddNewItemCommand}">
+                Создание предмета
+            </Button>
+            
+        </Grid>
+        
     </Grid>
 </UserControl>

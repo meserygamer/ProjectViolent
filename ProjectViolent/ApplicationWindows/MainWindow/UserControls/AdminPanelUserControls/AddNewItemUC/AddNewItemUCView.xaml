@@ -154,19 +154,49 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="ButtonStyle2" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#0000"/>
+            <Setter Property="BorderBrush" Value="#0000"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Grid.Column" Value="0"/>
+            <Setter Property="Grid.Row" Value="0"/>
+            <Setter Property="Height" Value="50"></Setter>
+            <Setter Property="Width" Value="50"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <Image Source="/Resources/Images/BackButton.png"></Image>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
+        
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*" MinHeight="75"></RowDefinition>
             <RowDefinition Height="18*"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <TextBlock Text="Создание аукциона" 
                    Grid.Row="0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="24"
                    FontWeight="Bold"/>
+
+        <Button HorizontalAlignment="Left"
+                Style="{StaticResource ButtonStyle2}"
+                VerticalAlignment="Center"
+                Margin="15 0 0 0"
+                Grid.ColumnSpan="3"
+                Command="{Binding ElementName=AddNewAuc, Path=BackOnPreviousPage}"/>
+
         <Grid Grid.Row="1">
+            
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="0.4*" MinHeight="100"/>
@@ -174,60 +204,78 @@
                 <RowDefinition Height="0.25*" MinHeight="60"/>
                 <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.5*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.1*" MinHeight="70"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+                
                 <Image Source="{Binding ItemImage,
                     TargetNullValue={StaticResource EmpImg}}"
                        Grid.RowSpan="2"/>
+                
                 <GroupBox FontSize="20"
                           Grid.Column="1"
                           Header="Выберите предмет"
                           Margin="0 5 5 0">
+                    
                     <ComboBox IsEditable="True"
                               FontSize="18"
                               BorderThickness="0"
                               SelectedItem="{Binding ChoseItem}"
                               ItemsSource="{Binding AvailableItems}">
                     </ComboBox>
+                    
                 </GroupBox>
+                
             </Grid>
             <GroupBox Grid.Row="1"
                       Header="Начало аукциона"
                       FontSize="20">
+                
                 <DateTimePicker:DateTimePickerView Height="70"/>
+                
             </GroupBox>
             <GroupBox Grid.Row="2"
                       Header="Окончание аукциона"
                       FontSize="20">
+                
                 <DateTimePicker:DateTimePickerView Height="70"/>
+                
             </GroupBox>
             <GroupBox Grid.Row="3"
                       Header="Стартовая стоимость"
                       FontSize="20">
+                
                 <TextBox Padding="4 0 0 0"
                          Text="{Binding StartPrice, Mode=TwoWay}"
                          FontSize="18"
                          BorderThickness="0"
                          VerticalAlignment="Center" 
                          Height="24"/>
+                
             </GroupBox>
+            
             <Button Style="{DynamicResource ButtonStyle1}"
                     Grid.Row="4"
                     Grid.ColumnSpan="2"
                     Command="{Binding AddNewItemCommand}">
+                
                 <TextBlock Text="Создать аукцион"
                            FontSize="20">
+                    
                     <TextBlock.Foreground>
                         <LinearGradientBrush>
                             <GradientStop Color="#03bfff" Offset="0" />

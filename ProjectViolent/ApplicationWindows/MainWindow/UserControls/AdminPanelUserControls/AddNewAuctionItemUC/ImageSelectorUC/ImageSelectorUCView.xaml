@@ -11,6 +11,42 @@
     <UserControl.Resources>
         <local:ProxyElem x:Key="proxy" SelectedImage="{Binding ElementName=SelectImageUC, Path=SelectedImage, Mode=TwoWay}"/>
         <BitmapImage UriSource="\Resources\Images\EmptyImage.jpg" x:Key="EmpImg"></BitmapImage>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10"
+                        SnapsToDevicePixels="true">
+                            <ContentPresenter 
+                        x:Name="contentPresenter"
+                        Focusable="False"
+                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        Margin="{TemplateBinding Padding}"
+                        RecognizesAccessKey="True"
+                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <LinearGradientBrush x:Key="ButtonGrad">
+            <GradientStop Color="#03bfff" Offset="0" />
+            <GradientStop Color="#fb03b1" Offset="1" />
+        </LinearGradientBrush>
     </UserControl.Resources>
     <UserControl.DataContext>
         <local:ImageSelectorUCViewModel SelectedImage="{Binding Source={StaticResource proxy}, Path=SelectedImage, Mode=TwoWay}"/>
@@ -23,7 +59,12 @@
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Source="{Binding Image, TargetNullValue={StaticResource EmpImg}}"/>
         <Button Content="Выбрать картинку"
-            Grid.Row="2"
-                Command="{Binding ChooseANewPictureCommand}"/>
+                Grid.Row="2"
+                Command="{Binding ChooseANewPictureCommand}"
+                Style="{StaticResource ButtonStyle1}"
+                Background="{StaticResource ButtonGrad}"
+                Foreground="White"
+                FontSize="18"
+                BorderThickness="0"/>
     </Grid>
 </UserControl>

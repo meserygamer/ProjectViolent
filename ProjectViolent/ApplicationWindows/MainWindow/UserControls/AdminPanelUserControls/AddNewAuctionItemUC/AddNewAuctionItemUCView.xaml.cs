@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AdminPanelMainMenuUC;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,14 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     /// </summary>
     public partial class AddNewAuctionItemUCView : UserControl
     {
+        public static readonly DependencyProperty BackOnPreviousPageDependencyProperty = DependencyProperty.Register("BackOnPreviousPage", typeof(RelayCommand), typeof(AddNewAuctionItemUCView));
+        
+        public RelayCommand BackOnPreviousPage
+        {
+            get => (RelayCommand)GetValue(BackOnPreviousPageDependencyProperty);
+            set => SetValue(BackOnPreviousPageDependencyProperty, value);
+        }
+
         public AddNewAuctionItemUCView()
         {
             InitializeComponent();
