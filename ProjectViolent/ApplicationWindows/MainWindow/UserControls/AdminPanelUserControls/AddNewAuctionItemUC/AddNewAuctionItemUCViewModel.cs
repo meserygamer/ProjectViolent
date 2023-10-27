@@ -45,7 +45,22 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         {
             get => _addNewItemCommand ?? (_addNewItemCommand = new RelayCommand(a =>
             {
-                MessageBox.Show("Добавление объекта");
+                if(ItemName == null || ItemName.Length == 0)
+                {
+                    MessageBox.Show("Минимальные требования для добавления предмета:\n*Имя предмета должно быть заполнено");
+                    return;
+                }
+                //MessageBox.Show("Добавление объекта");
+                if (AddNewAuctionItemUCModel.AddNewItemAuctionItem(
+                    (int)Application.Current.Resources["UserID"],
+                    ItemName, ItemDescription, ImageByteForm) == 0)
+                {
+                    MessageBox.Show("Предмет успешно добавлен");
+                }
+                else
+                {
+                    MessageBox.Show("При добавлении предмета произошла ошибка");
+                }
             }));
         }
 

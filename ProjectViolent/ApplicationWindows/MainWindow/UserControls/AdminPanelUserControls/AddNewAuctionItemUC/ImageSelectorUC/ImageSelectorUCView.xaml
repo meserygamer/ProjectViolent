@@ -9,7 +9,7 @@
              Name="SelectImageUC"
              Background="White">
     <UserControl.Resources>
-        <local:ProxyElem x:Key="proxy" SelectedImage="{Binding ElementName=SelectImageUC, Path=SelectedImage, Mode=TwoWay}"/>
+        <local:ProxyElem x:Key="proxy" SelectedImage="{Binding ElementName=SelectImageUC, Path=SelectedImage, Mode=OneWayToSource}"/>
         <BitmapImage UriSource="\Resources\Images\EmptyImage.jpg" x:Key="EmpImg"></BitmapImage>
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
@@ -49,7 +49,7 @@
         </LinearGradientBrush>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <local:ImageSelectorUCViewModel SelectedImage="{Binding Source={StaticResource proxy}, Path=SelectedImage, Mode=TwoWay}"/>
+        <local:ImageSelectorUCViewModel SelectedImage="{Binding Source={StaticResource proxy}, Path=SelectedImage, Mode=OneWayToSource}"/>
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
