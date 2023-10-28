@@ -21,6 +21,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public partial class DateTimePickerView : UserControl
     {
         public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register("SelectedDateTime", typeof(DateTime), typeof(DateTimePickerView));
+        public static readonly DependencyProperty StartSelectedDateProperty = DependencyProperty.Register("StartSelectedDate", typeof(DateTime), typeof(DateTimePickerView));
+
 
         public DateTime SelectedDateTime
         {
@@ -28,21 +30,33 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             set { SetValue(SelectedDateTimeProperty, value); }
         }
 
+        public DateTime StartSelectedDate
+        {
+            get { return (DateTime)GetValue(StartSelectedDateProperty); }
+            set { SetValue(StartSelectedDateProperty, value); }
+        }
+
         public DateTimePickerView()
         {
             InitializeComponent();
-            SelectedDateTime = DateTime.Now;
         }
     }
 
     public class proxy : Freezable
     {
         public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register("SelectedDateTime", typeof(DateTime), typeof(proxy));
+        public static readonly DependencyProperty StartSelectedDateProperty = DependencyProperty.Register("StartSelectedDate", typeof(DateTime), typeof(proxy));
 
         public DateTime SelectedDateTime
         {
             get { return (DateTime)GetValue(SelectedDateTimeProperty); }
             set { SetValue(SelectedDateTimeProperty, value); }
+        }
+
+        public DateTime StartSelectedDate
+        {
+            get { return (DateTime)GetValue(StartSelectedDateProperty); }
+            set { SetValue(StartSelectedDateProperty, value); }
         }
 
         protected override Freezable CreateInstanceCore()

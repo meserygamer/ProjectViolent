@@ -173,6 +173,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <local:DecimalConverter x:Key="ConvDec"/>
     </UserControl.Resources>
     <Grid>
         
@@ -222,7 +223,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 
-                <Image Source="{Binding ItemImage,
+                <Image Source="{Binding ItemImage.Image,
                     TargetNullValue={StaticResource EmpImg}}"
                        Grid.RowSpan="2"/>
                 
@@ -244,23 +245,34 @@
             <GroupBox Grid.Row="1"
                       Header="Начало аукциона"
                       FontSize="20">
-                
-                <DateTimePicker:DateTimePickerView Height="70"/>
-                
+
+                <DateTimePicker:DateTimePickerView Height="70"
+                        SelectedDateTime="{Binding ElementName=AddNewAuc
+                    , Path=DataContext.DateStart
+                    , Mode=TwoWay}"/>
+
             </GroupBox>
             <GroupBox Grid.Row="2"
                       Header="Окончание аукциона"
                       FontSize="20">
-                
-                <DateTimePicker:DateTimePickerView Height="70"/>
-                
+
+                <DateTimePicker:DateTimePickerView Height="70"
+                        SelectedDateTime="{Binding ElementName=AddNewAuc
+                    , Path=DataContext.DateEnd
+                    , Mode=TwoWay}"
+                        StartSelectedDate="{Binding ElementName=AddNewAuc
+                    , Path=DataContext.DateStart
+                    , Mode=TwoWay}"/>
+
             </GroupBox>
             <GroupBox Grid.Row="3"
                       Header="Стартовая стоимость"
                       FontSize="20">
                 
                 <TextBox Padding="4 0 0 0"
-                         Text="{Binding StartPrice, Mode=TwoWay}"
+                         Text="{Binding StartPrice
+                    , Mode=TwoWay
+                    , Converter={StaticResource ConvDec}}"
                          FontSize="18"
                          BorderThickness="0"
                          VerticalAlignment="Center" 
@@ -283,6 +295,7 @@
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
                 </TextBlock>
+                
             </Button>
         </Grid>
     </Grid>

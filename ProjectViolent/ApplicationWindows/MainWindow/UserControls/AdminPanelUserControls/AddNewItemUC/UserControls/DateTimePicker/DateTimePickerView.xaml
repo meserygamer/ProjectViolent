@@ -300,10 +300,16 @@
         </Style>
 
         <local:proxy x:Key="proxyElement"
-            SelectedDateTime="{Binding ElementName=DateTimePickerUC, Path=SelectedDateTime, Mode=TwoWay}"/>
+            SelectedDateTime="{Binding ElementName=DateTimePickerUC
+            , Path=SelectedDateTime, Mode=TwoWay}"
+            StartSelectedDate="{Binding ElementName=DateTimePickerUC
+            , Path=StartSelectedDate, Mode=TwoWay}"/>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <local:DateTimePickerViewModel SelectedDateTime="{Binding SelectedDateTime, Source={StaticResource proxyElement}, Mode=TwoWay}"/>
+        <local:DateTimePickerViewModel SelectedDateTime="{Binding SelectedDateTime
+            , Source={StaticResource proxyElement}, Mode=TwoWay}"
+            StartSelectedDate="{Binding StartSelectedDate
+            , Source={StaticResource proxyElement}, Mode=TwoWay}"/>
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -320,7 +326,8 @@
         <DatePicker Style="{DynamicResource DatePickerStyle1}"
                     Grid.Row="0" Grid.Column="0"
                     Grid.ColumnSpan="4"
-                    SelectedDate="{Binding SelectedDateTime}"/>
+                    SelectedDate="{Binding SelectedDateTimePicker, Mode=TwoWay}"
+                    DisplayDateStart="{Binding StartSelectedDate}"/>
         <ComboBox Style="{DynamicResource ComboBoxStyle1}"
                   Grid.Row="2" Grid.Column="0"
                   ItemsSource="{Binding HoursList}"

@@ -37,15 +37,22 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         public void UpdateImage()
         {
-            BitmapImage newBMI = new BitmapImage();
-            using (MemoryStream ms = new MemoryStream(ImageBytes))
+            try
             {
-                newBMI.BeginInit();
-                newBMI.StreamSource = ms;
-                newBMI.CacheOption = BitmapCacheOption.OnLoad;
-                newBMI.EndInit();
+                BitmapImage newBMI = new BitmapImage();
+                using (MemoryStream ms = new MemoryStream(ImageBytes))
+                {
+                    newBMI.BeginInit();
+                    newBMI.StreamSource = ms;
+                    newBMI.CacheOption = BitmapCacheOption.OnLoad;
+                    newBMI.EndInit();
+                }
+                Image = newBMI;
             }
-            Image = newBMI;
+            catch
+            {
+                Image = null;
+            }
         }
 
 
