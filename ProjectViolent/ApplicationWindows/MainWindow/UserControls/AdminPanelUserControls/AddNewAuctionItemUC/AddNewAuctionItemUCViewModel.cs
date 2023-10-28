@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC.ImageSelectorUC;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -31,12 +32,12 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }
         }
 
-        public byte[] ImageByteForm
+        public WPFImage Image
         {
-            get => _imageByteForm;
+            get => _image;
             set
             {
-                _imageByteForm = value;
+                _image = value;
                 OnPropertyChanged();
             }
         }
@@ -45,15 +46,14 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         {
             get => _addNewItemCommand ?? (_addNewItemCommand = new RelayCommand(a =>
             {
-                if(ItemName == null || ItemName.Length == 0)
+                if (ItemName == null || ItemName.Length == 0)
                 {
                     MessageBox.Show("Минимальные требования для добавления предмета:\n*Имя предмета должно быть заполнено");
                     return;
                 }
-                //MessageBox.Show("Добавление объекта");
                 if (AddNewAuctionItemUCModel.AddNewItemAuctionItem(
                     (int)Application.Current.Resources["UserID"],
-                    ItemName, ItemDescription, ImageByteForm) == 0)
+                    ItemName, ItemDescription, Image.ImageBytes) == 0)
                 {
                     MessageBox.Show("Предмет успешно добавлен");
                 }
@@ -65,11 +65,17 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         }
 
 
+        public AddNewAuctionItemUCViewModel()
+        {
+            Image = new WPFImage();
+        }
+
+
         private string _itemName;
 
         private string _itemDescription;
 
-        private byte[] _imageByteForm;
+        private WPFImage _image;
 
         private RelayCommand _addNewItemCommand;
 

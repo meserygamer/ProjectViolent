@@ -9,7 +9,11 @@
              Name="SelectImageUC"
              Background="White">
     <UserControl.Resources>
-        <local:ProxyElem x:Key="proxy" SelectedImage="{Binding ElementName=SelectImageUC, Path=SelectedImage, Mode=OneWayToSource}"/>
+        <local:ProxyElem x:Key="proxy" 
+                         SelectedImage="{Binding
+            ElementName=SelectImageUC,
+            Path=SelectedImage,
+            Mode=TwoWay, NotifyOnTargetUpdated=True}"/>
         <BitmapImage UriSource="\Resources\Images\EmptyImage.jpg" x:Key="EmpImg"></BitmapImage>
         <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
         <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
@@ -49,7 +53,10 @@
         </LinearGradientBrush>
     </UserControl.Resources>
     <UserControl.DataContext>
-        <local:ImageSelectorUCViewModel SelectedImage="{Binding Source={StaticResource proxy}, Path=SelectedImage, Mode=OneWayToSource}"/>
+        <local:ImageSelectorUCViewModel 
+            SelectedImage="{Binding SelectedImage,
+            Source={StaticResource proxy},
+            Mode=TwoWay, NotifyOnTargetUpdated=True}"/>
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -57,7 +64,8 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="{Binding Image, TargetNullValue={StaticResource EmpImg}}"/>
+        <Image Grid.Row="0" Source="{Binding SelectedImage.Image,
+            TargetNullValue={StaticResource EmpImg}}"/>
         <Button Content="Выбрать картинку"
                 Grid.Row="2"
                 Command="{Binding ChooseANewPictureCommand}"

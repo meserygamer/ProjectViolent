@@ -22,11 +22,11 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public partial class ImageSelectorUCView : UserControl
     {
         public static readonly DependencyProperty SelectedImageProperty =
-            DependencyProperty.Register("SelectedImage", typeof(byte[]), typeof(ImageSelectorUCView));
+            DependencyProperty.Register("SelectedImage", typeof(WPFImage), typeof(ImageSelectorUCView));
 
-        public byte[] SelectedImage
+        public WPFImage SelectedImage
         {
-            get { return (byte[])GetValue(SelectedImageProperty); }
+            get { return (WPFImage)GetValue(SelectedImageProperty); }
             set { SetValue(SelectedImageProperty, value); }
         }
 
@@ -39,11 +39,11 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public class ProxyElem : Freezable
     {
         public static readonly DependencyProperty SelectedImageProperty =
-            DependencyProperty.Register("SelectedImage", typeof(byte[]), typeof(ProxyElem));
+            DependencyProperty.Register("SelectedImage", typeof(WPFImage), typeof(ProxyElem));
 
-        public byte[] SelectedImage
+        public WPFImage SelectedImage
         {
-            get { return (byte[])GetValue(SelectedImageProperty); }
+            get { return (WPFImage)GetValue(SelectedImageProperty); }
             set { SetValue(SelectedImageProperty, value); }
         }
 

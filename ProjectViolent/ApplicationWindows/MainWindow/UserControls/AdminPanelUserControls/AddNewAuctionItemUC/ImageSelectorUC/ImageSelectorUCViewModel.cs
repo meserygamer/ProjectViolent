@@ -12,29 +12,79 @@ using System.Windows.Media.Imaging;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC.ImageSelectorUC
 {
-    public class ImageSelectorUCViewModel : DependencyObject, INotifyPropertyChanged
+    public class WPFImage : INotifyPropertyChanged
     {
-        public static readonly DependencyProperty SelectedImageProperty =
-            DependencyProperty.Register("SelectedImage", typeof(byte[]), typeof(ImageSelectorUCViewModel));
-
-        public byte[] SelectedImage
-        {
-            get { return (byte[])GetValue(SelectedImageProperty); }
-            set { SetValue(SelectedImageProperty, value); }
-        }
-
-        /// <summary>
-        /// Хранит текущее отображаемое изображение
-        /// </summary>
         public BitmapImage Image
         {
             get => _image;
-            set
+            private set
             {
                 _image = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Image));
             }
         }
+
+        public byte[] ImageBytes
+        {
+            get => _imageBytes;
+            set
+            {
+                _imageBytes = value;
+                OnPropertyChanged(nameof(ImageBytes));
+            }
+        }
+
+
+        public void UpdateImage()
+        {
+            BitmapImage newBMI = new BitmapImage();
+            using (MemoryStream ms = new MemoryStream(ImageBytes))
+            {
+                newBMI.BeginInit();
+                newBMI.StreamSource = ms;
+                newBMI.CacheOption = BitmapCacheOption.OnLoad;
+                newBMI.EndInit();
+            }
+            Image = newBMI;
+        }
+
+
+        public WPFImage(byte[] imageBytes)
+        {
+            ImageBytes = imageBytes;
+            UpdateImage();
+        }
+
+        public WPFImage()
+        {
+            Image = null;
+            ImageBytes = null;
+        }
+
+
+        private BitmapImage _image;
+
+        private byte[] _imageBytes;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+    }
+
+    public class ImageSelectorUCViewModel : DependencyObject, INotifyPropertyChanged
+    {
+        public static readonly DependencyProperty SelectedImageProperty =
+            DependencyProperty.Register("SelectedImage", typeof(WPFImage), typeof(ImageSelectorUCViewModel));
+
+        public WPFImage SelectedImage
+        {
+            get { return (WPFImage)GetValue(SelectedImageProperty); }
+            set { SetValue(SelectedImageProperty, value); }
+        }
+
 
         /// <summary>
         /// Команда обработки нажатия на кнопку загрузки новой картинки
@@ -47,8 +97,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 fileDialog.ShowDialog();
                 try
                 {
-                    SetNewImage(File.ReadAllBytes(fileDialog.FileName));
-                    SelectedImage = File.ReadAllBytes(fileDialog.FileName);
+                    SelectedImage = new WPFImage(File.ReadAllBytes(fileDialog.FileName));
                 }
                 catch
                 {
@@ -57,28 +106,19 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }));
         }
 
-        private BitmapImage _image;
 
         private RelayCommand _chooseANewPictureCommand;
 
-        private void SetNewImage(byte[] ImageByteForm)
-        {
-            BitmapImage newBMI = new BitmapImage();
-            using (MemoryStream ms = new MemoryStream(ImageByteForm))
-            {
-                newBMI.BeginInit();
-                newBMI.StreamSource = ms;
-                newBMI.CacheOption = BitmapCacheOption.OnLoad;
-                newBMI.EndInit();
-            }
-            Image = newBMI;
-        }
 
+        #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        #endregion
+
     }
+
 }
