@@ -10,6 +10,12 @@ using System.Windows;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC
 {
+    public enum AddNewAuctionItemStates
+    {
+        Create,
+        Update
+    }
+
     public class AddNewAuctionItemUCViewModel : INotifyPropertyChanged
     {
         public string ItemName
@@ -44,7 +50,46 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         public RelayCommand AddNewItemCommand
         {
-            get => _addNewItemCommand ?? (_addNewItemCommand = new RelayCommand(a =>
+            get => _addNewItemCommand;
+            set
+            {
+                _addNewItemCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public AddNewAuctionItemStates UCState
+        {
+            get => _uCState;
+            set
+            {
+                _uCState = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public AddNewAuctionItemUCViewModel()
+        {
+            UCState = AddNewAuctionItemStates.Create;
+            setCreateItemCommand();
+            Image = new WPFImage();
+        }
+
+        public AddNewAuctionItemUCViewModel(Items selectedItems)
+        {
+            UCState = AddNewAuctionItemStates.Update;
+            _updatedItem = selectedItems;
+            ItemName = selectedItems.ItemName;
+            ItemDescription = selectedItems.Description;
+            setUpdateItemCommand();
+            Image = new WPFImage(selectedItems.Image);
+        }
+
+
+        private void setCreateItemCommand()
+        {
+            AddNewItemCommand = new RelayCommand(a =>
             {
                 if (ItemName == null || ItemName.Length == 0)
                 {
@@ -61,13 +106,29 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 {
                     MessageBox.Show("При добавлении предмета произошла ошибка");
                 }
-            }));
+            });
         }
 
-
-        public AddNewAuctionItemUCViewModel()
+        private void setUpdateItemCommand()
         {
-            Image = new WPFImage();
+            AddNewItemCommand = new RelayCommand(a =>
+            {
+                if (ItemName == null || ItemName.Length == 0)
+                {
+                    MessageBox.Show("Минимальные требования для обновления предмета:\n*Имя предмета должно быть заполнено");
+                    return;
+                }
+                if (AddNewAuctionItemUCModel.UpdateItemAuction(
+                    _updatedItem.ID_Item,
+                    ItemName, ItemDescription, Image.ImageBytes) == 0)
+                {
+                    MessageBox.Show("Предмет успешно обновлен");
+                }
+                else
+                {
+                    MessageBox.Show("При обновлении предмета произошла ошибка");
+                }
+            });
         }
 
 
@@ -78,6 +139,11 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private WPFImage _image;
 
         private RelayCommand _addNewItemCommand;
+
+        private AddNewAuctionItemStates _uCState;
+
+        private Items _updatedItem = null;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

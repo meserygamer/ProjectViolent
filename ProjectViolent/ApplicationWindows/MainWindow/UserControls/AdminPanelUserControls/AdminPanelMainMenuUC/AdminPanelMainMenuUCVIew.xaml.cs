@@ -23,8 +23,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     {
         public static readonly DependencyProperty ShowAllUsersCommandDependencyProperty = DependencyProperty.Register("ShowAllUsersCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
         public static readonly DependencyProperty ShowMainDataBaseTableCommandDependencyProperty = DependencyProperty.Register("ShowMainDataBaseTableCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
-        public static readonly DependencyProperty AddNewItemCommandDependencyProperty = DependencyProperty.Register("AddNewItemCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
-        public static readonly DependencyProperty AddNewAuctionItemCommandDependencyProperty = DependencyProperty.Register("AddNewAuctionItemCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowAllItemsCommandDependencyProperty = DependencyProperty.Register("ShowAllItemsCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
 
         public RelayCommand ShowAllUsersCommand
         {
@@ -38,16 +37,10 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             set => SetValue(ShowMainDataBaseTableCommandDependencyProperty, value);
         }
 
-        public RelayCommand AddNewItemCommand
+        public RelayCommand ShowAllItemsCommand
         {
-            get => (RelayCommand)GetValue(AddNewItemCommandDependencyProperty);
-            set => SetValue(AddNewItemCommandDependencyProperty, value);
-        }
-
-        public RelayCommand AddNewAuctionItemCommand
-        {
-            get => (RelayCommand)GetValue(AddNewAuctionItemCommandDependencyProperty);
-            set => SetValue(AddNewAuctionItemCommandDependencyProperty, value);
+            get => (RelayCommand)GetValue(ShowAllItemsCommandDependencyProperty);
+            set => SetValue(ShowAllItemsCommandDependencyProperty, value);
         }
 
         public AdminPanelMainMenuUCVIew()

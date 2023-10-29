@@ -22,11 +22,18 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public partial class ShowMainTableDataBaseUCView : UserControl
     {
         public static readonly DependencyProperty MoveOnPreviousCommandDependencyProperty = DependencyProperty.Register("MoveOnPreviousCommand", typeof(RelayCommand), typeof(ShowMainTableDataBaseUCView));
+        public static readonly DependencyProperty CreateNewAuctionCommandDependencyProperty = DependencyProperty.Register("CreateNewAuctionCommand", typeof(RelayCommand), typeof(ShowMainTableDataBaseUCView));
 
         public RelayCommand MoveOnPreviousCommand
         {
             get => (RelayCommand)GetValue(MoveOnPreviousCommandDependencyProperty);
             set => SetValue(MoveOnPreviousCommandDependencyProperty, value);
+        }
+
+        public RelayCommand CreateNewAuctionCommand
+        {
+            get => (RelayCommand)GetValue(CreateNewAuctionCommandDependencyProperty);
+            set => SetValue(CreateNewAuctionCommandDependencyProperty, value);
         }
 
         public ShowMainTableDataBaseUCView()

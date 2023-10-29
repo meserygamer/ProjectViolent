@@ -98,6 +98,11 @@
       <DependentUpon>AdminPanelMainMenuUCVIew.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowAllItemsDataBaseUC\ShowAllItemsDataBaseUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowAllItemsDataBaseUC\ShowAllItemsDataBaseUCView.xaml.cs">
+      <DependentUpon>ShowAllItemsDataBaseUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowAllItemsDataBaseUC\ShowAllItemsDataBaseUCViewModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCView.xaml.cs">
       <DependentUpon>ShowInformationAboutAllUsersUCView.xaml</DependentUpon>
@@ -254,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\AdminPanelMainMenuUC\AdminPanelMainMenuUCVIew.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowAllItemsDataBaseUC\ShowAllItemsDataBaseUCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

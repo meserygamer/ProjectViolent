@@ -41,6 +41,14 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding UCState}" Value="Create">
+                    <Setter Property="Content" Value="Создание предмета"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding UCState}" Value="Update">
+                    <Setter Property="Content" Value="Подтвердить изменения"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
         <LinearGradientBrush x:Key="ButtonGrad">
             <GradientStop Color="#03bfff" Offset="0" />
@@ -83,13 +91,25 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock Text="Создание нового предмета"
-                   HorizontalAlignment="Center"
+
+        <TextBlock HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="24"
                    FontWeight="Bold"
-                   Grid.ColumnSpan="3"/>
+                   Grid.ColumnSpan="3">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding UCState}" Value="Create">
+                            <Setter Property="Text" Value="Создание нового предмета"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding UCState}" Value="Update">
+                            <Setter Property="Text" Value="Обновление предмета"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <Button
             HorizontalAlignment="Left"
@@ -153,7 +173,7 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+
             <Button Style="{DynamicResource ButtonStyle1}"
                     Grid.Row="1"
                     Grid.Column="1"
@@ -163,7 +183,6 @@
                     Foreground="{StaticResource ButtonGrad}"
                     FontSize="18"
                     Command="{Binding AddNewItemCommand}">
-                Создание предмета
             </Button>
             
         </Grid>

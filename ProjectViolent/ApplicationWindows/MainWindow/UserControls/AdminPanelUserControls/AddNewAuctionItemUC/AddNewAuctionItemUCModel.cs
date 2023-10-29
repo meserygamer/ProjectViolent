@@ -35,5 +35,28 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 return -1;
             }
         }
+        public static int UpdateItemAuction(
+            int ItemID,
+            string ItemName,
+            string Description,
+            byte[] Image)
+        {
+            try
+            {
+                using (DataBase DB = new DataBase())
+                {
+                    Items UpdateItem = DB.Items.Find(ItemID);
+                    UpdateItem.ItemName = ItemName;
+                    UpdateItem.Description = Description;
+                    UpdateItem.Image = Image;
+                    DB.SaveChanges();
+                }
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
     }
 }

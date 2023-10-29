@@ -40,13 +40,8 @@
                     </Hyperlink>
                 </TextBlock>
                 <TextBlock>
-                    <Hyperlink Style="{StaticResource AddNewItemCommand}">
-                        Добавление нового аукциона
-                    </Hyperlink>
-                </TextBlock>
-                <TextBlock>
-                    <Hyperlink Style="{StaticResource AddNewAuctionItemCommand}">
-                        Добавление нового предмета
+                    <Hyperlink Style="{StaticResource ShowAllItemsCommand}">
+                        Посмотреть таблицу предметов
                     </Hyperlink>
                 </TextBlock>
             </StackPanel>
