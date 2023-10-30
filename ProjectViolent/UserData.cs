@@ -41,7 +41,7 @@ namespace ProjectViolent
 
         public override string ToString()
         {
-            return Surname +" "+ Name +" "+ Patronymic + "(" + UserID + ")";
+            return Surname + " " + Name + " " + Patronymic + "(" + UserID + ")";
         }
     }
 }

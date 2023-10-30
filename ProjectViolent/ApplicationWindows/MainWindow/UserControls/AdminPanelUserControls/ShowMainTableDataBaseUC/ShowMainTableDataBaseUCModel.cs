@@ -12,7 +12,26 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     public class ShowMainTableDataBaseUCModel : INotifyPropertyChanged
     {
         private ObservableCollection<Auction> _auctionList;
+
         private DataBase DB;
+
+
+        public bool DeleteAuct(Auction deletedAuction)
+        {
+
+            try
+            {
+                DB.Auction.Remove(DB.Auction.Find(deletedAuction.ID_Auction));
+                DB.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            
+        }
+
 
         public ObservableCollection<Auction> AuctionsList
         {

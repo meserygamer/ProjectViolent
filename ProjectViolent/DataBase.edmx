@@ -69,7 +69,9 @@
           <Property Name="Role" Type="varchar" MaxLength="256" Nullable="false" />
         </EntityType>
         <Association Name="FK__Auction__ID_Item__75A278F5">
-          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Items" Type="Self.Items" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Auction" Type="Self.Auction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Items">
@@ -93,7 +95,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__BettingHi__ID_Au__797309D9">
-          <End Role="Auction" Type="Self.Auction" Multiplicity="1" />
+          <End Role="Auction" Type="Self.Auction" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BettingHistory" Type="Self.BettingHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Auction">
@@ -104,20 +108,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BettingHi__UserI__787EE5A0">
-          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
-          <End Role="BettingHistory" Type="Self.BettingHistory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserData">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="BettingHistory">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Items__UserID__72C60C4A">
-          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserData">
@@ -152,6 +146,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BettingHistory_UserData">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1" />
+          <End Role="BettingHistory" Type="Self.BettingHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="BettingHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorizationData" EntityType="Self.AuthorizationData" Schema="dbo" store:Type="Tables" />
@@ -172,10 +178,6 @@
             <End Role="Auction" EntitySet="Auction" />
             <End Role="BettingHistory" EntitySet="BettingHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__BettingHi__UserI__787EE5A0" Association="Self.FK__BettingHi__UserI__787EE5A0">
-            <End Role="UserData" EntitySet="UserData" />
-            <End Role="BettingHistory" EntitySet="BettingHistory" />
-          </AssociationSet>
           <AssociationSet Name="FK__Items__UserID__72C60C4A" Association="Self.FK__Items__UserID__72C60C4A">
             <End Role="UserData" EntitySet="UserData" />
             <End Role="Items" EntitySet="Items" />
@@ -187,6 +189,10 @@
           <AssociationSet Name="FK__UserData__RoleID__6383C8BA" Association="Self.FK__UserData__RoleID__6383C8BA">
             <End Role="UserRoles" EntitySet="UserRoles" />
             <End Role="UserData" EntitySet="UserData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BettingHistory_UserData" Association="Self.FK_BettingHistory_UserData">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="BettingHistory" EntitySet="BettingHistory" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -344,7 +350,9 @@
           <NavigationProperty Name="UserData" Relationship="Model.FK__Items__UserID__72C60C4A" FromRole="Items" ToRole="UserData" />
         </EntityType>
         <Association Name="FK__Auction__ID_Item__75A278F5">
-          <End Type="Model.Items" Role="Items" Multiplicity="1" />
+          <End Type="Model.Items" Role="Items" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Model.Auction" Role="Auction" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Items">
@@ -356,7 +364,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__BettingHi__ID_Au__797309D9">
-          <End Type="Model.Auction" Role="Auction" Multiplicity="1" />
+          <End Type="Model.Auction" Role="Auction" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Model.BettingHistory" Role="BettingHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Auction">
@@ -368,7 +378,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__BettingHi__UserI__787EE5A0">
-          <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Model.BettingHistory" Role="BettingHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserData">
@@ -380,7 +392,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Items__UserID__72C60C4A">
-          <End Type="Model.UserData" Role="UserData" Multiplicity="1" />
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="Model.Items" Role="Items" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserData">

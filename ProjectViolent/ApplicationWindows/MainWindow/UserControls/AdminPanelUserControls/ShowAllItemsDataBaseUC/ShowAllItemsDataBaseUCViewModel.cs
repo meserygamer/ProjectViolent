@@ -37,6 +37,30 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }
         }
 
+        public RelayCommand DelElemCommand
+        {
+            get => _delElemCommand ?? (_delElemCommand = new RelayCommand(a =>
+            {
+                if(a is Items deletedItem)
+                {
+                    if(MessageBox.Show("Вы точно хотите удалить данный предмет?", "Предупреждение", MessageBoxButton.OKCancel,
+                        MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                    {
+                        return;
+                    }
+                    if(Model.DeleteItem(deletedItem))
+                    {
+                        Model.UpdateItemsList();
+                        MessageBox.Show("Предмет успешно удален!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при удалении предмета");
+                    }
+                }
+            }));
+        }
+
 
         public ShowAllItemsDataBaseUCViewModel()
         {
@@ -55,7 +79,9 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         private ShowAllItemsDataBaseUCModel _model;
 
-        private Items _selectedItem; 
+        private Items _selectedItem;
+
+        private RelayCommand _delElemCommand;
 
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC
@@ -35,6 +36,30 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }
         }
 
+        public RelayCommand DelElemCommand
+        {
+            get => _delElemCommand ?? (_delElemCommand = new RelayCommand(a =>
+            {
+                if (a is Auction deletedItem)
+                {
+                    if (MessageBox.Show("Вы точно хотите удалить данный аукцион?", "Предупреждение", MessageBoxButton.OKCancel,
+                        MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                    {
+                        return;
+                    }
+                    if (Model.DeleteAuct(deletedItem))
+                    {
+                        Model.UpdateAuctionList();
+                        MessageBox.Show("Аукцион успешно удален!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при удалении аукциона");
+                    }
+                }
+            }));
+        }
+
 
         public ShowMainTableDataBaseUCViewModel()
         {
@@ -57,6 +82,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private ShowMainTableDataBaseUCModel _model;
 
         private Auction _selectedAuction;
+
+        private RelayCommand _delElemCommand;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
