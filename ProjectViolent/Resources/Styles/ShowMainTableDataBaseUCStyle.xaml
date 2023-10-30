@@ -77,7 +77,7 @@
         </Setter>
     </Style>
     <Style x:Key="ListViewStyle1" TargetType="{x:Type ListView}">
-        <Setter Property="Grid.Row" Value="1"/>
+        <Setter Property="Grid.Row" Value="2"/>
         <Setter Property="Grid.ColumnSpan" Value="3"/>
         <Setter Property="Background" Value="{StaticResource ListBox.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{StaticResource ListBox.Static.Border}"/>
