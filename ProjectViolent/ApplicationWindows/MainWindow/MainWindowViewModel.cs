@@ -139,6 +139,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             get => _showMainTableCommand ?? (_showMainTableCommand = new RelayCommand(a => 
             {
                 ShowMainTableDataBaseUCDataContext = new ShowMainTableDataBaseUCViewModel();
+                ShowMainTableDataBaseUCDataContext.SelectionAuctionWasUpdateNotify += UpdateAuction;
                 MainControlState = MainControlStates.ShowMainTable;
             }));
         }
@@ -158,6 +159,12 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
                 AddNewItemUCDataContext = new AddNewItemUCViewModel();
                 MainControlState = MainControlStates.AddNewItem;
             }));
+        }
+
+        private void UpdateAuction(Auction item)
+        {
+            AddNewItemUCDataContext = new AddNewItemUCViewModel(item);
+            MainControlState = MainControlStates.AddNewItem;
         }
 
         public RelayCommand ShowAddNewAuctionItemCommand

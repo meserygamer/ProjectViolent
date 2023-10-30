@@ -1,6 +1,8 @@
 ﻿using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC.UserControls.DateTimePicker;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +34,23 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         public AddNewItemUCView()
         {
             InitializeComponent();
+        }
+    }
+
+    public class Proxy : Freezable
+    {
+        public static readonly DependencyProperty AllUsersProperty = DependencyProperty.Register("AllUsers", typeof(ObservableCollection<UserData>), typeof(Proxy));
+
+        public RelayCommand AllUsers
+        {
+            get => (RelayCommand)GetValue(AllUsersProperty);
+            set => SetValue(AllUsersProperty, value);
+        }
+
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return new proxy();
         }
     }
 }

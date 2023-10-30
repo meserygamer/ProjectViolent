@@ -72,7 +72,8 @@
                 Command="{Binding ElementName=ShowMainTableDBUC
             , Path=CreateNewAuctionCommand, Mode=OneWay}"/>
         <ListView Style="{DynamicResource ListViewStyle1}"
-                  d:ItemsSource="{d:SampleData ItemCount=5}">
+                  d:ItemsSource="{d:SampleData ItemCount=5}"
+                  SelectedItem="{Binding SelectedAuction}">
         </ListView>
     </Grid>
 </UserControl>

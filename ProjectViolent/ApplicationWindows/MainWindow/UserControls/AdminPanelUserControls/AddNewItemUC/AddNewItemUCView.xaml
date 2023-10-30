@@ -174,6 +174,7 @@
             </Setter>
         </Style>
         <local:DecimalConverter x:Key="ConvDec"/>
+        <local:Proxy x:Key="Proxy" AllUsers="{Binding ElementName=AddNewAuc, Path=DataContext.Model.AllUsers}"/>
     </UserControl.Resources>
     <Grid>
         
@@ -181,13 +182,26 @@
             <RowDefinition Height="1*" MinHeight="75"></RowDefinition>
             <RowDefinition Height="18*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <TextBlock Text="Создание аукциона" 
+
+        <TextBlock 
                    Grid.Row="0"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    FontSize="24"
-                   FontWeight="Bold"/>
+                   FontWeight="Bold">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Status}" Value="Create">
+                            <Setter Property="Text" Value="Создание аукциона"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Status}" Value="Update">
+                            <Setter Property="Text" Value="Обновление аукциона"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
 
         <Button HorizontalAlignment="Left"
                 Style="{StaticResource ButtonStyle2}"
@@ -207,9 +221,39 @@
             </Grid.RowDefinitions>
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1.5*"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
+            <DataGrid Grid.Row="1" 
+                      Grid.RowSpan="3"
+                      Grid.Column="1"
+                      Margin="10 0 10 0"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="False"
+                      ItemsSource="{Binding BetHistory}">
+                <DataGrid.Columns>
+                    <DataGridComboBoxColumn Header="Пользователь"
+                        ItemsSource="{Binding Source={StaticResource Proxy}
+                        ,Path=AllUsers}"
+                        SelectedItemBinding="{Binding UserData}"/>
+                    <DataGridTextColumn Header="Ставка" 
+                                        Binding="{Binding BidAmount
+                        , Converter={StaticResource ConvDec}}" />
+                </DataGrid.Columns>
+                <DataGrid.Style>
+                    <Style TargetType="DataGrid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Create">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding Status}" Value="Update">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Style>
+            </DataGrid>
             
             <Grid Grid.Row="0" Grid.ColumnSpan="2">
                 
@@ -235,13 +279,14 @@
                     <ComboBox IsEditable="True"
                               FontSize="18"
                               BorderThickness="0"
-                              SelectedItem="{Binding ChoseItem}"
+                              SelectedItem="{Binding ChoseItem, Mode=TwoWay}"
                               ItemsSource="{Binding AvailableItems}">
                     </ComboBox>
                     
                 </GroupBox>
                 
             </Grid>
+            
             <GroupBox Grid.Row="1"
                       Header="Начало аукциона"
                       FontSize="20">
@@ -252,6 +297,7 @@
                     , Mode=TwoWay}"/>
 
             </GroupBox>
+            
             <GroupBox Grid.Row="2"
                       Header="Окончание аукциона"
                       FontSize="20">
@@ -265,6 +311,7 @@
                     , Mode=TwoWay}"/>
 
             </GroupBox>
+            
             <GroupBox Grid.Row="3"
                       Header="Стартовая стоимость"
                       FontSize="20">
@@ -285,7 +332,7 @@
                     Grid.ColumnSpan="2"
                     Command="{Binding AddNewItemCommand}">
                 
-                <TextBlock Text="Создать аукцион"
+                <TextBlock 
                            FontSize="20">
                     
                     <TextBlock.Foreground>
@@ -294,6 +341,27 @@
                             <GradientStop Color="#fb03b1" Offset="1" />
                         </LinearGradientBrush>
                     </TextBlock.Foreground>
+
+                    <TextBlock.Style>
+                        
+                        <Style TargetType="TextBlock">
+                            
+                            <Style.Triggers>
+                                
+                                <DataTrigger Binding="{Binding Status}" Value="Create">
+                                    <Setter Property="Text" Value="Создать аукцион"/>
+                                </DataTrigger>
+                                
+                                <DataTrigger Binding="{Binding Status}" Value="Update">
+                                    <Setter Property="Text" Value="Подтвердить изменение"/>
+                                </DataTrigger>
+                                
+                            </Style.Triggers>
+                            
+                        </Style>
+                        
+                    </TextBlock.Style>
+
                 </TextBlock>
                 
             </Button>

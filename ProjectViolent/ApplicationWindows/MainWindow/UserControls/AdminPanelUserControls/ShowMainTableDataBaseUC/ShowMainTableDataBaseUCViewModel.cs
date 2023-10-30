@@ -12,7 +12,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 {
     public class ShowMainTableDataBaseUCViewModel : INotifyPropertyChanged
     {
-        private ShowMainTableDataBaseUCModel _model;
+        public event Action<Auction> SelectionAuctionWasUpdateNotify;
 
         public ShowMainTableDataBaseUCModel Model
         {
@@ -24,11 +24,40 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }
         }
 
+        public Auction SelectedAuction
+        {
+            get => _selectedAuction;
+            set
+            {
+                _selectedAuction = value;
+                OnPropertyChanged(nameof(SelectedAuction));
+                selectionAuctionWasUpdate();
+            }
+        }
+
+
         public ShowMainTableDataBaseUCViewModel()
         {
             Model = new ShowMainTableDataBaseUCModel();
             Model.UpdateAuctionList();
         }
+
+
+        private void selectionAuctionWasUpdate()
+        {
+            if(SelectedAuction != null)
+            {
+                SelectedAuction.Items = SelectedAuction.Items;
+                SelectedAuction.BettingHistory = SelectedAuction.BettingHistory;
+                SelectionAuctionWasUpdateNotify(SelectedAuction);
+            }
+        }
+
+
+        private ShowMainTableDataBaseUCModel _model;
+
+        private Auction _selectedAuction;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

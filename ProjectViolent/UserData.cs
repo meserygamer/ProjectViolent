@@ -38,5 +38,10 @@ namespace ProjectViolent
         public virtual ICollection<BettingHistory> BettingHistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Items> Items { get; set; }
+
+        public override string ToString()
+        {
+            return Surname +" "+ Name +" "+ Patronymic + "(" + UserID + ")";
+        }
     }
 }

@@ -17,6 +17,12 @@ using System.Windows.Media.Imaging;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC
 {
+    public enum AddNewItemUCStatus
+    {
+        Create,
+        Update
+    }
+
     public class AddNewItemUCViewModel : INotifyPropertyChanged
     {
         #region свойства
@@ -63,28 +69,12 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         public RelayCommand AddNewItemCommand
         {
-            get => _addNewItemCommand ?? (_addNewItemCommand = new RelayCommand(a =>
+            get => _addNewItemCommand;
+            set
             {
-                if(ChoseItem == null)
-                {
-                    MessageBox.Show("Выставляемый на аукцион предмет не выбран!");
-                    return;
-                }
-                if(_model.AddNewAuctionInDataBase(new Auction
-                {
-                    ID_Item = ChoseItem.ID_Item,
-                    Date_Start = DateStart,
-                    Date_End = DateEnd,
-                    StartPrice = StartPrice
-                }))
-                {
-                    MessageBox.Show("Аукцион успешно добавлен");
-                }
-                else
-                {
-                    MessageBox.Show("При добавлении аукциона произошла ошибка");
-                }
-            }));
+                _addNewItemCommand = value;
+                OnPropertyChanged();
+            }
         }
 
         public DateTime DateStart
@@ -106,15 +96,77 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 OnPropertyChanged();
             }
         }
+
+        public AddNewItemUCModel Model
+        {
+            get => _model;
+            set
+            {
+                _model = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<BettingHistory> BetHistory
+        {
+            get => _betHistory;
+            set
+            {
+                _betHistory = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public AddNewItemUCStatus Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region public конструкторы
         public AddNewItemUCViewModel()
         {
-            _model = new AddNewItemUCModel();
+            Model = new AddNewItemUCModel();
+            Status = AddNewItemUCStatus.Create;
             AvailableItems = new ObservableCollection<Items>(_model.AllItems);
             DateStart = DateTime.Now;
             DateEnd = DateTime.Now;
+            setCreateItemCommand();
+            //BetHistory = new ObservableCollection<BettingHistory>() {new BettingHistory(){
+            //    UserID = 4,
+            //    BidAmount = 10000,
+            //    ID_Auction = 10
+            //} };
+        }
+
+        public AddNewItemUCViewModel(Auction selectionAuction)
+        {
+            Model = new AddNewItemUCModel();
+            Status = AddNewItemUCStatus.Update;
+            AvailableItems = new ObservableCollection<Items>(_model.AllItems);
+            StartPrice = (decimal)selectionAuction.StartPrice;
+            ChoseItem = AvailableItems.Where(x => x.ID_Item == selectionAuction.ID_Item).FirstOrDefault();
+            //ChoseItem = selectionAuction.Items;
+            DateStart = selectionAuction.Date_Start;
+            DateEnd = selectionAuction.Date_End;
+            BetHistory = new ObservableCollection<BettingHistory>();
+            foreach(BettingHistory item in selectionAuction.BettingHistory)
+            {
+                BetHistory.Add(new BettingHistory()
+                {
+                    ID_Auction = item.ID_Auction,
+                    UserData = Model.AllUsers.Where(a=>a.UserID == item.UserID).First(),
+                    BidAmount = item.BidAmount,
+                    UserID = item.UserID,
+                });
+            }
+            _updatedAuction = selectionAuction;
+            setUpdateItemCommand();
         }
         #endregion
 
@@ -134,10 +186,70 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private DateTime _dateEnd;
 
         private AddNewItemUCModel _model;
+
+        private ObservableCollection<BettingHistory> _betHistory;
+
+        private AddNewItemUCStatus _status;
+
+        private Auction _updatedAuction;
         #endregion
 
         #region private функции
         private void UpdateImage() => ItemImage = new WPFImage(ChoseItem.Image);
+
+        private void setCreateItemCommand()
+        {
+            AddNewItemCommand = new RelayCommand(a =>
+            {
+                if (ChoseItem == null)
+                {
+                    MessageBox.Show("Выставляемый на аукцион предмет не выбран!");
+                    return;
+                }
+                if (_model.AddNewAuctionInDataBase(new Auction
+                {
+                    ID_Item = ChoseItem.ID_Item,
+                    Date_Start = DateStart,
+                    Date_End = DateEnd,
+                    StartPrice = StartPrice
+                }))
+                {
+                    MessageBox.Show("Аукцион успешно добавлен");
+                }
+                else
+                {
+                    MessageBox.Show("При добавлении аукциона произошла ошибка");
+                }
+            });
+        }
+
+        private void setUpdateItemCommand()
+        {
+            AddNewItemCommand = new RelayCommand(a =>
+            {
+                if (ChoseItem == null)
+                {
+                    MessageBox.Show("Выставляемый на аукцион предмет не выбран!");
+                    return;
+                }
+                if (_model.UpdateAuctionInDataBase(new Auction
+                {
+                    ID_Auction = _updatedAuction.ID_Auction,
+                    ID_Item = ChoseItem.ID_Item,
+                    Date_Start = DateStart,
+                    Date_End = DateEnd,
+                    StartPrice = StartPrice,
+                    BettingHistory = BetHistory
+                }))
+                {
+                    MessageBox.Show("Аукцион успешно обновлен");
+                }
+                else
+                {
+                    MessageBox.Show("При обновлении аукциона произошла ошибка");
+                }
+            });
+        }
         #endregion
 
         #region INotifyPropertyChanged

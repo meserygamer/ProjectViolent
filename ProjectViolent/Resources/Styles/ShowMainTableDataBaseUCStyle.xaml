@@ -91,7 +91,8 @@
                 <DataTemplate>
                     <Border BorderThickness="1"
                             Width="665"
-                            CornerRadius="5">
+                            CornerRadius="5"
+                            IsHitTestVisible="False">
                         <Border.BorderBrush>
                             <LinearGradientBrush>
                                 <GradientStop Color="#03bfff" Offset="0" />
@@ -166,7 +167,7 @@
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsHitTestVisible="False" 
+                    <WrapPanel  
                                HorizontalAlignment="Center"/>
                 </ItemsPanelTemplate>
             </Setter.Value>
