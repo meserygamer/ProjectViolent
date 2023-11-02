@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC"
+             xmlns:FilterUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC.FIltAndSortUC"
              mc:Ignorable="d" Background="White"
              x:Name="ShowMainTableDBUC"
              d:DesignHeight="850" d:DesignWidth="720">
@@ -51,11 +52,13 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid Margin="10 10 0 10">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"/>
             <ColumnDefinition></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1.6*"></RowDefinition>
@@ -75,71 +78,17 @@
                 Command="{Binding ElementName=ShowMainTableDBUC
             , Path=CreateNewAuctionCommand, Mode=OneWay}"/>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="3" Margin="10 0 0 0">
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <FilterUC:FiltAndSortUCView 
+            Grid.Row="1" 
+            Grid.ColumnSpan="3"
+            Margin="10 10 0 10"
+            InputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,
+            Path=DataContext.Model.AuctionsList,Mode=OneWay}"
+            OutputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,
+            Path=DataContext.Model.FilteredAuctionList,Mode=TwoWay}"/>
 
-            <GroupBox Header="Фильтрация" Margin="0 10 5 10"
-                      FontSize="16">
-
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-
-                    <StackPanel Orientation="Vertical">
-
-                        <CheckBox>
-                            <TextBlock Text="Завершенные аукционы" FontSize="13"/>
-                        </CheckBox>
-
-                        <CheckBox>
-                            <TextBlock Text="Идущие аукционы" FontSize="13"/>
-                        </CheckBox>
-
-                        <CheckBox>
-                            <TextBlock Text="Будущие аукционы" FontSize="13"/>
-                        </CheckBox>
-
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" 
-                            Margin="10 0 0 0">
-
-                        <TextBox FontSize="18" Width="300"  Height="30"/>
-
-                        <ComboBox FontSize="18"
-                              Width="150"
-                              HorizontalAlignment="Left" Height="25" Margin="0 5 0 0"/>
-
-                    </StackPanel>
-
-                </StackPanel>
-
-            </GroupBox>
-
-            <GroupBox Header="Сортировка" Margin="0 10 5 10"
-                      Grid.Column="1" FontSize="16">
-
-                <StackPanel Orientation="Vertical">
-
-                    <ComboBox Margin="5" Height="25"/>
-
-                    <RadioButton Margin="5 0 0 0">
-                        <TextBlock Text="По возрастанию" FontSize="13"/>
-                    </RadioButton>
-
-                    <RadioButton Margin="5 0 0 0">
-                        <TextBlock Text="По убыванию" FontSize="13"/>
-                    </RadioButton>
-
-                </StackPanel>
-
-            </GroupBox>
-            
-        </Grid>
-        
         <ListView Style="{DynamicResource ListViewStyle1}"
+                  ItemsSource="{Binding Model.FilteredAuctionList}"
                   d:ItemsSource="{d:SampleData ItemCount=5}"
                   SelectedItem="{Binding SelectedAuction}">
             

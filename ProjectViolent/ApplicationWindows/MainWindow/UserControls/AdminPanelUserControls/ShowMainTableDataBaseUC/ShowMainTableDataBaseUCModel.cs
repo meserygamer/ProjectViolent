@@ -11,9 +11,25 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 {
     public class ShowMainTableDataBaseUCModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Auction> _auctionList;
+        public ObservableCollection<Auction> AuctionsList
+        {
+            get => _auctionList;
+            set
+            {
+                _auctionList = value;
+                OnPropertyChanged();
+            }
+        }
 
-        private DataBase DB;
+        public ObservableCollection<Auction> FilteredAuctionList
+        {
+            get => _filteredAuctionList;
+            set
+            {
+                _filteredAuctionList = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         public bool DeleteAuct(Auction deletedAuction)
@@ -32,17 +48,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             
         }
 
-
-        public ObservableCollection<Auction> AuctionsList
-        {
-            get => _auctionList;
-            set
-            {
-                _auctionList = value;
-                OnPropertyChanged();
-            }
-        }
-
         public bool UpdateAuctionList()
         {
             try
@@ -56,10 +61,19 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             return true;
         }
 
+
         public ShowMainTableDataBaseUCModel()
         {
             DB = new DataBase();
         }
+
+
+        private ObservableCollection<Auction> _auctionList;
+
+        private ObservableCollection<Auction> _filteredAuctionList;
+
+        private DataBase DB;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

@@ -108,6 +108,12 @@
       <DependentUpon>ShowInformationAboutAllUsersUCView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\FIltAndSortUC\FiltAndSortUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\FIltAndSortUC\FiltAndSortUCView.xaml.cs">
+      <DependentUpon>FiltAndSortUCView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\FIltAndSortUC\FiltAndSortUCViewModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\FIltAndSortUC\Filters.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\ShowMainTableDataBaseUCView.xaml.cs">
       <DependentUpon>ShowMainTableDataBaseUCView.xaml</DependentUpon>
@@ -267,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowInformationAboutAllUsersUC\ShowInformationAboutAllUsersUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\AdminPanelUserControls\ShowMainTableDataBaseUC\FIltAndSortUC\FiltAndSortUCView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
