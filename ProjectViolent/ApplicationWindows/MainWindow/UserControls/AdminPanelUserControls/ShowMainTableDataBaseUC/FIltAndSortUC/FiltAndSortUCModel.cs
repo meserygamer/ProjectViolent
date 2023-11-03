@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC.FIltAndSortUC
 {
-    public class FiltAndSortUCModel : INotifyPropertyChanged
+    public class FiltAndSortUCModel
     {
         public ObservableCollection<Auction> InputAuctions
         {
@@ -19,8 +19,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             set
             {
                 _inputAuctions = value;
-                OnPropertyChanged();
-                OutputAuctions = _inputAuctions;
+                ApplyFilters();
             }
         }
 
@@ -30,46 +29,42 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             set
             {
                 _outputAuctions = value;
-                OnPropertyChanged();
+                ApplyFilters();
             }
+        }
+
+        public List<IFilter<Auction>> ActivityFilters
+        {
+            get => _activityFilters;
         }
 
 
         public void ApplyFilters()
         {
-            foreach(IFilter<Auction> filter in _activityFilters)
+            if(InputAuctions is null || OutputAuctions is null)
             {
-                _outputAuctions = new ObservableCollection<Auction>(InputAuctions);
-
-                for(int i = 0; i < InputAuctions.Count; i++)
+                return;
+            }
+            OutputAuctions.Clear();
+            for(int i = 0; i < InputAuctions.Count; i++)
+            {
+                if(_activityFilters.All(a =>
                 {
-                    if (!filter.CheckAuction(InputAuctions[i]))
-                    {
-                        _outputAuctions.Remove(InputAuctions[i]);
-                    }
+                    if (a is null) return true;
+                    return a.CheckAuction(InputAuctions[i]);
+                }))
+                {
+                    OutputAuctions.Add(InputAuctions[i]);
                 }
-
-                OnPropertyChanged("OutputAuctions");
             }
         }
 
-        public void AddFilter(IFilter<Auction> filter)
-        {
-            if (filter is null) return;
-            _activityFilters.Add(filter);
-        }
-
-        public void DelFilter(IFilter<Auction> filter)
-        {
-            if (filter is null) return;
-            _activityFilters.Remove(filter);
-        }
 
 
-        public FiltAndSortUCModel()
+
+        public FiltAndSortUCModel(List<IFilter<Auction>> activityFiltersList)
         {
-            InputAuctions = new ObservableCollection<Auction>();
-            _activityFilters = new List<IFilter<Auction>>();
+            _activityFilters = activityFiltersList;
         }
 
 
@@ -78,16 +73,5 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private ObservableCollection<Auction> _outputAuctions;
 
         private List<IFilter<Auction>> _activityFilters;
-
-
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-        #endregion
     }
-
 }

@@ -41,8 +41,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             {
                 _selectedItemFromComboBox = value;
                 OnPropertyChanged();
-                Model.DelFilter(value);
-                Model.AddFilter(value);
+                Model.ActivityFilters[0] = SelectedItemFromComboBox;
                 Model.ApplyFilters();
             }
         }
@@ -57,7 +56,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             });
         }
 
-        public string SearchBarQuary
+        public AuctionSearchFilter SearchBarQuary
         {
             get => _searchBarQuary;
             set
@@ -67,42 +66,32 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             }
         }
 
-        public bool ShowCompletedAuctions
+        public AuctionCustomCheckBoxFilter CheckBoxFilterCompletedAuctions
         {
-            get => _showCompletedAuctions;
+            get => _checkBoxFilterCompletedAuctions;
             set
             {
-                _showCompletedAuctions = value;
+                _checkBoxFilterCompletedAuctions = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool ShowStartedAuctions
+        public AuctionCustomCheckBoxFilter CheckBoxFilterBeOnAuctions
         {
-            get => _showStartedAuctions;
+            get => _checkBoxFilterBeOnAuctions;
             set
             {
-                _showStartedAuctions = value;
+                _checkBoxFilterBeOnAuctions = value;
                 OnPropertyChanged();
             }
         }
 
-        public bool ShowNotStartedAuctions
+        public AuctionCustomCheckBoxFilter CheckBoxFilterFuturedAuctions
         {
-            get => _showNotStartedAuctions;
+            get => _checkBoxFilterFuturedAuctions;
             set
             {
-                _showNotStartedAuctions = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public int ComboBoxSelectedIndex
-        {
-            get => _comboBoxSelectedIndex;
-            set
-            {
-                _comboBoxSelectedIndex = value;
+                _checkBoxFilterFuturedAuctions = value;
                 OnPropertyChanged();
             }
         }
@@ -174,34 +163,62 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         public FiltAndSortUCViewModel()
         {
-            Model = new FiltAndSortUCModel();
-            Model.PropertyChanged += OutPutCollectionListner;
+            FiltersInitializator();
             SetDependencyPropertyListners();
-            ShowCompletedAuctions = true;
-            ShowNotStartedAuctions = true;
-            ShowStartedAuctions = true;
+            Model = new FiltAndSortUCModel(new List<IFilter<Auction>>()
+            {
+                SelectedItemFromComboBox,
+                new AuctionCustomCheckBoxUnitedFilter(5,new List<AuctionCustomCheckBoxFilter>()
+                { CheckBoxFilterCompletedAuctions,
+                    CheckBoxFilterBeOnAuctions,
+                    CheckBoxFilterFuturedAuctions}), 
+                SearchBarQuary});
+            SelectedItemFromComboBox = ComboBoxFilterList[0];
             ModeASCIsChecked = true;
-            ComboBoxSelectedIndex = 0;
         }
 
-        private void OutPutCollectionListner(object sender, PropertyChangedEventArgs e)
-        {
-            if(e.PropertyName == "OutputAuctions")
-            {
-                OutputObserverCollectionProperty = Model.OutputAuctions;
-            }
-        }
 
         private void SetDependencyPropertyListners()
         {
             DependencyPropertyDescriptor descriptorInputCollection = DependencyPropertyDescriptor.FromProperty(InputObserverCollectionDependencyProperty
                 , typeof(FiltAndSortUCViewModel));
+            DependencyPropertyDescriptor descriptorOutputCollection = DependencyPropertyDescriptor.FromProperty(OutputObserverCollectionDependencyProperty
+                , typeof(FiltAndSortUCViewModel));
             descriptorInputCollection.AddValueChanged(this, ChangedInputCollection);
+            descriptorOutputCollection.AddValueChanged(this, ChangedOutputCollection);
         }
 
         private void ChangedInputCollection(object sender, EventArgs e)
         {
             Model.InputAuctions = InputObserverCollectionProperty;
+        }
+
+        private void ChangedOutputCollection(object sender, EventArgs e)
+        {
+            Model.OutputAuctions = OutputObserverCollectionProperty;
+        }
+
+        private void FiltersInitializator()
+        {
+            CheckBoxFilterCompletedAuctions = new AuctionCustomCheckBoxFilter(2, "Завершенные аукционы", a => a.AuctionStatus == "Закончился", a => false);
+            CheckBoxFilterCompletedAuctions.PropertyChanged += RefilteringCheckBoxWasEdited;
+            CheckBoxFilterBeOnAuctions = new AuctionCustomCheckBoxFilter(3, "Идущие аукционы", a => a.AuctionStatus == "В процессе", a => false);
+            CheckBoxFilterBeOnAuctions.PropertyChanged += RefilteringCheckBoxWasEdited;
+            CheckBoxFilterFuturedAuctions = new AuctionCustomCheckBoxFilter(4, "Будущие аукционы", a => a.AuctionStatus == "Не начался", a => false);
+            CheckBoxFilterFuturedAuctions.PropertyChanged += RefilteringCheckBoxWasEdited;
+            SearchBarQuary = new AuctionSearchFilter(6);
+            SearchBarQuary.PropertyChanged += RefilteringSearchBoxWasEdited;
+
+        }
+
+        private void RefilteringCheckBoxWasEdited(object sender, PropertyChangedEventArgs handler)
+        {
+            if(handler.PropertyName == "IsChecked") Model.ApplyFilters();
+        }
+
+        private void RefilteringSearchBoxWasEdited(object sender, PropertyChangedEventArgs handler)
+        {
+            if (handler.PropertyName == "SearchQuarry") Model.ApplyFilters();
         }
 
 
@@ -220,16 +237,13 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
 
         private ObservableCollection<AuctionCustomFilter> _comboBoxFilterList;
 
-        private string _searchBarQuary;
+        private AuctionSearchFilter _searchBarQuary;
 
-        private bool _showCompletedAuctions;
+        private AuctionCustomCheckBoxFilter _checkBoxFilterCompletedAuctions;
 
-        private bool _showStartedAuctions;
+        private AuctionCustomCheckBoxFilter _checkBoxFilterBeOnAuctions;
 
-        private bool _showNotStartedAuctions;
-
-        private int _comboBoxSelectedIndex;
-
+        private AuctionCustomCheckBoxFilter _checkBoxFilterFuturedAuctions;
         #endregion
 
         private FiltAndSortUCModel _model;

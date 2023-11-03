@@ -85,7 +85,7 @@
             InputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,
             Path=DataContext.Model.AuctionsList,Mode=OneWay}"
             OutputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,
-            Path=DataContext.Model.FilteredAuctionList,Mode=TwoWay}"/>
+            Path=DataContext.Model.FilteredAuctionList,Mode=OneWay}"/>
 
         <ListView Style="{DynamicResource ListViewStyle1}"
                   ItemsSource="{Binding Model.FilteredAuctionList}"

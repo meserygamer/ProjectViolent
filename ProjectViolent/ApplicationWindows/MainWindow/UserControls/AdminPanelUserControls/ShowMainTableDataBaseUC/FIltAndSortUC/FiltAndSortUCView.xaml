@@ -44,16 +44,22 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <CheckBox IsChecked="{Binding ShowCompletedAuctions}">
-                        <TextBlock Text="Завершенные аукционы" FontSize="13"/>
+                    <CheckBox IsChecked="{Binding CheckBoxFilterCompletedAuctions.IsChecked
+                        , Mode=TwoWay}">
+                        <TextBlock Text="{Binding CheckBoxFilterCompletedAuctions}"
+                                   FontSize="13"/>
                     </CheckBox>
 
-                    <CheckBox IsChecked="{Binding ShowStartedAuctions}">
-                        <TextBlock Text="Идущие аукционы" FontSize="13"/>
+                    <CheckBox IsChecked="{Binding CheckBoxFilterBeOnAuctions.IsChecked
+                        , Mode=TwoWay}">
+                        <TextBlock Text="{Binding CheckBoxFilterBeOnAuctions}"
+                                   FontSize="13"/>
                     </CheckBox>
 
-                    <CheckBox IsChecked="{Binding ShowNotStartedAuctions}">
-                        <TextBlock Text="Будущие аукционы" FontSize="13"/>
+                    <CheckBox IsChecked="{Binding CheckBoxFilterFuturedAuctions.IsChecked
+                        , Mode=TwoWay}">
+                        <TextBlock Text="{Binding CheckBoxFilterFuturedAuctions}"
+                                   FontSize="13"/>
                     </CheckBox>
 
                 </StackPanel>
@@ -61,7 +67,9 @@
                 <StackPanel Orientation="Vertical" 
                 Margin="10 0 0 0">
 
-                    <TextBox FontSize="18" Text="{Binding SearchBarQuary}"
+                    <TextBox FontSize="18" 
+                             Text="{Binding SearchBarQuary.SearchQuarry
+                        , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Width="300" Height="30"/>
 
                     <ComboBox FontSize="18"
@@ -69,8 +77,7 @@
                               HorizontalAlignment="Left"
                               Height="25" Margin="0 5 0 0"
                               SelectedItem="{Binding SelectedItemFromComboBox}"
-                              ItemsSource="{Binding ComboBoxFilterList}"
-                              SelectedIndex="{Binding ComboBoxSelectedIndex}"/>
+                              ItemsSource="{Binding ComboBoxFilterList}"/>
 
                 </StackPanel>
 

@@ -65,6 +65,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         public ShowMainTableDataBaseUCModel()
         {
             DB = new DataBase();
+            AuctionsList = new ObservableCollection<Auction>();
+            FilteredAuctionList = new ObservableCollection<Auction>();
         }
 
 
