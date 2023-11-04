@@ -91,12 +91,12 @@
             <StackPanel Orientation="Vertical">
 
                 <ComboBox Margin="5" Height="25"
-                          SelectedItem="{Binding SelectedTargetSortingType}">
-                    <ComboBoxItem IsSelected="True">
+                          SelectedIndex="{Binding SelectedSortIndex}">
+                    <ComboBoxItem>
                         <sys:String>По номеру</sys:String>
                     </ComboBoxItem>
                     <ComboBoxItem>
-                        <sys:String>По названию</sys:String>
+                        <sys:String>По названию предмета</sys:String>
                     </ComboBoxItem>
                 </ComboBox>
 

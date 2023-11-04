@@ -12,12 +12,6 @@ using System.Windows.Documents;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC.FIltAndSortUC
 {
-    public enum SortingStates
-    {
-        ASC,
-        DESC
-    }
-    
     public class FiltAndSortUCViewModel : DependencyObject, INotifyPropertyChanged
     {
         public ObservableCollection<Auction> InputObserverCollectionProperty
@@ -99,25 +93,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         #endregion
 
         #region сортировка свойства
-        public SortingStates SortingState
-        {
-            get => _sortingState;
-            set
-            {
-                _sortingState = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string SelectedTargetSortingType
-        {
-            get => _selectedTargetSortingType;
-            set
-            {
-                _selectedTargetSortingType = value;
-                OnPropertyChanged();
-            }
-        }
 
         public bool ModeASCIsChecked
         {
@@ -126,7 +101,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             {
                 _modeASCIsChecked = value;
                 OnPropertyChanged();
-                if (ModeASCIsChecked) SortingState = SortingStates.ASC;
             }
         }
 
@@ -137,11 +111,22 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             {
                 _modeDESCIsChecked = value;
                 OnPropertyChanged();
-                if (ModeDESCIsChecked) SortingState = SortingStates.DESC;
+                SortOutputCollection();
             }
         }
-        #endregion
 
+        public int SelectedSortIndex
+        {
+            get => _selectedSortIndex;
+            set
+            {
+                _selectedSortIndex = value;
+                OnPropertyChanged();
+                SortOutputCollection();
+            }
+        }
+
+        #endregion
 
         public FiltAndSortUCModel Model
         {
@@ -175,6 +160,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 SearchBarQuary});
             SelectedItemFromComboBox = ComboBoxFilterList[0];
             ModeASCIsChecked = true;
+            SelectedSortIndex = 0;
         }
 
 
@@ -221,15 +207,39 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             if (handler.PropertyName == "SearchQuarry") Model.ApplyFilters();
         }
 
+        private void SortOutputCollection()
+        {
+            if (!(Model is null))
+            {
+                switch (SelectedSortIndex)
+                {
+                    case 0:
+                        {
+                            Model.CurrentSortComparer = new AuctionIDComparer(ModeDESCIsChecked);
+                            break;
+                        }
+                    case 1:
+                        {
+                            Model.CurrentSortComparer = new AuctionItemNameComparer(ModeDESCIsChecked);
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
+            }
+        }
+
 
         #region сортировка поля
-        private SortingStates _sortingState;
-
-        private string _selectedTargetSortingType;
 
         private bool _modeASCIsChecked;
 
         private bool _modeDESCIsChecked;
+
+        private int _selectedSortIndex;
+
         #endregion
 
         #region фильтрация поля

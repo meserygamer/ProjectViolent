@@ -38,6 +38,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             get => _activityFilters;
         }
 
+        public IComparer<Auction> CurrentSortComparer
+        {
+            get => _currentSortComparer;
+            set
+            {
+                _currentSortComparer = value;
+                ApplyFilters();
+            }
+        }
+
 
         public void ApplyFilters()
         {
@@ -46,6 +56,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                 return;
             }
             OutputAuctions.Clear();
+            List<Auction> auctions = new List<Auction>();
             for(int i = 0; i < InputAuctions.Count; i++)
             {
                 if(_activityFilters.All(a =>
@@ -54,12 +65,19 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
                     return a.CheckAuction(InputAuctions[i]);
                 }))
                 {
-                    OutputAuctions.Add(InputAuctions[i]);
+                    auctions.Add(InputAuctions[i]);
                 }
             }
+            if (!(CurrentSortComparer is null))
+            {
+                auctions.Sort(CurrentSortComparer);
+            }
+            foreach (var auction in auctions)
+            {
+                OutputAuctions.Add(auction);
+            }
+
         }
-
-
 
 
         public FiltAndSortUCModel(List<IFilter<Auction>> activityFiltersList)
@@ -73,5 +91,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
         private ObservableCollection<Auction> _outputAuctions;
 
         private List<IFilter<Auction>> _activityFilters;
+
+        private IComparer<Auction> _currentSortComparer;
     }
 }
