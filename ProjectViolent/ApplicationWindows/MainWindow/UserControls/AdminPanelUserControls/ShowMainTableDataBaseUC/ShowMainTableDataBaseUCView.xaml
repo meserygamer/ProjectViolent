@@ -54,8 +54,8 @@
     <Grid Margin="10 10 0 10">
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.3*"/>
-            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.3*" MinWidth="60" MaxWidth="80"/>
+            <ColumnDefinition MinWidth="240"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
@@ -81,7 +81,7 @@
         <FilterUC:FiltAndSortUCView 
             Grid.Row="1" 
             Grid.ColumnSpan="3"
-            Margin="10 10 0 10"
+            Margin="10 0 0 10"
             InputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,
             Path=DataContext.Model.AuctionsList,Mode=OneWay}"
             OutputObserverCollectionProperty="{Binding ElementName=ShowMainTableDBUC,

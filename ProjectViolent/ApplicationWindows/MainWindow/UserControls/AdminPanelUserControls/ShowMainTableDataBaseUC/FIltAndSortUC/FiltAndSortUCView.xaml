@@ -8,7 +8,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="720"
+             d:DesignHeight="110" d:DesignWidth="720"
              Name="FiltrAndSort"
              Background="White">
     <UserControl.Resources>
@@ -33,16 +33,21 @@
     <Grid>
         
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="3*" MinWidth="400"/>
+            <ColumnDefinition Width="1*" MinWidth="175"/>
         </Grid.ColumnDefinitions>
 
         <GroupBox Header="Фильтрация" Margin="0 0 5 0"
           FontSize="16">
 
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+            <Grid VerticalAlignment="Center">
 
-                <StackPanel Orientation="Vertical">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Column="0">
 
                     <CheckBox IsChecked="{Binding CheckBoxFilterCompletedAuctions.IsChecked
                         , Mode=TwoWay}">
@@ -65,32 +70,34 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" 
-                Margin="10 0 0 0">
+                            HorizontalAlignment="Stretch"
+                            Margin="10 0 0 0"
+                            Grid.Column="1">
 
                     <TextBox FontSize="18" 
                              Text="{Binding SearchBarQuary.SearchQuarry
                         , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             Width="300" Height="30"/>
+                             Height="30"/>
 
                     <ComboBox FontSize="18"
                               Width="150"
                               HorizontalAlignment="Left"
-                              Height="25" Margin="0 5 0 0"
+                              Height="30" Margin="0 5 0 0"
                               SelectedItem="{Binding SelectedItemFromComboBox}"
                               ItemsSource="{Binding ComboBoxFilterList}"/>
 
                 </StackPanel>
 
-            </StackPanel>
+            </Grid>
 
         </GroupBox>
 
         <GroupBox Header="Сортировка" Margin="0 0 5 0"
           Grid.Column="1" FontSize="16">
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Center">
 
-                <ComboBox Margin="5" Height="25"
+                <ComboBox Margin="5" Height="30"
                           SelectedIndex="{Binding SelectedSortIndex}">
                     <ComboBoxItem>
                         <sys:String>По номеру</sys:String>
@@ -101,11 +108,13 @@
                 </ComboBox>
 
                 <RadioButton Margin="5 0 0 0" GroupName="SortType"
+                             VerticalContentAlignment="Center"
                              IsChecked="{Binding ModeASCIsChecked}">
                     <TextBlock Text="По возрастанию" FontSize="13"/>
                 </RadioButton>
 
                 <RadioButton Margin="5 0 0 0" GroupName="SortType"
+                             VerticalContentAlignment="Center"
                              IsChecked="{Binding ModeDESCIsChecked}">
                     <TextBlock Text="По убыванию" FontSize="13"/>
                 </RadioButton>
