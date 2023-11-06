@@ -32,5 +32,6 @@ namespace ProjectViolent
         public virtual DbSet<Auction> Auction { get; set; }
         public virtual DbSet<BettingHistory> BettingHistory { get; set; }
         public virtual DbSet<Items> Items { get; set; }
+        public virtual DbSet<UsersPhotos> UsersPhotos { get; set; }
     }
 }

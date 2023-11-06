@@ -150,6 +150,7 @@
     </Compile>
     <Compile Include="DataBaseAuctionPatrialClass.cs" />
     <Compile Include="DataBaseItemsPatrialClass.cs" />
+    <Compile Include="DataBaseUserDataPartialClass.cs" />
     <Compile Include="Genders.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
@@ -161,6 +162,9 @@
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRoles.cs">
+      <DependentUpon>DataBase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersPhotos.cs">
       <DependentUpon>DataBase.tt</DependentUpon>
     </Compile>
   </ItemGroup>

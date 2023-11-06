@@ -20,6 +20,7 @@ namespace ProjectViolent
             this.AuthorizationData = new HashSet<AuthorizationData>();
             this.BettingHistory = new HashSet<BettingHistory>();
             this.Items = new HashSet<Items>();
+            this.UsersPhotos = new HashSet<UsersPhotos>();
         }
     
         public int UserID { get; set; }
@@ -29,6 +30,7 @@ namespace ProjectViolent
         public System.DateTime Birthday { get; set; }
         public int GenderID { get; set; }
         public int RoleID { get; set; }
+        public byte[] CurrentPhoto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AuthorizationData> AuthorizationData { get; set; }
@@ -38,10 +40,7 @@ namespace ProjectViolent
         public virtual ICollection<BettingHistory> BettingHistory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Items> Items { get; set; }
-
-        public override string ToString()
-        {
-            return Surname + " " + Name + " " + Patronymic + "(" + UserID + ")";
-        }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsersPhotos> UsersPhotos { get; set; }
     }
 }

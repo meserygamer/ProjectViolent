@@ -60,6 +60,7 @@
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="CurrentPhoto" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -67,6 +68,14 @@
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UsersPhotos">
+          <Key>
+            <PropertyRef Name="PhotoID" />
+          </Key>
+          <Property Name="PhotoID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
         </EntityType>
         <Association Name="FK__Auction__ID_Item__75A278F5">
           <End Role="Items" Type="Self.Items" Multiplicity="1">
@@ -158,6 +167,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UsersPhotos_UserData">
+          <End Role="UserData" Type="Self.UserData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UsersPhotos" Type="Self.UsersPhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersPhotos">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище ModelContainer">
           <EntitySet Name="Auction" EntityType="Self.Auction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AuthorizationData" EntityType="Self.AuthorizationData" Schema="dbo" store:Type="Tables" />
@@ -166,6 +189,7 @@
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserData" EntityType="Self.UserData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsersPhotos" EntityType="Self.UsersPhotos" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Auction__ID_Item__75A278F5" Association="Self.FK__Auction__ID_Item__75A278F5">
             <End Role="Items" EntitySet="Items" />
             <End Role="Auction" EntitySet="Auction" />
@@ -193,6 +217,10 @@
           <AssociationSet Name="FK_BettingHistory_UserData" Association="Self.FK_BettingHistory_UserData">
             <End Role="UserData" EntitySet="UserData" />
             <End Role="BettingHistory" EntitySet="BettingHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersPhotos_UserData" Association="Self.FK_UsersPhotos_UserData">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="UsersPhotos" EntitySet="UsersPhotos" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -232,6 +260,8 @@
           <NavigationProperty Name="UserRoles" Relationship="Self.FK__UserData__RoleID__6383C8BA" FromRole="UserData" ToRole="UserRoles" />
           <NavigationProperty Name="BettingHistory" Relationship="Model.FK__BettingHi__UserI__787EE5A0" FromRole="UserData" ToRole="BettingHistory" />
           <NavigationProperty Name="Items" Relationship="Model.FK__Items__UserID__72C60C4A" FromRole="UserData" ToRole="Items" />
+          <Property Name="CurrentPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="UsersPhotos" Relationship="Model.FK_UsersPhotos_UserData" FromRole="UserData" ToRole="UsersPhotos" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
@@ -312,6 +342,11 @@
           <AssociationSet Name="FK__Items__UserID__72C60C4A" Association="Model.FK__Items__UserID__72C60C4A">
             <End Role="UserData" EntitySet="UserData" />
             <End Role="Items" EntitySet="Items" />
+          </AssociationSet>
+          <EntitySet Name="UsersPhotos" EntityType="Model.UsersPhotos" />
+          <AssociationSet Name="FK_UsersPhotos_UserData" Association="Model.FK_UsersPhotos_UserData">
+            <End Role="UserData" EntitySet="UserData" />
+            <End Role="UsersPhotos" EntitySet="UsersPhotos" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Auction">
@@ -405,6 +440,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UsersPhotos">
+          <Key>
+            <PropertyRef Name="PhotoID" />
+          </Key>
+          <Property Name="PhotoID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Photo" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="UserData" Relationship="Model.FK_UsersPhotos_UserData" FromRole="UsersPhotos" ToRole="UserData" />
+        </EntityType>
+        <Association Name="FK_UsersPhotos_UserData">
+          <End Type="Model.UserData" Role="UserData" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Model.UsersPhotos" Role="UsersPhotos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserData">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UsersPhotos">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -431,6 +489,7 @@
           <EntitySetMapping Name="UserData">
             <EntityTypeMapping TypeName="Model.UserData">
               <MappingFragment StoreEntitySet="UserData">
+                <ScalarProperty Name="CurrentPhoto" ColumnName="CurrentPhoto" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -478,6 +537,15 @@
                 <ScalarProperty Name="ItemName" ColumnName="ItemName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="ID_Item" ColumnName="ID_Item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersPhotos">
+            <EntityTypeMapping TypeName="Model.UsersPhotos">
+              <MappingFragment StoreEntitySet="UsersPhotos">
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

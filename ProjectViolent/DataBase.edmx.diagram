@@ -19,6 +19,8 @@
         <AssociationConnector Association="Model.FK__BettingHi__ID_Au__797309D9" />
         <AssociationConnector Association="Model.FK__BettingHi__UserI__787EE5A0" />
         <AssociationConnector Association="Model.FK__Items__UserID__72C60C4A" />
+        <EntityTypeShape EntityType="Model.UsersPhotos" Width="1.5" PointX="3.375" PointY="7" />
+        <AssociationConnector Association="Model.FK_UsersPhotos_UserData" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
