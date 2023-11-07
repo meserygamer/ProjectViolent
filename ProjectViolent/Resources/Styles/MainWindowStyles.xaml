@@ -6,7 +6,8 @@
                     xmlns:SMTDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC"
                     xmlns:ANIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewItemUC"
                     xmlns:ANAIUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.AddNewAuctionItemUC"
-                    xmlns:SAIDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowAllItemsDataBaseUC">
+                    xmlns:SAIDB="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowAllItemsDataBaseUC"
+                    xmlns:UPAUC="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC">
     <EISUC:EnterInSystemUCView x:Key="EnterInSystemUserControlView" DataContext="{Binding EnterInSystemUCDataContext}"></EISUC:EnterInSystemUCView>
     <APMMUC:AdminPanelMainMenuUCVIew x:Key="AdminPanelMainMenuUserControlVIew"
                                      ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
@@ -32,6 +33,8 @@
                                       DataContext="{Binding ShowAllItemsDataBaseUCDataContext}"
                                       MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
                                       CreateNewAuctionItemCommand="{Binding ElementName=MainWindow, Path=DataContext.ShowAddNewAuctionItemCommand}"/>
+    <UPAUC:PersonalAreaUC x:Key="UserPersonalAreaView"
+                          DataContext="{Binding PersonalAreaUCDataContext}"/>
     <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>
@@ -55,6 +58,9 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding MainControlState}" Value="ShowAllItemsDB">
                 <Setter Property="Content" Value="{StaticResource ShowAllItemsDBUCView}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding MainControlState}" Value="UserPanel">
+                <Setter Property="Content" Value="{StaticResource UserPersonalAreaView}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

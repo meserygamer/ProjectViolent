@@ -1,0 +1,268 @@
+﻿<UserControl x:Class="ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC.PersonalAreaUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC"
+             mc:Ignorable="d"
+             Background="White"
+             d:DesignHeight="834" d:DesignWidth="720">
+
+    <UserControl.Resources>
+
+        <Style TargetType="GroupBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Height" Value="65"/>
+            <Setter Property="Padding" Value="5 0 0 0"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Regular"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+
+        <Style x:Key="RightButton" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" Padding="0"
+                                CornerRadius="5">
+                            <Border.Effect>
+                                <DropShadowEffect RenderingBias="Performance"
+                                                  ShadowDepth="0.5" BlurRadius="3"
+                                                  Color="Gray"/>
+                            </Border.Effect>
+                            <Image Source="\Resources\Images\ButtonArrows.png"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="LeftButton" TargetType="Button">
+            <Setter Property="Height" Value="50"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="White" Padding="0"
+                        CornerRadius="5">
+                            <Border.Effect>
+                                <DropShadowEffect RenderingBias="Performance"
+                                          ShadowDepth="0.5" BlurRadius="3"
+                                          Color="Gray"/>
+                            </Border.Effect>
+                            <Image Source="\Resources\Images\ButtonArrows.png" RenderTransformOrigin="0.5,0.5">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <BitmapImage x:Key="StandardPicture"
+             UriSource="\Resources\Images\EmptyImage.jpg"/>
+
+        <local:ImageConverter x:Key="SpinerConverter"/>
+
+        <Style TargetType="local:ImageSpiner">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="local:ImageSpiner">
+                        <Grid Height="{TemplateBinding Height}"
+                              Width="{TemplateBinding Width}">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.ColumnSpan="2"
+                                        Grid.RowSpan="3"
+                                        Padding="15">
+
+                                    <Image 
+                                        Source="{Binding DisplayedImages, RelativeSource={RelativeSource TemplatedParent}
+                                        , Converter={StaticResource SpinerConverter}, ConverterParameter=0
+                                        , TargetNullValue={StaticResource StandardPicture}}"/>
+
+                                </Border>
+
+                                <Button Grid.Column="0"
+                                        Grid.Row="1"
+                                        Style="{StaticResource LeftButton}"
+                                        Command="{Binding LeftButton
+                                        , RelativeSource={RelativeSource TemplatedParent}}"/>
+
+                            </Grid>
+
+                            <Image Grid.Column="1"
+                                   Source="{Binding DisplayedImages, RelativeSource={RelativeSource TemplatedParent}
+                                   , Converter={StaticResource SpinerConverter}, ConverterParameter=1
+                                   , TargetNullValue={StaticResource StandardPicture}}"/>
+
+                            <Grid Grid.Column="2">
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.ColumnSpan="2"
+                                       Grid.RowSpan="3"
+                                       Padding="15">
+
+                                    <Image Source="{Binding DisplayedImages, RelativeSource={RelativeSource TemplatedParent}
+                                           , Converter={StaticResource SpinerConverter}, ConverterParameter=2
+                                           , TargetNullValue={StaticResource StandardPicture}}"/>
+
+                                </Border>
+
+                                <Button Grid.Column="1"
+                                        Grid.Row="1"
+                                        Style="{StaticResource RightButton}"
+                                        Command="{Binding RightButton
+                                    , RelativeSource={RelativeSource TemplatedParent}}"/>
+
+                            </Grid>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        
+
+    </UserControl.Resources>
+
+    <Border Padding="10">
+
+        <Grid>
+
+            <!--Колонки основного контейнера-->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Строки основного контейнера-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <!--Заголовок-->
+            <Label FontSize="20" Content="Личный кабинет"
+                   HorizontalAlignment="Center" FontWeight="Bold"
+                   Grid.ColumnSpan="3"></Label>
+
+            <!--Аватар пользователя-->
+            <Grid x:Name="grid" Grid.Row="1" Grid.Column="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{Binding ActualWidth,
+                        ElementName=grid, Mode=OneWay}"
+                                   MaxHeight="500"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Аватарка-->
+                <Image Grid.Row="0"
+                       Source="{Binding UserData.BitImage
+                    , TargetNullValue={StaticResource StandardPicture}}"/>
+
+                <!--Кнопка изменения аватарки-->
+                <Button Grid.Row="1" 
+                        Height="60" Margin="0 10 0 2"
+                        Content="Изменить аватар"
+                        Command="{Binding SelectNewAvatarCommand}"/>
+
+                <!--Кнопки добавления изображений в галлерею-->
+                <Button Height="60" Grid.Row="2"
+                        Content="Добавить фото в галлерею"
+                        Command="{Binding AddPhotosInGalleryCommand}"/>
+
+                <local:ImageSpiner Grid.Row="3" Height="200" Margin="0 10 0 0"/>
+
+            </Grid>
+
+            <!--Информационный грид-->
+            <Grid Grid.Row="1" Grid.Column="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Фамилия" Grid.Row="0">
+                    <TextBlock Text="{Binding UserData.Surname}"/>
+                </GroupBox>
+
+                <GroupBox Header="Имя" Grid.Row="1">
+                    <TextBlock Text="{Binding UserData.Name}"/>
+                </GroupBox>
+
+                <GroupBox Header="Отчество" Grid.Row="2">
+                    <TextBlock Text="{Binding UserData.Patronymic}"/>
+                </GroupBox>
+
+                <GroupBox Header="Дата рождения" Grid.Row="3">
+                    <TextBlock Text="{Binding UserData.Birthday, StringFormat=dd.MM.yyyy}"/>
+                </GroupBox>
+
+                <GroupBox Header="Пол" Grid.Row="4">
+                    <TextBlock Text="{Binding UserData.Genders.Gender}"/>
+                </GroupBox>
+
+                <Button Grid.Row="5" Height="60"
+                        Content="Изменить данные"
+                        Margin="5 20 5 0" VerticalAlignment="Top"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Border>
+
+</UserControl>

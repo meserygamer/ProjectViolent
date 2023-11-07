@@ -5,6 +5,7 @@ using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserCo
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowInformationAboutAllUsersUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUserControls.ShowMainTableDataBaseUC;
 using ProjectViolent.ApplicationWindows.MainWindow.UserControls.EnterInSystemUserControl;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private AddNewItemUCViewModel _addNewItemUCDataContext;
         private AddNewAuctionItemUCViewModel _addNewAuctionItemUCDataContext;
         private ShowAllItemsDataBaseUCViewModel _showAllItemsDataBaseUCDataContext;
+        private PersonalAreaUCViewModel _personalAreaUCDataContext;
         private RelayCommand _showAllUserCommand;
         private RelayCommand _showMainTableCommand;
         private RelayCommand _moveOnAdminPanel;
@@ -125,6 +127,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             }
         }
 
+        public PersonalAreaUCViewModel PersonalAreaUCDataContext
+        {
+            get => _personalAreaUCDataContext;
+            set
+            {
+                _personalAreaUCDataContext = value;
+                OnPropertyChanged();
+            }
+        }
+
         public RelayCommand ShowAllUserCommand
         {
             get => _showAllUserCommand ?? (_showAllUserCommand = new RelayCommand(a => 
@@ -206,6 +218,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
             switch(MainWindowModel.DefineRole(UserID))
             {
                 case 1:
+                    PersonalAreaUCDataContext = new PersonalAreaUCViewModel((int)Application.Current.Resources["UserID"]);
                     MainControlState = MainControlStates.UserPanel;
                     break;
                 case 2:
