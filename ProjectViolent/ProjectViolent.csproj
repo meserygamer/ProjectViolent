@@ -125,6 +125,11 @@
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\LoginUC\LoginUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegAuthDataUC\RegAuthDataUCModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\ChangePersonalDataWindow\ChangePersonalDataWindowModel.cs" />
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\ChangePersonalDataWindow\ChangePersonalDataWindowView.xaml.cs">
+      <DependentUpon>ChangePersonalDataWindowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\ChangePersonalDataWindow\ChangePersonalDataWindowViewModel.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\ImageSpinerControl.cs" />
     <Compile Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\PersonalAreaUC.xaml.cs">
       <DependentUpon>PersonalAreaUC.xaml</DependentUpon>
@@ -311,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ApplicationWindows\MainWindow\UserControls\EnterInSystemUserControl\UserControls\RegUserDataUC\RegUserDataUCView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ApplicationWindows\MainWindow\UserControls\UserPanelUserControls\PersonalAreaUC\ChangePersonalDataWindow\ChangePersonalDataWindowView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
