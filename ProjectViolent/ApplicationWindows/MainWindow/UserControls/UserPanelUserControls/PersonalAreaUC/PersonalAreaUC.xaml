@@ -78,6 +78,8 @@
 
         <local:ImageConverter x:Key="SpinerConverter"/>
 
+        <local:VisabilityConverter x:Key="VisabilityConverter"/>
+
         <Style TargetType="local:ImageSpiner">
             <Setter Property="Template">
                 <Setter.Value>
@@ -165,8 +167,6 @@
             </Setter>
         </Style>
 
-        
-
     </UserControl.Resources>
 
     <Border Padding="10">
@@ -219,7 +219,28 @@
                         Content="Добавить фото в галлерею"
                         Command="{Binding AddPhotosInGalleryCommand}"/>
 
-                <local:ImageSpiner Grid.Row="3" Height="200" Margin="0 10 0 0"/>
+                <Grid Grid.Row="3" Margin="0 10 0 0"
+                      Visibility="{Binding IsImageSpinnerVisiable
+                    , Converter={StaticResource VisabilityConverter}}">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--Спинер изображений из галлереи-->
+                    <local:ImageSpiner  Height="200"
+                                        BitmapImages="{Binding UserImages
+                                        , Mode=OneWay}"
+                                        SelectedImage="{Binding SelectedSpinerImage
+                                        , Mode=OneWayToSource}"/>
+
+                    <Button Grid.Row="1" Height="60"
+                            Margin="0 10 0 0" 
+                            Content="Подтвердить выбор аватара"
+                            Command="{Binding UserSelectedAvatarFromGalleryCommand}"/>
+
+                </Grid>
 
             </Grid>
 
@@ -232,32 +253,42 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <GroupBox Header="Фамилия" Grid.Row="0">
+                <GroupBox Header="Логин" Grid.Row="0">
+                    <TextBlock Text="{Binding AuthorizationData.Login}"/>
+                </GroupBox>
+
+                <GroupBox Header="Фамилия" Grid.Row="1">
                     <TextBlock Text="{Binding UserData.Surname}"/>
                 </GroupBox>
 
-                <GroupBox Header="Имя" Grid.Row="1">
+                <GroupBox Header="Имя" Grid.Row="2">
                     <TextBlock Text="{Binding UserData.Name}"/>
                 </GroupBox>
 
-                <GroupBox Header="Отчество" Grid.Row="2">
+                <GroupBox Header="Отчество" Grid.Row="3">
                     <TextBlock Text="{Binding UserData.Patronymic}"/>
                 </GroupBox>
 
-                <GroupBox Header="Дата рождения" Grid.Row="3">
+                <GroupBox Header="Дата рождения" Grid.Row="4">
                     <TextBlock Text="{Binding UserData.Birthday, StringFormat=dd.MM.yyyy}"/>
                 </GroupBox>
 
-                <GroupBox Header="Пол" Grid.Row="4">
+                <GroupBox Header="Пол" Grid.Row="5">
                     <TextBlock Text="{Binding UserData.Genders.Gender}"/>
                 </GroupBox>
 
-                <Button Grid.Row="5" Height="60"
-                        Content="Изменить данные"
+                <Button Grid.Row="6" Height="60"
+                        Content="Изменить личные данные"
                         Margin="5 20 5 0" VerticalAlignment="Top"/>
+
+                <Button Grid.Row="7" Height="60"
+                        Content="Изменить авторизационные данные"
+                        Margin="5 10 5 0" VerticalAlignment="Top"/>
 
             </Grid>
 

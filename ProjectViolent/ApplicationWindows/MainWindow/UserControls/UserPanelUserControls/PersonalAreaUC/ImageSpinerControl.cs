@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,6 +22,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             {
                 _displayedImagesCounter--;
                 SetCurrentImages();
+                SelectedImage = BitmapImageToByte(DisplayedImages[1]);
             }));
         }
 
@@ -30,13 +32,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             {
                 _displayedImagesCounter++;
                 SetCurrentImages();
+                SelectedImage = BitmapImageToByte(DisplayedImages[1]);
             }));
-        }
-
-        public BitmapImage[] BitmapImages
-        {
-            get => (BitmapImage[])GetValue(InputImagesArrayProperty);
-            set => SetValue(InputImagesArrayProperty, value);
         }
 
         public ObservableCollection<BitmapImage> DisplayedImages
@@ -49,8 +46,22 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             }
         }
 
+        public BitmapImage[] BitmapImages
+        {
+            get => (BitmapImage[])GetValue(InputImagesArrayProperty);
+            set => SetValue(InputImagesArrayProperty, value);
+        }
+
+        public byte[] SelectedImage
+        {
+            get => (byte[])GetValue(SelectedImageProperty);
+            set => SetValue(SelectedImageProperty, value);
+        }
+
 
         public static DependencyProperty InputImagesArrayProperty = DependencyProperty.Register("BitmapImages", typeof(BitmapImage[]), typeof(ImageSpiner));
+
+        public static DependencyProperty SelectedImageProperty = DependencyProperty.Register("SelectedImage", typeof(byte[]), typeof(ImageSpiner));
 
 
         public ImageSpiner()
@@ -65,7 +76,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
 
         private void ChangedInputImages(object sender, EventArgs e)
         {
-            DisplayedImages = new ObservableCollection<BitmapImage>();
+            DisplayedImages = new ObservableCollection<BitmapImage>() {null,null,null};
             if(BitmapImages.Length == 0)
             {
                 return;
@@ -80,6 +91,20 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             DisplayedImages[0] = _spinerSource[_displayedImagesCounter];
             DisplayedImages[1] = _spinerSource[_displayedImagesCounter + 1];
             DisplayedImages[2] = _spinerSource[_displayedImagesCounter + 2];
+            OnPropertyChanged(nameof(DisplayedImages));
+        }
+
+        public byte[] BitmapImageToByte(BitmapImage imageSource)
+        {
+            byte[] data;
+            JpegBitmapEncoder encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(imageSource));
+            using (MemoryStream ms = new MemoryStream())
+            {
+                encoder.Save(ms);
+                data = ms.ToArray();
+            }
+            return data;
         }
 
 

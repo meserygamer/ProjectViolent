@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC
 {
@@ -19,6 +21,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             {
                 _userData = value;
                 OnPropertyChanged(nameof(UserData));
+            }
+        }
+
+        public AuthorizationData AuthorizationData
+        {
+            get => _authorizationData;
+            set
+            {
+                _authorizationData = value;
+                OnPropertyChanged(nameof(AuthorizationData));
             }
         }
 
@@ -50,12 +62,19 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
                 {
                     case MessageBoxResult.Yes:
                         {
+                            UserImages = _model.GetAllUserImages(_userID);
+                            IsImageSpinnerVisiable = true;
                             break;
                         }
                     case MessageBoxResult.No:
                         {
-                            SetAvatarFromFile();
-                            UserData = _model.GetInfoAboutUser(_userID);
+                            string avatarPath = SetAvatarFromFile();
+                            if(avatarPath is null)
+                            {
+                                return;
+                            }
+                            _model.LoadPhotosInDataBase(new string[] { avatarPath }, _userID);
+                            SetAllInformationAboutUser(_userID);
                             break;
                         }
                     case MessageBoxResult.Cancel:
@@ -66,30 +85,84 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             }));
         }
 
+        public BitmapImage[] UserImages
+        {
+            get => _userImages;
+            set
+            {
+                _userImages = value;
+                OnPropertyChanged(nameof(UserImages));
+            }
+        }
+
+        public byte[] SelectedSpinerImage
+        {
+            get => _selectedSpinerImage;
+            set
+            {
+                _selectedSpinerImage = value;
+                OnPropertyChanged(nameof(SelectedSpinerImage));
+            }
+        }
+
+        public RelayCommand UserSelectedAvatarFromGalleryCommand
+        {
+            get => _userSelectedAvatarFromGalleryCommand ?? (_userSelectedAvatarFromGalleryCommand = new RelayCommand(a =>
+            {
+                if(_model.SetUserAvatar(SelectedSpinerImage, _userID) != 0)
+                {
+                    MessageBox.Show("Установить аватар не удалось");
+                    return;
+                }
+                SetAllInformationAboutUser(_userID);
+                IsImageSpinnerVisiable = false;
+                MessageBox.Show("Аватар успешно обновлен!");
+            }));
+        }
+
+        public bool IsImageSpinnerVisiable
+        {
+            get => _isImageSpinnerVisible;
+            set
+            {
+                _isImageSpinnerVisible = value;
+                OnPropertyChanged(nameof(IsImageSpinnerVisiable));
+            }
+        }
+
 
         public PersonalAreaUCViewModel(int userID)
         {
             _userID = userID;
             _model = new PersonalAreaUCModel();
-            UserData = _model.GetInfoAboutUser(userID);
+            SetAllInformationAboutUser(userID);
+            IsImageSpinnerVisiable = false;
         }
 
 
-        private void SetAvatarFromFile()
+        private string SetAvatarFromFile()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Multiselect = false;
             dialog.ShowDialog();
             if (dialog.FileName == string.Empty)
             {
-                return;
+                return null;
             }
-            if (_model.SetAvatarForUserFromFile(dialog.FileName, _userID) == 1)
+            if (_model.SetUserAvatar(dialog.FileName, _userID) == 1 ||
+                _model.SetUserAvatar(dialog.FileName, _userID) == 2)
             {
                 MessageBox.Show("При загрузке изображения что-то пошло не так");
-                return;
+                return null;
             }
             MessageBox.Show("Аватар успешно изменен!");
+            return dialog.FileName;
+        }
+
+        private void SetAllInformationAboutUser(int userID)
+        {
+            UserData = _model.GetInfoAboutUser(userID);
+            AuthorizationData = _model.GetAuthorizationInfoAboutUser(userID);
         }
 
 
@@ -97,11 +170,22 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
 
         private UserData _userData;
 
+        private AuthorizationData _authorizationData;
+
         private RelayCommand _addPhotosInGalleryCommand;
 
         private RelayCommand _selectNewAvatarCommand;
 
         private PersonalAreaUCModel _model;
+
+        private BitmapImage[] _userImages;
+
+        private byte[] _selectedSpinerImage;
+
+        private RelayCommand _userSelectedAvatarFromGalleryCommand;
+
+        private bool _isImageSpinnerVisible;
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")

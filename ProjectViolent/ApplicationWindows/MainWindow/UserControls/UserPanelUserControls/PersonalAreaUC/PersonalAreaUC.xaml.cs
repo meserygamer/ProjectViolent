@@ -36,11 +36,36 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             {
                 return null;
             }
-            if(value is ObservableCollection<BitmapImage> images && parameter is int counter)
+            if(value is ObservableCollection<BitmapImage> images)
             {
-                return images[counter];
+                return images[System.Convert.ToInt32(parameter)];
             }
             return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class VisabilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(!(value is bool))
+            {
+                return null;
+            }
+            switch((bool)value)
+            {
+                case true:
+                    return Visibility.Visible;
+                case false:
+                    return Visibility.Hidden;
+                default:
+                    return null;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
