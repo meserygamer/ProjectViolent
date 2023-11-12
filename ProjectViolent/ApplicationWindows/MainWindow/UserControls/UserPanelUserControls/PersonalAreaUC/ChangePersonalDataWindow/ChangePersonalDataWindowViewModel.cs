@@ -41,7 +41,6 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
                         {
                             MessageBox.Show("Изменения успешно произведены!");
                             return;
-                            /////
                         }
                     case 1:
                         {

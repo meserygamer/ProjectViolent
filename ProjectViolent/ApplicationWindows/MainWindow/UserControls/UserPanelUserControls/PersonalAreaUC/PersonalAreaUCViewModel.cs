@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC.ChangeAuthorizationDataWindow;
+using ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUserControls.PersonalAreaUC.ChangePersonalDataWindow;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -130,6 +132,34 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             }
         }
 
+        public RelayCommand ChangePersonalDataCommand
+        {
+            get => _changePersonalDataCommand ?? (_changePersonalDataCommand = new RelayCommand(a => 
+            {
+                ChangePersonalDataWindowViewModel DC = new ChangePersonalDataWindowViewModel(_userID);
+                ChangePersonalDataWindowView changePersonalDataWindowView = new ChangePersonalDataWindowView()
+                {
+                    DataContext = DC
+                };
+                changePersonalDataWindowView.ShowDialog();
+                UpdateUserData(_userID);
+            }));
+        }
+
+        public RelayCommand ChangeAuthorizationDataCommand
+        {
+            get => _changeAuthorizationDataCommand ?? (_changeAuthorizationDataCommand = new RelayCommand(a =>
+            {
+                ChangeAuthorizationDataWindowViewModel DC = new ChangeAuthorizationDataWindowViewModel(_userID);
+                ChangeAuthorizationDataWindowView changeAuthorizationDataWindowView = new ChangeAuthorizationDataWindowView()
+                {
+                    DataContext = DC
+                };
+                changeAuthorizationDataWindowView.ShowDialog();
+                UpdateAuthorizationData(_userID);
+            }));
+        }
+
 
         public PersonalAreaUCViewModel(int userID)
         {
@@ -161,9 +191,13 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
 
         private void SetAllInformationAboutUser(int userID)
         {
-            UserData = _model.GetInfoAboutUser(userID);
-            AuthorizationData = _model.GetAuthorizationInfoAboutUser(userID);
+            UpdateUserData(userID);
+            UpdateAuthorizationData(userID);
         }
+
+        private void UpdateUserData(int userID) => UserData = _model.GetInfoAboutUser(userID);
+
+        private void UpdateAuthorizationData(int userID) => AuthorizationData = _model.GetAuthorizationInfoAboutUser(userID);
 
 
         private int _userID;
@@ -185,6 +219,10 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
         private RelayCommand _userSelectedAvatarFromGalleryCommand;
 
         private bool _isImageSpinnerVisible;
+
+        private RelayCommand _changePersonalDataCommand;
+
+        private RelayCommand _changeAuthorizationDataCommand;
 
 
         public event PropertyChangedEventHandler PropertyChanged;

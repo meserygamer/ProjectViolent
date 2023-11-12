@@ -13,12 +13,18 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
     {
         public UserData GetInfoAboutUser(int userID)
         {
-            return _dataBase.UserData.Find(userID);
+            using(DataBase DB = new DataBase())
+            {
+                return DB.UserData.Include("Genders").Where(a => a.UserID == userID).First();
+            } 
         }
 
         public AuthorizationData GetAuthorizationInfoAboutUser(int userID)
         {
-            return _dataBase.UserData.Find(userID).AuthorizationData.First();
+            using(DataBase DB = new DataBase())
+            {
+                return DB.UserData.Find(userID).AuthorizationData.First();
+            }
         }
 
         public int LoadPhotosInDataBase(string[] fileNames, int userID)

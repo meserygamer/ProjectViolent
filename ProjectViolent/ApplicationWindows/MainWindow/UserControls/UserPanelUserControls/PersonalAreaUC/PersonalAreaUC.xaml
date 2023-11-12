@@ -284,10 +284,12 @@
 
                 <Button Grid.Row="6" Height="60"
                         Content="Изменить личные данные"
+                        Command="{Binding ChangePersonalDataCommand}"
                         Margin="5 20 5 0" VerticalAlignment="Top"/>
 
                 <Button Grid.Row="7" Height="60"
                         Content="Изменить авторизационные данные"
+                        Command="{Binding ChangeAuthorizationDataCommand}"
                         Margin="5 10 5 0" VerticalAlignment="Top"/>
 
             </Grid>
