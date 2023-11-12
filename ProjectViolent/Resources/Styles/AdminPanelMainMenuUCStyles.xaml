@@ -61,4 +61,8 @@
         <Setter Property="Command" Value="{Binding ElementName=UC,
             Path=ShowAllItemsCommand, Mode=OneWay}"/>
     </Style>
+    <Style x:Key="ShowPersonalArea" TargetType="Hyperlink">
+        <Setter Property="Command" Value="{Binding ElementName=UC,
+            Path=ShowPersonalAreaCommand, Mode=OneWay}"/>
+     </Style>
 </ResourceDictionary>

@@ -77,7 +77,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
         private void ChangedInputImages(object sender, EventArgs e)
         {
             DisplayedImages = new ObservableCollection<BitmapImage>() {null,null,null};
-            if(BitmapImages.Length == 0)
+            if(BitmapImages is null || BitmapImages.Length == 0)
             {
                 return;
             }

@@ -46,6 +46,7 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
         private RelayCommand _showAddNewItemCommand;
         private RelayCommand _showAddNewAuctionItemCommand;
         private RelayCommand _showAllItemsCommand;
+        private RelayCommand _showPersonalAreaCommand;
 
         public MainControlStates MainControlState
         {
@@ -201,6 +202,15 @@ namespace ProjectViolent.ApplicationWindows.MainWindow
                 ShowAllItemsDataBaseUCDataContext = new ShowAllItemsDataBaseUCViewModel();
                 ShowAllItemsDataBaseUCDataContext.ItemsChanged += UpdateAuctionItem;
                 MainControlState = MainControlStates.ShowAllItemsDB;
+            }));
+        }
+
+        public RelayCommand ShowPersonalAreaCommand
+        {
+            get => _showPersonalAreaCommand ?? (_showPersonalAreaCommand = new RelayCommand(a =>
+            {
+                PersonalAreaUCDataContext = new PersonalAreaUCViewModel((int)Application.Current.Resources["UserID"], true);
+                MainControlState = MainControlStates.UserPanel;
             }));
         }
 

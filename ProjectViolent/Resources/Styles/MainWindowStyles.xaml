@@ -13,6 +13,7 @@
                                      ShowAllUsersCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllUserCommand}"
                                      ShowMainDataBaseTableCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowMainTableCommand}"
                                      ShowAllItemsCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowAllItemsCommand}"
+                                     ShowPersonalAreaCommand="{Binding ElementName=MainWindow,Path=DataContext.ShowPersonalAreaCommand}"
                                      DataContext="{Binding AdminPanelMainMenuUCDataContext}"></APMMUC:AdminPanelMainMenuUCVIew>
     <SAIAU:ShowInformationAboutAllUsersUCView x:Key="ShowInformationAboutAllUsersUserControlView"
                                               MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
@@ -34,7 +35,8 @@
                                       MoveOnPreviousCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"
                                       CreateNewAuctionItemCommand="{Binding ElementName=MainWindow, Path=DataContext.ShowAddNewAuctionItemCommand}"/>
     <UPAUC:PersonalAreaUC x:Key="UserPersonalAreaView"
-                          DataContext="{Binding PersonalAreaUCDataContext}"/>
+                          DataContext="{Binding PersonalAreaUCDataContext}"
+                          BackOnPreviousPageCommand="{Binding ElementName=MainWindow, Path=DataContext.MoveOnAdminPanel}"/>
     <Style x:Key="MainContentControl"
            TargetType="ContentControl">
         <Style.Triggers>

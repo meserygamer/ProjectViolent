@@ -21,9 +21,15 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
     /// </summary>
     public partial class AdminPanelMainMenuUCVIew : UserControl
     {
-        public static readonly DependencyProperty ShowAllUsersCommandDependencyProperty = DependencyProperty.Register("ShowAllUsersCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
-        public static readonly DependencyProperty ShowMainDataBaseTableCommandDependencyProperty = DependencyProperty.Register("ShowMainDataBaseTableCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
-        public static readonly DependencyProperty ShowAllItemsCommandDependencyProperty = DependencyProperty.Register("ShowAllItemsCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowAllUsersCommandDependencyProperty 
+            = DependencyProperty.Register("ShowAllUsersCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowMainDataBaseTableCommandDependencyProperty
+            = DependencyProperty.Register("ShowMainDataBaseTableCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowAllItemsCommandDependencyProperty
+            = DependencyProperty.Register("ShowAllItemsCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+        public static readonly DependencyProperty ShowPersonalAreaCommandDependencyProperty
+            = DependencyProperty.Register("ShowPersonalAreaCommand", typeof(RelayCommand), typeof(AdminPanelMainMenuUCVIew));
+
 
         public RelayCommand ShowAllUsersCommand
         {
@@ -42,6 +48,13 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.AdminPanelUs
             get => (RelayCommand)GetValue(ShowAllItemsCommandDependencyProperty);
             set => SetValue(ShowAllItemsCommandDependencyProperty, value);
         }
+
+        public RelayCommand ShowPersonalAreaCommand
+        {
+            get => (RelayCommand)GetValue(ShowPersonalAreaCommandDependencyProperty);
+            set => SetValue(ShowPersonalAreaCommandDependencyProperty, value);
+        }
+
 
         public AdminPanelMainMenuUCVIew()
         {

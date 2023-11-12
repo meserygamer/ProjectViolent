@@ -22,6 +22,17 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
     /// </summary>
     public partial class PersonalAreaUC : UserControl
     {
+        public static readonly DependencyProperty BackOnPreviousPageCommandProperty =
+            DependencyProperty.Register("BackOnPreviousPageCommand", typeof(RelayCommand), typeof(PersonalAreaUC));
+
+
+        public RelayCommand BackOnPreviousPageCommand
+        {
+            get => (RelayCommand) GetValue(BackOnPreviousPageCommandProperty);
+            set => SetValue(BackOnPreviousPageCommandProperty, value);
+        }
+
+
         public PersonalAreaUC()
         {
             InitializeComponent();

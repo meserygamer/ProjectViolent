@@ -44,6 +44,11 @@
                         Посмотреть таблицу предметов
                     </Hyperlink>
                 </TextBlock>
+                <TextBlock>
+                    <Hyperlink Style="{StaticResource ShowPersonalArea}">
+                        Личный кабинет
+                    </Hyperlink>
+                </TextBlock>
             </StackPanel>
         </ScrollViewer>
     </Grid>

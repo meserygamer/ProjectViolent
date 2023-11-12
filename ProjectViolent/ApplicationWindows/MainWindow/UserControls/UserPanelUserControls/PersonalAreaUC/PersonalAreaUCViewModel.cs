@@ -65,6 +65,11 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
                     case MessageBoxResult.Yes:
                         {
                             UserImages = _model.GetAllUserImages(_userID);
+                            if(UserImages is null || UserImages.Length == 0)
+                            {
+                                MessageBox.Show("В вашей галерее нет картинок!");
+                                return;
+                            }
                             IsImageSpinnerVisiable = true;
                             break;
                         }
@@ -160,6 +165,16 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             }));
         }
 
+        public Visibility VisibilityOfBackButton
+        {
+            get => _visibilityOfBackButton;
+            set
+            {
+                _visibilityOfBackButton = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         public PersonalAreaUCViewModel(int userID)
         {
@@ -167,6 +182,21 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
             _model = new PersonalAreaUCModel();
             SetAllInformationAboutUser(userID);
             IsImageSpinnerVisiable = false;
+            VisibilityOfBackButton = Visibility.Hidden;
+        }
+
+        public PersonalAreaUCViewModel(int userID, bool isAdminPanel)
+        {
+            _userID = userID;
+            _model = new PersonalAreaUCModel();
+            SetAllInformationAboutUser(userID);
+            IsImageSpinnerVisiable = false;
+            if(isAdminPanel)
+            {
+                VisibilityOfBackButton = Visibility.Visible;
+                return;
+            }
+            VisibilityOfBackButton = Visibility.Hidden;
         }
 
 
@@ -223,6 +253,8 @@ namespace ProjectViolent.ApplicationWindows.MainWindow.UserControls.UserPanelUse
         private RelayCommand _changePersonalDataCommand;
 
         private RelayCommand _changeAuthorizationDataCommand;
+
+        private Visibility _visibilityOfBackButton;
 
 
         public event PropertyChangedEventHandler PropertyChanged;
